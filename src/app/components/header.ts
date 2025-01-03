@@ -1,9 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { User, users } from 'backend';
+import { User, UserRole, users } from 'backend';
 import { AuthService } from '../auth/auth.service';
 import HeaderSelector from './header-selector';
+import { HasRoleDirective } from '../core/hasRole.directive';
 
 @Component({
   selector: 'app-header',
@@ -19,13 +20,28 @@ import HeaderSelector from './header-selector';
             routerLink="/"
             >Dashboard</a
           >
-          <a routerLinkActive="text-indigo-600" routerLink="/orders"
-            >Ordernes</a
+
+          <a
+            *hasRole="['sales', 'admin']"
+            routerLinkActive="text-indigo-600"
+            routerLink="/orders"
           >
-          <a routerLinkActive="text-indigo-600" routerLink="/reports"
-            >Reportes</a
+            Ordenes
+          </a>
+
+          <a
+            *hasRole="['manager', 'admin']"
+            routerLinkActive="text-indigo-600"
+            routerLink="/reports"
           >
-          <a routerLinkActive="text-indigo-600" routerLink="/admin">Admin</a>
+            Reportes
+          </a>
+          <a
+            *hasRole="['admin']"
+            routerLinkActive="text-indigo-600"
+            routerLink="/admin"
+            >Admin</a
+          >
         </nav>
 
         <app-header-selector
@@ -37,7 +53,7 @@ import HeaderSelector from './header-selector';
       </div>
     </header>
   `,
-  imports: [RouterLink, HeaderSelector, RouterLinkActive],
+  imports: [RouterLink, HeaderSelector, RouterLinkActive, HasRoleDirective],
 })
 export default class Header {
   private _authService = inject(AuthService);
@@ -52,5 +68,9 @@ export default class Header {
 
   selectedUser(user: User) {
     this._authService.login(user.email).subscribe();
+  }
+
+  hasRole(roles: UserRole[]) {
+    return this.currentUser()?.roles.some((role) => roles.includes(role));
   }
 }
