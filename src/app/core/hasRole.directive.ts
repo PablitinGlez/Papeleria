@@ -6,9 +6,9 @@ import {
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
-import { User, UserRole } from 'backend';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { User, UserRole } from 'backend';
+import { AuthService } from '../auth/data-access/auth.service';
 
 @Directive({
   selector: '[hasRole]',

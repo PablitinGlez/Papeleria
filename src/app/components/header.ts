@@ -2,9 +2,9 @@ import { Component, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { User, UserRole, users } from 'backend';
-import { AuthService } from '../auth/auth.service';
-import HeaderSelector from './header-selector';
+import { AuthService } from '../auth/data-access/auth.service';
 import { HasRoleDirective } from '../core/hasRole.directive';
+import HeaderSelector from './header-selector';
 
 @Component({
   selector: 'app-header',

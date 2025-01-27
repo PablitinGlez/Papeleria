@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { users, User } from 'backend';
+import { User, users } from 'backend';
 import { BehaviorSubject, delay, of, tap } from 'rxjs';
 
 @Injectable({

@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanMatchFn, GuardResult, MaybeAsync, Router } from '@angular/router';
 import { map } from 'rxjs';
-import { AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from 'src/app/auth/data-access/auth.service';
 
 export const authGuard: CanMatchFn = (
   route,
@@ -19,3 +19,4 @@ export const authGuard: CanMatchFn = (
     }),
   );
 };
+

@@ -1,0 +1,183 @@
+<div
+  class="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"
+></div>
+<app-signup-header></app-signup-header>
+
+<section class="relative min-h-[620px] flex justify-center items-center">
+  <!-- Fondo decorativo adicional -->
+  <div
+    class="absolute inset-0 -z-10 h-full w-full flex items-center justify-center"
+  >
+    <div
+      class="absolute left-0 top-0 h-80 w-80 rounded-full bg-blue-400 opacity-30 blur-[120px]"
+    ></div>
+    <div
+      class="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-sky-400 opacity-30 blur-[120px]"
+    ></div>
+  </div>
+
+  <!-- Contenido del formulario -->
+  <div
+    class="bg-white shadow-xl rounded-2xl p-2 flex flex-col md:flex-row items-center sm:space-x-8"
+   data-aos="zoom-out-up"
+   
+  >
+    <div
+      class="rounded-2xl flex flex-col md:flex-row items-center sm:space-x-8"
+      style="
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.3) 0%,
+          rgba(240, 240, 250, 0.5) 50%,
+          rgba(232, 246, 251, 0.7) 70%
+        );
+      "
+    >
+      <div
+        class="relative w-52 h-[355px] rounded-lg p-4 flex justify-center items-center overflow-visible"
+        style="
+          border-radius: 16px;
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+          backdrop-filter: blur(4px);
+          -webkit-backdrop-filter: blur(4px);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          z-index: 1;
+        "
+      >
+        <img
+          src="vector.png"
+          alt="Imagen de fondo"
+          class="absolute inset-0 m-auto w-40 h-42 object-cover z-20"
+          style="transform: translate(0, 0); z-index: 5"
+        />
+        <!-- Íconos flotantes -->
+        <img
+          src="Apple.png"
+          alt="Icono 1"
+          class="absolute floating-icon"
+          style="width: 90px; height: 90px; top: 50px; left: -30px; z-index: 10"
+        />
+        <img
+          src="hat.png"
+          alt="Icono 1"
+          class="absolute floating-icon"
+          style="width: 80px; height: 80px; top: -20px; left: 90px; z-index: 10"
+        />
+        <img
+          src="Calculator.png"
+          alt="Icono 2"
+          class="absolute floating-icon"
+          style="
+            width: 80px;
+            height: 80px;
+            top: 50px;
+            right: -50px;
+            z-index: 10;
+          "
+        />
+        <script
+          src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
+          type="module"
+        ></script>
+        <dotlottie-player
+          src="https://lottie.host/87002c02-03c5-49e5-85a8-63455f04db79/FHVPGcWEz2.lottie"
+          background="transparent"
+          speed="1"
+          loop
+          style="
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            transform: translate(50px, 50px);
+            z-index: 30;
+          "
+          autoplay
+        ></dotlottie-player>
+      </div>
+
+      <!-- Formulario -->
+      <div class="sm:w-96  pl-5 pr-6">
+
+           <span class="text-3xl font-semibold text-start mb-4 pt-4 block bg-gradient-to-tl
+from-slate-800
+via-blue-500
+to-zinc-400
+font-Onest
+bg-clip-text
+text-transparent">Iniciar Sesión</span>
+
+
+
+        <form [formGroup]="form" (ngSubmit)="login()">
+          <div class="input-group">
+            <div class="input-wrapper">
+              <svg fill="none" viewBox="0 0 24 24" class="input-icon">
+                <path
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  d="M3 8L10.8906 13.2604C11.5624 13.7083 12.4376 13.7083 13.1094 13.2604L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z"
+                ></path>
+              </svg>
+              <input
+                required=""
+                placeholder="Email"
+                class="form-input"
+                type="email"
+              />
+            </div>
+          </div>
+
+          <div class="input-group">
+            <div class="input-wrapper">
+              <svg fill="none" viewBox="0 0 24 24" class="input-icon">
+                <path
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  d="M12 10V14M8 6H16C17.1046 6 18 6.89543 18 8V16C18 17.1046 17.1046 18 16 18H8C6.89543 18 6 17.1046 6 16V8C6 6.89543 6.89543 6 8 6Z"
+                ></path>
+              </svg>
+              <input
+                required=""
+                placeholder="Password"
+                class="form-input"
+                type="password"
+              />
+              <button class="password-toggle" type="button">
+                <svg fill="none" viewBox="0 0 24 24" class="eye-icon">
+                  <path
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    d="M2 12C2 12 5 5 12 5C19 5 22 12 22 12C22 12 19 19 12 19C5 19 2 12 2 12Z"
+                  ></path>
+                  <circle
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    r="3"
+                    cy="12"
+                    cx="12"
+                  ></circle>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="form-footer">
+            <p class="login-link text-gray-600 hover:text-gray-800 ">
+              ¿No tienes una cuenta?
+            <a class="text-blue-500 hover:text-blue-700" 
+   
+   routerLink="/auth/sign-up">
+   Regístrate
+</a>
+
+            </p>
+          </div>
+
+          <div class="flex justify-between mt-12">
+           <app-btn-google></app-btn-google>
+            <app-button-blue text="Iniciar Sesión"></app-button-blue>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

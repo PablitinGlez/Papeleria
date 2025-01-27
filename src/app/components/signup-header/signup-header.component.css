@@ -1,0 +1,33 @@
+/* From Uiverse.io by andrew-demchenk0 */
+.theme-switcher {
+    padding: 3px;
+    width: -moz-fit-content;
+    width: fit-content;
+    display: flex;
+    border-radius: 9999px;
+   
+}
+
+.theme-switcher_switch {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: inherit;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.theme-switcher_switch:hover>.icon {
+    stroke: #323232;
+}
+
+.theme-switcher_switch:active {
+    background-color: rgba(128, 128, 128, 0.35);
+}
+
+.theme-switcher_switch:active>.icon {
+    stroke: white;
+}

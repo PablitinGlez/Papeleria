@@ -3,9 +3,11 @@ import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
-    path: 'auth/login',
-    loadComponent: () => import('./auth/login'), // public
+    //canActivateChild: [publicGuard()],
+    path: 'auth',
+    loadChildren: () => import('./auth/features/auth.routes'),
   },
+  
   {
     canMatch: [authGuard],
     path: '',
