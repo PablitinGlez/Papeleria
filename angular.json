@@ -29,9 +29,24 @@
             ],
             "styles": [
               "src/styles.css",
+               "node_modules/aos/dist/aos.css",
+               "public/vendor/bootstrap/css/bootstrap.min.css",
+               "public/vendor/bootstrap-icons/bootstrap-icons.css",
+               "public/vendor/aos/aos.css",
+               "public/vendor/glightbox/css/glightbox.min.css",
+               "public/vendor/swiper/swiper-bundle.min.css",
+               "public/css/main.css"              
               
             ],
             "scripts": [
+              "public/vendor/bootstrap/js/bootstrap.bundle.min.js",
+  "public/vendor/php-email-form/validate.js",
+  "public/vendor/aos/aos.js",
+  "public/vendor/glightbox/js/glightbox.min.js",
+  "public/vendor/swiper/swiper-bundle.min.js",
+  "public/vendor/purecounter/purecounter_vanilla.js",
+  "public/js/main.js"
+
                
             ]
            

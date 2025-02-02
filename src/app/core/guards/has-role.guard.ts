@@ -22,7 +22,8 @@ export const hasRoleGuard = (roles: UserRole[]): CanActivateFn => {
       map((user) => {
         if (!user) return false;
 
-        return user.roles.some((role) => roles.includes(role));
+        // Especifica que "role" es de tipo UserRole
+        return user.roles.some((role: UserRole) => roles.includes(role));
       }),
     );
   };

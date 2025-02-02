@@ -59,7 +59,6 @@ export default class Header {
   private _authService = inject(AuthService);
 
   currentUser = toSignal(this._authService.currentUser$);
-
   users = signal(users);
 
   logout() {
@@ -67,10 +66,20 @@ export default class Header {
   }
 
   selectedUser(user: User) {
-    this._authService.login(user.email).subscribe();
+    const password = prompt(
+      'Por favor, ingrese la contraseña para el usuario:',
+    );
+    if (password) {
+      this._authService.login(user.email, password).subscribe({
+        next: () => console.log('Inicio de sesión exitoso'),
+        error: (err) => console.error('Error al iniciar sesión:', err),
+      });
+    }
   }
 
-  hasRole(roles: UserRole[]) {
-    return this.currentUser()?.roles.some((role) => roles.includes(role));
+  hasRole(roles: UserRole[]): boolean {
+    return this.currentUser()?.roles.some((role: UserRole) =>
+      roles.includes(role),
+    );
   }
 }

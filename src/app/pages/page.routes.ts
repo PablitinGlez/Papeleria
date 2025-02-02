@@ -4,7 +4,7 @@ import { hasRoleGuard } from '../core/guards/has-role.guard';
 export default [
   {
     path: '',
-    loadComponent: () => import('./dashboard/dashboard'), // public
+    loadComponent: () => import('./dashboard/dashboard.component'), // public
   },
   {
     path: 'orders',
