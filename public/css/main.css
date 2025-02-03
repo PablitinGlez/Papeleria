@@ -1360,14 +1360,14 @@ section,
 .features-2 .phone-mockup {
   position: relative;
   padding: 30px 0;
+  
 }
 
 .features-2 .phone-mockup img {
-  max-width: 300px;
-  height: auto;
+  width: 800px; /* Ocupa todo el ancho del contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
   filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
 }
-
 @media (max-width: 991.98px) {
   .features-2 .feature-item {
     text-align: center !important;

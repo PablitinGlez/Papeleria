@@ -31,7 +31,7 @@ import { AuthService } from '../../auth/data-access/auth.service';
           fill="#1976D2"
         ></path>
       </svg>
-      {{ isAuthenticating ? 'Iniciando sesión...' : 'Continuar con Google' }}
+      {{ isAuthenticating ? 'Iniciando sesión...' : 'Iniciar con Google' }}
     </button>
   `,
 })
