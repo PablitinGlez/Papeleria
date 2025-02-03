@@ -24,39 +24,30 @@ export class AuthService {
   isAuthenticating$ = this._isAuthenticating.asObservable();
 
   login(email: string, password: string): Observable<UserCredential> {
-    if (this._isAuthenticating.value) {
-      return throwError(() => new Error('Authentication in progress'));
-    }
-
     this._isAuthenticating.next(true);
+
     return from(signInWithEmailAndPassword(this.auth, email, password)).pipe(
-      tap((credentials) => {
-        const user = {
-          uid: credentials.user.uid,
-          email: credentials.user.email,
-          displayName: credentials.user.displayName,
-          photoURL: credentials.user.photoURL,
-        };
-        this.saveToken(user);
-        this._currentUser.next(user);
-        this.router.navigateByUrl('/dashboard');
+      tap((userCredential) => {
+        this._currentUser.next(userCredential.user);
+        this.router.navigate(['/dashboard']); // Redirige al dashboard tras el login exitoso
       }),
       catchError((error) => {
-        console.error('Error during login:', error);
+        console.error('Error en el inicio de sesión:', error);
         return throwError(() => error);
       }),
-      finalize(() => {
-        this._isAuthenticating.next(false);
-      }),
+      finalize(() => this._isAuthenticating.next(false)),
     );
   }
 
   signInWithGoogle(): Observable<UserCredential> {
     if (this._isAuthenticating.value) {
+      console.log('Ya hay un proceso de autenticación en curso');
       return throwError(() => new Error('Authentication in progress'));
     }
 
     this._isAuthenticating.next(true);
+    console.log('Iniciando autenticación con Google');
+
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({
       prompt: 'select_account',
@@ -64,17 +55,7 @@ export class AuthService {
 
     return from(signInWithPopup(this.auth, provider)).pipe(
       tap((credentials: UserCredential) => {
-     
-        const additionalUserInfo = (
-          credentials as UserCredential & { additionalUserInfo?: any }
-        ).additionalUserInfo;
-
-        if (additionalUserInfo?.isNewUser) {
-          console.log('Nuevo usuario registrado');
-         
-        } else {
-          console.log('Usuario ya registrado');
-        }
+        console.log('Autenticación exitosa', credentials);
 
         const user = {
           uid: credentials.user.uid,
@@ -82,20 +63,27 @@ export class AuthService {
           displayName: credentials.user.displayName,
           photoURL: credentials.user.photoURL,
         };
+
+        // Almacenar token y actualizar el estado
         this.saveToken(user);
         this._currentUser.next(user);
-        this.router.navigateByUrl('/dashboard'); // Redirigir al dashboard después del registro
+
+        console.log('Usuario autenticado', user);
+
+        // Redirigir al dashboard
+        this.router.navigateByUrl('/dashboard');
+        console.log('Redirigiendo al dashboard');
       }),
       catchError((error) => {
         console.error('Error durante el inicio de sesión con Google:', error);
         return throwError(() => error);
       }),
       finalize(() => {
+        console.log('Finalizando proceso de autenticación');
         this._isAuthenticating.next(false);
       }),
     );
   }
-
   logout(): Observable<void> {
     return from(signOut(this.auth)).pipe(
       tap(() => {

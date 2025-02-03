@@ -10,6 +10,7 @@ import { AuthService } from '../../auth/data-access/auth.service';
   template: `
     <button
       [disabled]="isAuthenticating"
+      type="button"
       (click)="signInWithGoogle()"
       class="cursor-pointer text-black flex gap-1 items-center bg-white px-4 py-1.5 rounded-lg font-medium text-sm hover:bg-zinc-300 transition-all ease-in duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
     >
@@ -53,10 +54,12 @@ export class BtnGoogleComponent implements OnDestroy {
 
     this.authService.signInWithGoogle().subscribe({
       next: () => {
-        console.log('Login exitoso');
+        console.log('Registro exitoso');
+        // Redirige al dashboard o a la página que desees
+        this.router.navigate(['/dashboard']);
       },
       error: (error) => {
-        console.error('Error al iniciar sesión con Google:', error);
+        console.error('Error al registrar con Google:', error);
       },
     });
   }
