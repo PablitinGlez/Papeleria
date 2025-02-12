@@ -9,7 +9,7 @@ import { AuthService } from '../../auth/data-access/auth.service';
   standalone: true,
   template: `
     <button
-      [disabled]="isAuthenticating"
+      
       type="button"
       (click)="signInWithGoogle()"
       class="cursor-pointer text-black flex gap-1 items-center bg-white px-4 py-1.5 rounded-lg font-medium text-sm hover:bg-zinc-300 transition-all ease-in duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -32,7 +32,7 @@ import { AuthService } from '../../auth/data-access/auth.service';
           fill="#1976D2"
         ></path>
       </svg>
-      {{ isAuthenticating ? 'Iniciando sesión...' : 'Iniciar con Google' }}
+      Ingresar con Google
     </button>
   `,
 })

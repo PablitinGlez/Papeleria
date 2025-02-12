@@ -137,8 +137,8 @@ body.light-mode .video-bg:before {
 
 .app {
     background-color: var(--theme-bg-color);
-    max-width: 1250px;
-    max-height: 860px;
+    max-width:max-content;
+    max-height: max-content;
     height: 90vh;
     display: flex;
     flex-direction: column;
@@ -162,7 +162,7 @@ body.light-mode .video-bg:before {
     padding: 0 30px;
     white-space: nowrap;
 
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 980px) {
         padding: 0 16px;
     }
 
@@ -177,7 +177,7 @@ body.light-mode .video-bg:before {
             border-bottom: 2px solid transparent;
             transition: 0.3s;
 
-            @media screen and (max-width: 610px) {
+            @media screen and (max-width: 910px) {
                 &:not(.main-header-link) {
                     display: none;
                 }
