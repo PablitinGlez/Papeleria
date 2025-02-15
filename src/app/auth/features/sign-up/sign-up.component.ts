@@ -4,17 +4,18 @@ import { Router, RouterLink } from '@angular/router';
 import { BtnGoogleComponent } from '@components/btn-google/btn-google.component';
 import { ButtonBlueComponent } from '@components/button-blue/button-blue.component';
 import { SignupHeaderComponent } from '@components/signup-header/signup-header.component';
-import { AuthenticationApiServiceService } from '../../data-access/authentication-api-service.service';
+import { AuthService } from '../../data-access/auth.service';
 
 @Component({
   selector: 'app-sign-up',
-  standalone: true, // Asegúrate de que el componente sea standalone
+  standalone: true,
   imports: [
     SignupHeaderComponent,
     BtnGoogleComponent,
     ButtonBlueComponent,
     FormsModule,
     RouterLink,
+
     ReactiveFormsModule,
   ],
   templateUrl: './sign-up.component.html',
@@ -28,33 +29,42 @@ export class SignUpComponent {
   birthdate: string = '';
   password: string = '';
   confirmPassword: string = '';
+  errorMessage: string = '';
 
   constructor(
-    private authService: AuthenticationApiServiceService,
+    private authService: AuthService,
     private router: Router,
   ) {}
 
   register() {
-    if (this.password === this.confirmPassword) {
-      this.authService
-        .signup(
-          this.name,
-          this.email,
-          this.phone,
-          this.birthdate,
-          this.password,
-        )
-        .subscribe({
-          next: (response) => {
-            console.log('Registro exitoso:', response);
-            this.router.navigate(['/dashboard']);
-          },
-          error: (error) => {
-            console.error('Error al registrar:', error);
-          },
-        });
-    } else {
-      console.log('Las contraseñas no coinciden');
+    if (this.password !== this.confirmPassword) {
+      this.errorMessage = 'Las contraseñas no coinciden';
+      return;
     }
+
+    if (
+      !this.name ||
+      !this.email ||
+      !this.phone ||
+      !this.birthdate ||
+      !this.password
+    ) {
+      this.errorMessage = 'Todos los campos son obligatorios';
+      return;
+    }
+
+    this.authService
+      .signup(this.name, this.email, this.phone, this.birthdate, this.password)
+      .subscribe({
+        next: (response) => {
+          console.log('Registro exitoso:', response);
+          this.router.navigate(['/dashboard']); // Redirigir al dashboard después del registro
+        },
+        error: (error) => {
+          console.error('Error al registrar:', error);
+          this.errorMessage =
+            error.error?.message || 'Error al registrar usuario';
+        },
+      });
   }
 }

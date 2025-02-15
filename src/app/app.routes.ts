@@ -4,26 +4,26 @@ import { LandingComponent } from './landing/landing/landing.component';
 
 export const routes: Routes = [
   {
-    path: '',
-    component: LandingComponent, // Página de inicio si no está autenticado
-    pathMatch: 'full',
+    path: 'landing',
+    component: LandingComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/features/auth.routes'), // Rutas de autenticación
+    loadChildren: () => import('./auth/features/auth.routes'),
   },
   {
-    path: 'dashboard',
-    canActivate: [authGuard], // Protección con authGuard
-    loadComponent: () =>
-      import('./pages/dashboard/dashboard.component').then(
-        (m) => m.DashboardComponent,
-      ),
+    path: '',
+    canActivate: [authGuard],
+    loadChildren: () => import('./pages/page.routes'),
+  },
+  {
+    path: '',
+    redirectTo: 'landing',
+    pathMatch: 'full',
   },
   {
     path: '**',
-    redirectTo: '',
+    redirectTo: 'dashboard',
   },
-
-  
 ];

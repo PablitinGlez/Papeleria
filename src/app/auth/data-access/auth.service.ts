@@ -1,15 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import {
   Auth,
   GoogleAuthProvider,
-  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  UserCredential,
+  UserCredential
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { BehaviorSubject, from, Observable, throwError } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
+import { environment } from 'src/app/enviroments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -23,20 +24,62 @@ export class AuthService {
   currentUser$ = this._currentUser.asObservable();
   isAuthenticating$ = this._isAuthenticating.asObservable();
 
-  login(email: string, password: string): Observable<UserCredential> {
-    this._isAuthenticating.next(true);
+  constructor(private http: HttpClient) {}
 
-    return from(signInWithEmailAndPassword(this.auth, email, password)).pipe(
-      tap((userCredential) => {
-        this._currentUser.next(userCredential.user);
-        this.router.navigate(['/dashboard']); // Redirige al dashboard tras el login exitoso
-      }),
-      catchError((error) => {
-        console.error('Error en el inicio de sesión:', error);
-        return throwError(() => error);
-      }),
-      finalize(() => this._isAuthenticating.next(false)),
-    );
+  // Añadimos el método signup
+  signup(
+    nombre: string,
+    correo: string,
+    telefono: string,
+    fechaNacimiento: string,
+    password: string,
+  ): Observable<any> {
+    const signupData = {
+      nombre,
+      correo,
+      password,
+      telefono,
+      fechaNacimiento,
+    };
+
+    return this.http
+      .post(`${environment.api.authApis}/auth/sign-up`, signupData)
+      .pipe(
+        tap((response: any) => {
+          if (response.token) {
+            this.saveToken({
+              token: response.token,
+              user: response.usuario,
+            });
+            this._currentUser.next(response.usuario);
+            this.router.navigate(['/dashboard']); // Redirigir al dashboard después del registro
+          }
+          console.log('Registro exitoso', response);
+        }),
+        catchError((error) => {
+          console.error('Error en el registro:', error);
+          return throwError(() => error);
+        }),
+      );
+  }
+
+  login(email: string, password: string): Observable<any> {
+    const loginData = {
+      correo: email, // Cambiamos el nombre del campo para que coincida con el backend
+      password: password,
+    }; // Cambia el nombre del campo a 'correo'
+    return this.http
+      .post(`${environment.api.authApis}/auth/login`, loginData) // Añade '/auth' al endpoint
+      .pipe(
+        tap((response) => {
+          console.log('Login exitoso', response);
+          this.router.navigate(['/dashboard']);
+        }),
+        catchError((error) => {
+          console.error('Error en el inicio de sesión:', error);
+          return throwError(() => error);
+        }),
+      );
   }
 
   signInWithGoogle(): Observable<UserCredential> {

@@ -7,3 +7,10 @@
 
 
 
+.no-placeholder::-webkit-datetime-edit-text,
+.no-placeholder::-webkit-datetime-edit-month-field,
+.no-placeholder::-webkit-datetime-edit-day-field,
+.no-placeholder::-webkit-datetime-edit-year-field {
+    display: none;
+}
+

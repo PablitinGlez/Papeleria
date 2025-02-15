@@ -36,7 +36,7 @@
           >Registrarse</span
         >
 
-      <form (ngSubmint)="register()">
+      <form (ngSubmit)="register()">
   <!-- [formGroup]="form" (ngSubmit)="register()" -->
 
   <!-- Fila 1: Nombre y Email -->
@@ -96,7 +96,10 @@
             d="M21 12C21 14.2091 19.2091 16 17 16C14.7909 16 13 14.2091 13 12C13 9.79086 14.7909 8 17 8C19.2091 8 21 9.79086 21 12Z"
           ></path>
         </svg>
-       <input [(ngModel)]="birthdate" name="birthdate" required placeholder="Fecha de Nacimiento" class="form-input" type="date">
+      <input [(ngModel)]="birthdate" name="birthdate" required 
+       class="form-input no-placeholder" 
+       type="date">
+
       </div>
     </div>
   </div>
