@@ -78,6 +78,31 @@
     --font-text: "Onest Variable";
     /* Color de texto de los estados */
 
+
+
+
+    /*modal*/
+    --modal-bg: var(--popup-bg);
+        /* Fondo del modal */
+        --modal-text: var(--theme-color);
+        /* Color de texto */
+        --modal-border: var(--border-color);
+        /* Borde del modal */
+        --modal-shadow: var(--overlay-bg);
+        /* Sombra */
+        --modal-input-bg: var(--content-bg);
+        /* Fondo de los inputs */
+        --modal-input-text: var(--theme-color);
+        /* Texto de los inputs */
+        --modal-input-border: var(--border-color);
+        /* Borde de los inputs */
+        --modal-btn-cancel: var(--button-inactive);
+        /* Color botón cancelar */
+        --modal-btn-save: var(--name-color);
+        /* Color botón guardar */
+        --modal-btn-text: var(--content-title-color);
+        /* Texto de botones */
+
 }
 
 .light-mode {
