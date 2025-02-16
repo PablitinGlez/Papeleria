@@ -1,16 +1,133 @@
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-
+@import "@fontsource-variable/onest";
 
 .no-placeholder::-webkit-datetime-edit-text,
 .no-placeholder::-webkit-datetime-edit-month-field,
 .no-placeholder::-webkit-datetime-edit-day-field,
 .no-placeholder::-webkit-datetime-edit-year-field {
-    display: none;
+  display: none;
 }
 
+:root {
+  --font-heading: "Onest Variable";
+
+  --theme-bg-color: #000000;
+  --theme-color: #f9fafb;
+  --name-color: #ffcc00;
+  --inactive-color: rgba(255, 255, 255, 0.78);
+  --border-color: rgba(113, 119, 144, 0.25);
+  --hover-menu-bg: rgba(4, 15, 51, 0.3);
+  --content-title-color: #000000;
+  --content-bg: rgba(146, 151, 179, 0.13);
+  --button-inactive: rgba(249, 250, 251, 0.55);
+  --dropdown-bg: #21242d;
+  --dropdown-hover: rgb(42, 46, 60);
+  --card-bg-color: #2d3748;
+
+  --card-text-color: #f7fafc;
+
+  /* Borde en tema oscuro */
+  --card-hover-bg-color: #4a5568;
+  /* Fondo al hacer hover en tema oscuro */
+  --popup-bg: rgb(22, 25, 37);
+  --search-bg: #14162b;
+  --overlay-bg: rgba(36, 39, 59, 0.3);
+  --scrollbar-bg: rgba(1, 2, 3, 0.4);
+  --card-bg-color: #000000; /* Fondo de tarjeta en tema claro */
+  --card-text-color: #ffffff; /* Texto en tema claro */
+  --card-border-color: rgba(0, 255, 234, 0.1); /* Borde en tema claro */
+
+  --card-hover-bg-color: #000e1b; /* Fondo al hacer hover en tema claro */
+  --icon-1-bg-color: #3a4f98;
+  /* Rosa pastel */
+  --icon-2-bg-color: #3a4f98;
+  /* Azul pastel */
+  --card-border-gradient-1: linear-gradient(71deg, #0d1212, #3da077, #0d1212);
+  --card-border-gradient-2: linear-gradient(71deg, #121013, #b0afb0, #121013);
+  --card-border-gradient-3: linear-gradient(71deg, #110e0e, #afa220, #110e0e);
+  --card-border-gradient-4: linear-gradient(71deg, #0c0a0e, #5f6fad, #0c0a0e);
+  --icon-3-bg-color: #3a4f98;
+  /* Verde pastel */
+  --icon-4-bg-color: #3a4f98;
+
+
+
+--table-header-bg: #2d3748;
+    /* Fondo de encabezado */
+    --table-header-color: #f7fafc;
+    /* Color de texto del encabezado */
+    --table-row-bg: #000000;
+    /* Fondo de las filas */
+    --table-row-color: #e2e8f0;
+    /* Color de texto de las filas */
+    --table-border: rgb(255, 255, 255);
+    /* Borde de las celdas */
+    --table-hover-bg: rgba(255, 255, 255, 0.1);
+    /* Fondo al pasar el ratón sobre una fila */
+    --status-active-bg: #38a169;
+    /* Fondo estado activo */
+    --status-inactive-bg: #e53e3e;
+    /* Fondo estado inactivo */
+    --status-text: #fff;
+    /* Color de texto de los estados */
+
+}
+
+.light-mode {
+  --theme-bg-color: rgba(255, 255, 255, 0.31);
+  --theme-color: #3c3a3a;
+  --name-color: #000340;
+  --inactive-color: #333333;
+  --button-inactive: #3c3a3a;
+  --search-bg: rgba(255, 255, 255, 0.31);
+  --dropdown-bg: #f7f7f7;
+  --overlay-bg: rgba(255, 255, 255, 0.3);
+  --dropdown-hover: rgb(236, 236, 236);
+  --border-color: rgba(255, 255, 255, 0.35);
+  --card-bg-color: #ffffff;
+  /* Fondo de tarjeta en tema claro */
+  --card-text-color: #333333;
+  /* Texto en tema claro */
+  --card-border-color: rgba(0, 0, 0, 0.1);
+  /* Borde en tema claro */
+  --card-hover-bg-color: #f9fafb;
+  /* Fondo al hacer hover en tema claro */
+  --popup-bg: rgb(255, 255, 255);
+  --hover-menu-bg: rgba(255, 255, 255, 0.35);
+  --scrollbar-bg: rgba(255, 253, 253, 0.57);
+  --content-title-color: var(--theme-color);
+
+  --icon-1-bg-color: rgba(255, 99, 132, 0.2);
+  /* Rosa pastel */
+  --icon-2-bg-color: rgba(54, 162, 235, 0.2);
+  /* Azul pastel */
+  --icon-3-bg-color: rgba(75, 192, 192, 0.2);
+  /* Verde pastel */
+  --icon-4-bg-color: rgba(255, 206, 86, 0.2);
+  /* Amarillo pastel */
+
+
+--table-row-bg: #ffffff;
+}
+
+body {
+  font-family: var(--body-font);
+  background-color: var(--theme-bg-color);
+  color: var(--theme-color);
+}
+
+body.light-mode {
+  background-color: var(--theme-bg-color);
+  color: var(--theme-color);
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

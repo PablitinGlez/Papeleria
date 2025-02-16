@@ -1,0 +1,434 @@
+
+
+
+/* Estilo base de la tabla */
+.custom-table {
+    width: 100% !important;
+    max-width: 1100px !important;
+    min-width: 600px;
+    margin: 20px;
+    padding: 15px;
+    display: block !important;
+}
+
+.mat-mdc-table {
+    width: 100% !important;
+    table-layout: fixed !important;
+}
+
+.mat-header-cell {
+    background-color: var(--table-header-bg);
+    color: var(--table-header-color);
+    font-weight: 600;
+    font-size: 14px;
+    padding: 16px !important;
+    border-bottom: none;
+}
+
+.mat-header-cell,
+.mat-cell {
+    width: auto;
+    min-width: 120px;
+    max-width: 250px;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.mat-cell {
+    color: var(--table-row-color);
+    font-size: 14px;
+    padding: 12px 16px !important;
+    border-bottom: 1px solid var(--table-border);
+}
+
+.mat-row {
+    transition: background-color 0.2s ease;
+    background-color: var(--table-row-bg);
+    margin-bottom: 10px;
+}
+
+.mat-row:hover {
+    background-color: var(--table-hover-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.estado-activo,
+.estado-inactivo {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.estado-activo {
+    background-color: var(--status-active-bg);
+    color: var(--status-text);
+}
+
+.estado-inactivo {
+    background-color: var(--status-inactive-bg);
+    color: var(--status-text);
+}
+
+/* Estilos para el modo claro */
+.light-mode .mat-header-cell {
+    background-color: var(--light-table-header-bg);
+    color: var(--light-table-header-color);
+}
+
+.light-mode .mat-cell {
+    color: var(--light-table-row-color);
+}
+
+.light-mode .mat-row {
+    background-color: var(--light-table-row-bg);
+}
+
+.light-mode .mat-row:hover {
+    background-color: var(--light-table-hover-bg);
+}
+
+/* Estilos responsivos */
+@media screen and (max-width: 768px) {
+    .custom-table {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .mat-header-cell,
+    .mat-cell {
+        padding: 10px !important;
+        font-size: 13px;
+    }
+}
+
+/* Estilos para la paginación */
+.mat-paginator {
+    background-color: transparent;
+    border-top: 1px solid var(--table-border);
+}
+
+/* Estilos para el ordenamiento */
+.mat-sort-header-container {
+    justify-content: flex-start;
+}
+
+/* Estilos para las fechas */
+td.mat-cell.fecha {
+    color: #ffffff;
+    font-size: 13px;
+}
+
+/* Estilos para el correo */
+td.mat-cell.correo {
+    color: #3498db;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Animación al cargar la tabla */
+.mat-table {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+/* Estilo con mayor especificidad */
+app-users .mat-mdc-table .mat-mdc-header-cell {
+    background-color: #2c3e50 !important;
+    color: #ecf0f1 !important;
+}
+
+app-users .mat-mdc-table .mat-mdc-cell {
+    background-color: #ffffff !important;
+    color: #2c3e50 !important;
+}
+
+
+/* From Uiverse.io by vinodjangid07 */
+.Btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100px;
+    height: 40px;
+    border: none;
+    padding: 0px 20px;
+    background-color: #62abff;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 10px;
+  
+    transition-duration: .3s;
+}
+
+.svg {
+    width: 13px;
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+    fill: white;
+    transition-duration: .3s;
+}
+
+.Btn:hover {
+    color: transparent;
+}
+
+.Btn:hover svg {
+    right: 43%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    transition-duration: .3s;
+}
+
+.Btn:active {
+    transform: translate(3px, 3px);
+    transition-duration: .3s;
+    box-shadow: 2px 2px 0px rgb(140, 32, 212);
+}
+
+
+/* From Uiverse.io by vinodjangid07 */
+.button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgb(20, 20, 20);
+    border: none;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    position: relative;
+    gap: 2px;
+}
+
+.svgIcon {
+    width: 12px;
+    transition-duration: 0.3s;
+}
+
+.svgIcon path {
+    fill: white;
+}
+
+.button:hover {
+    transition-duration: 0.3s;
+    background-color: rgb(255, 69, 69);
+    align-items: center;
+    gap: 0;
+}
+
+.bin-top {
+    transform-origin: bottom right;
+}
+
+.button:hover .bin-top {
+    transition-duration: 0.5s;
+    transform: rotate(160deg);
+}
+
+/* Contenedor de la tabla */
+.table-container {
+    width: 10%;
+    padding: 30px;
+    overflow-x: auto;
+    /* Permite el desplazamiento horizontal en pantallas pequeñas */
+}
+
+/* Estilos base de la tabla */
+.custom-table {
+    width: 10%;
+    min-width: 100px;
+    /* Ajusta este valor según el contenido de tu tabla */
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: var(--table-row-bg);
+}
+
+/* Estilos para las celdas */
+.mat-cell {
+    white-space: nowrap;
+    
+    /* Evita que el texto se divida en varias líneas */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Muestra puntos suspensivos si el texto es demasiado largo */
+    max-width: 80px;
+    /* Ajusta este valor según el contenido de tus columnas */
+}
+
+td{
+    padding: 14px;
+}
+
+
+
+/* Estilos del botón Añadir */
+.btn-add {
+    display: block;
+    width: 10%;
+    margin-top: 20px;
+    padding: 10px 20px;
+    margin-left: 20px;
+    text-align: center;
+    background-color: #07a66c;
+    /* Verde pastel */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.btn-add svg {
+    margin-left: 10px;
+   
+    width: 16px;
+    height: 16px;
+}
+
+/* Hover */
+.btn-add:hover {
+    background-color: #004727;
+    /* Cambio de color al hacer hover */
+}
+
+.btn-add:focus {
+    outline: none;
+}
+
+
+
+/* Contenedor de las cards */
+.gradient-cards {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 20px 20px;
+    justify-content: start;
+    gap: 20px;
+}
+
+/* Estilos base de la card */
+.card {
+    width: 300px;
+   
+  border: none;
+    background: none;
+    /* Espacio para que el borde no se sobreponga */
+    background-clip: padding-box;
+}
+
+/* Contenedor interno de la card */
+.container-card {
+    background: var(--card-bg-color);
+    color: var(--card-text-color);
+
+    padding: 20px;
+    text-align: center;
+}
+
+/* 🌑 Borde gradiente para tema oscuro */
+.bg-green-box {
+    border: 0.3px solid;
+    border-radius: 1%;
+    border-image-source: var(--card-border-gradient-1);
+    border-image-slice: 1;
+}
+
+.bg-white-box {
+    border: 0.3px solid;
+    border-radius: 1%;
+    border-image-source: var(--card-border-gradient-2);
+    border-image-slice: 1;
+}
+
+.bg-blue-box {
+    border: 0.3px solid;
+    border-radius: 1%;
+    border-image-source: var(--card-border-gradient-3);
+    border-image-slice: 1;
+}
+
+/* ☀️ Borde gradiente para tema claro */
+.light-mode .bg-green-box {
+    border-image-source: var(--light-card-border-gradient-1);
+}
+
+.light-mode .bg-white-box {
+    border-image-source: var(--light-card-border-gradient-2);
+}
+
+.light-mode .bg-blue-box {
+    border-image-source: var(--light-card-border-gradient-3);
+}
+
+/* Estilos para el título de la card */
+.card-title {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/* Estilos para la descripción de la card */
+.card-description {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Modo claro - ajustar fondo y texto */
+.light-mode .container-card {
+    background: #ffffff;
+    color: #333333;
+}
+
+.bg-green-box::after,
+.bg-white-box::after,
+.bg-yellow-box::after,
+.bg-blue-box::after {
+    position: absolute;
+    top: -2px;
+    /* Ajuste para que el borde gradiente sobresalga un poco */
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    content: "";
+    z-index: -1;
+    border-radius: 45px;
+    /* Aplica el border-radius al borde gradiente */
+    
+    /* Gradiente para el borde */
+    background-size: 100% 100%;
+}

@@ -1,12 +1,19 @@
 // layout/dashboard-layout.component.ts
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
+import { LogoutButtonComponent } from "../../components/logout/logout.component";
 
 @Component({
   selector: 'app-dashboard-layout',
   styleUrls: ['../dashboard/dashboard.component.css'],
   standalone: true,
-  imports: [RouterModule, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [
+    RouterModule,
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
+    LogoutButtonComponent,
+  ],
 
   template: `
     <div class="app">
@@ -19,7 +26,7 @@ import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angul
         </div>
         <div class="header-profile">
           <div class="notification">
-            <span class="notification-number">3</span>
+         
             <svg
               viewBox="0 0 24 24"
               fill="currentColor"
@@ -51,7 +58,7 @@ import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angul
         <!-- Sidebar fijo -->
         <div class="left-side">
           <div class="side-wrapper">
-            <div class="side-title">Papeleria</div>
+            <h4 class="side-title">Papeleria</h4>
             <div class="side-menu">
               <a routerLink="/dashboard" routerLinkActive="active">
                 <svg viewBox="0 0 512 512">
@@ -76,6 +83,7 @@ import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angul
                 </svg>
                 Dashboard
               </a>
+           
             </div>
           </div>
           <div class="side-wrapper">
@@ -206,9 +214,9 @@ import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angul
                 Ventas
               </a>
             </div>
+            <hr class="divider" />
           </div>
 
-          <hr class="divider" />
           <div class="side-wrapper">
             <div class="side-menu">
               <a routerLink="/dashboard/sales" routerLinkActive="active">
@@ -230,28 +238,8 @@ import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angul
             </div>
           </div>
 
-          <hr class="divider" />
           <!-- Botón de Cierre de Sesión -->
-          <div class="side-wrapper">
-            <div class="side-menu">
-              <a href="#" class="logout-button">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                  <path d="M16 17l5-5-5-5"></path>
-                  <path d="M21 12H9"></path>
-                </svg>
-                Cerrar Sesión
-              </a>
-            </div>
-          </div>
+          <app-logout-button></app-logout-button>
         </div>
 
         <!-- Contenido dinámico -->

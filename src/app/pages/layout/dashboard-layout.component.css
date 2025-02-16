@@ -1,0 +1,10 @@
+.main-container {
+    flex: 1;
+    /* Ocupa el espacio restante */
+    margin-left: 250px;
+    /* Ajusta según el ancho del sidebar */
+    padding: 20px;
+    /* Espaciado interno */
+    overflow-x: auto;
+    /* Permite el desplazamiento horizontal si la tabla es ancha */
+}

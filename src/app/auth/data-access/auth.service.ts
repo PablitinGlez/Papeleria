@@ -130,15 +130,36 @@ export class AuthService {
   logout(): Observable<void> {
     return from(signOut(this.auth)).pipe(
       tap(() => {
-        localStorage.removeItem('userData');
+        // Limpiar todos los datos de autenticación
+        localStorage.clear(); // Limpia todo el localStorage
+        sessionStorage.clear(); // Limpia todo el sessionStorage si lo usas
         this._currentUser.next(null);
-        this.router.navigateByUrl('/auth/login');
+
+        // Limpiar cualquier otro estado de la aplicación si es necesario
+        // Por ejemplo, si tienes otros servicios con estado:
+        // this.userPreferencesService.clear();
+        // this.cartService.clear();
+
+        // Redirigir a la página de inicio
+        this.router.navigate(['/landing'], {
+          replaceUrl: true, // Esto evita que el usuario pueda volver atrás
+        });
       }),
       catchError((error) => {
         console.error('Error durante logout:', error);
         return throwError(() => error);
       }),
     );
+  }
+
+  // Método para verificar si el usuario está autenticado
+  isAuthenticated(): boolean {
+    return !!this.decodeToken();
+  }
+
+  getToken(): string | null {
+    const userData = this.decodeToken();
+    return userData?.token || null;
   }
 
   private saveToken(user: any) {

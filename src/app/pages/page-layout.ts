@@ -6,7 +6,7 @@ import Header from '@components/header';
   selector: 'app-page-layout',
   imports: [RouterOutlet, Header],
   template: `
-   <Header></Header>
+   <!--header-->
     <main>
       <router-outlet />
     </main>
