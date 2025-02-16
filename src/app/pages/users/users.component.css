@@ -6,8 +6,8 @@
     width: 100% !important;
     max-width: 1100px !important;
     min-width: 600px;
-    margin: 20px;
-    padding: 15px;
+    margin: 0 auto;
+    padding: 20px 0;
     display: block !important;
 }
 
@@ -18,7 +18,7 @@
 
 .mat-header-cell {
     background-color: var(--table-header-bg);
-    color: var(--table-header-color);
+   color: var(--text-color); /* Aplicamos la variable al texto */
     font-weight: 600;
     font-size: 14px;
     padding: 16px !important;
@@ -287,15 +287,24 @@ td{
     padding: 14px;
 }
 
+.adds{
+    width: 100% !important;
+        max-width: 1100px !important;
+        min-width: 600px;
+        margin: 0 auto;
+        padding: 15px 0;
+        display: block !important;
+    }
 
 
 /* Estilos del botón Añadir */
 .btn-add {
+    
     display: block;
     width: 10%;
-    margin-top: 20px;
+    margin-top:0 auto;
     padding: 10px 20px;
-    margin-left: 20px;
+
     text-align: center;
     background-color: #07a66c;
     /* Verde pastel */
@@ -335,10 +344,16 @@ td{
 .gradient-cards {
     display: flex;
     flex-wrap: wrap;
-    width: 90%;
-    margin: 20px 20px;
+    padding: 25px 0;
+        margin: 0 auto;
+  
     justify-content: start;
     gap: 20px;
+    width: 100% !important;
+        max-width: 1100px !important;
+        min-width: 600px;
+        margin: 0 auto;
+      
 }
 
 /* Estilos base de la card */
@@ -431,4 +446,15 @@ td{
     
     /* Gradiente para el borde */
     background-size: 100% 100%;
+}
+
+th{
+    color:var(--text-color-td);
+    font-family: var(--font-text);
+}
+
+td{
+    color: var(--text-color-th);
+    font-family: var(--font-text);
+    
 }
