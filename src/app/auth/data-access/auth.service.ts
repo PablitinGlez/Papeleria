@@ -33,7 +33,23 @@ export class AuthService {
     telefono: string,
     fechaNacimiento: string,
     password: string,
+    profileImage?: File, // Add optional profile image parameter
   ): Observable<any> {
+
+    const formData = new FormData();
+    formData.append('nombre', nombre);
+    formData.append('correo', correo);
+    formData.append('telefono', telefono);
+    formData.append('fechaNacimiento', fechaNacimiento);
+    formData.append('password', password);
+
+   
+     if (profileImage) {
+       formData.append('image', profileImage);
+     }
+
+    console.log('Enviando fecha al backend:', fechaNacimiento); // Log para verificación
+
     const signupData = {
       nombre,
       correo,
@@ -65,15 +81,22 @@ export class AuthService {
 
   login(email: string, password: string): Observable<any> {
     const loginData = {
-      correo: email, // Cambiamos el nombre del campo para que coincida con el backend
+      correo: email,
       password: password,
-    }; // Cambia el nombre del campo a 'correo'
+    };
     return this.http
-      .post(`${environment.api.authApis}/auth/login`, loginData) // Añade '/auth' al endpoint
+      .post(`${environment.api.authApis}/auth/login`, loginData)
       .pipe(
-        tap((response) => {
+        tap((response: any) => {
           console.log('Login exitoso', response);
-          this.router.navigate(['/dashboard']);
+          if (response.token) {
+            this.saveToken({
+              token: response.token,
+              user: response.usuario,
+            });
+            this._currentUser.next(response.usuario);
+            this.router.navigate(['/dashboard']);
+          }
         }),
         catchError((error) => {
           console.error('Error en el inicio de sesión:', error);
@@ -81,7 +104,6 @@ export class AuthService {
         }),
       );
   }
-
   signInWithGoogle(): Observable<UserCredential> {
     if (this._isAuthenticating.value) {
       console.log('Ya hay un proceso de autenticación en curso');

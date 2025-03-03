@@ -1,6 +1,8 @@
 // layout/dashboard-layout.component.ts
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/data-access/auth.service';
 import { LogoutButtonComponent } from "../../components/logout/logout.component";
 
 @Component({
@@ -26,7 +28,6 @@ import { LogoutButtonComponent } from "../../components/logout/logout.component"
         </div>
         <div class="header-profile">
           <div class="notification">
-         
             <svg
               viewBox="0 0 24 24"
               fill="currentColor"
@@ -48,8 +49,13 @@ import { LogoutButtonComponent } from "../../components/logout/logout.component"
           </svg>
           <img
             class="profile-img"
-            src="https://images.unsplash.com/photo-1600353068440-6361ef3a86e8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-            alt=""
+            [src]="
+              currentUser?.imageUrl ||
+              currentUser?.photoURL ||
+              defaultProfileImage
+            "
+            [alt]="currentUser?.nombre || currentUser?.displayName || 'Profile'"
+            (error)="handleImageError($event)"
           />
         </div>
       </div>
@@ -83,7 +89,6 @@ import { LogoutButtonComponent } from "../../components/logout/logout.component"
                 </svg>
                 Dashboard
               </a>
-           
             </div>
           </div>
           <div class="side-wrapper">
@@ -250,4 +255,36 @@ import { LogoutButtonComponent } from "../../components/logout/logout.component"
     </div>
   `,
 })
-export class DashboardLayoutComponent {}
+export class DashboardLayoutComponent {
+  currentUser: any = null;
+  private userSubscription: Subscription | undefined;
+  defaultProfileImage =
+    'https://res.cloudinary.com/dxgriy1hu/image/upload/v1739936608/ICONOS-27_mtjxlg.png';
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    // Subscribe to the current user observable
+    this.userSubscription = this.authService.currentUser$.subscribe(
+      (user) => {
+        this.currentUser = user;
+        console.log('Current user updated:', user);
+      },
+      (error) => {
+        console.error('Error getting current user:', error);
+      },
+    );
+  }
+
+  ngOnDestroy() {
+    // Clean up subscription when component is destroyed
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
+  }
+
+  handleImageError(event: any) {
+    // If the image fails to load, fallback to default image
+    event.target.src = this.defaultProfileImage;
+  }
+}

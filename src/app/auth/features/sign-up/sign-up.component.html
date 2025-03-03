@@ -87,21 +87,18 @@
     </div>
 
     <!-- Fecha de Nacimiento -->
-    <div class="input-group flex-1">
-      <div class="input-wrapper">
-        <svg fill="none" viewBox="0 0 24 24" class="input-icon">
-          <path
-            stroke-width="1.5"
-            stroke="currentColor"
-            d="M21 12C21 14.2091 19.2091 16 17 16C14.7909 16 13 14.2091 13 12C13 9.79086 14.7909 8 17 8C19.2091 8 21 9.79086 21 12Z"
-          ></path>
-        </svg>
-      <input [(ngModel)]="birthdate" name="birthdate" required 
-       class="form-input no-placeholder" 
-       type="date">
-
-      </div>
-    </div>
+   <div class="input-group flex-1">
+  <div class="input-wrapper">
+    <svg fill="none" viewBox="0 0 24 24" class="input-icon">
+      <path
+        stroke-width="1.5"
+        stroke="currentColor"
+        d="M8 6H16C17.1046 6 18 6.89543 18 8V16C18 17.1046 17.1046 18 16 18H8C6.89543 18 6 17.1046 6 16V8C6 6.89543 6.89543 6 8 6Z"
+      ></path>
+    </svg>
+    <input [(ngModel)]="birthdate" name="birthdate" id="fechaNacimiento" class="form-input" required type="date" placeholder="Fecha de Nacimiento">
+  </div>
+</div>
   </div>
 
   <!-- Fila 3: Contraseña y Confirmar Contraseña -->

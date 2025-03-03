@@ -25,7 +25,7 @@
   --button-inactive: rgba(249, 250, 251, 0.55);
   --dropdown-bg: #21242d;
   --dropdown-hover: rgb(42, 46, 60);
-  --card-bg-color: #2d3748;
+
 
   --card-text-color: #f7fafc;
 
@@ -36,74 +36,137 @@
   --search-bg: #14162b;
   --overlay-bg: rgba(36, 39, 59, 0.3);
   --scrollbar-bg: rgba(1, 2, 3, 0.4);
-  --card-bg-color: #000000; /* Fondo de tarjeta en tema claro */
-  --card-text-color: #ffffff; /* Texto en tema claro */
-  --card-border-color: rgba(0, 255, 234, 0.1); /* Borde en tema claro */
 
-  --card-hover-bg-color: #000e1b; /* Fondo al hacer hover en tema claro */
-  --icon-1-bg-color: #3a4f98;
+  --card-bg-color: rgba(0, 0, 0, 0.976);
+  --card-text-color: #ffffff;
+  /* Texto en tema claro */
+  --card-border-color: rgba(0, 255, 234, 0.1);
+
+
+  /* Borde en tema claro */
+
+  --card-hover-bg-color: #0a5ba7;
+  /* Fondo al hacer hover en tema claro */
+  --icon-1-bg-color: #1143f917;
   /* Rosa pastel */
-  --icon-2-bg-color: #3a4f98;
+  --icon-2-bg-color: #1143f917;
   /* Azul pastel */
-  --card-border-gradient-1: linear-gradient(71deg, #0d1212, #3da077, #0d1212);
+  --card-border-gradient-1: linear-gradient(901deg, #0d1212, #3da077, #0d1212);
   --card-border-gradient-2: linear-gradient(71deg, #121013, #b0afb0, #121013);
   --card-border-gradient-3: linear-gradient(71deg, #110e0e, #afa220, #110e0e);
   --card-border-gradient-4: linear-gradient(71deg, #0c0a0e, #5f6fad, #0c0a0e);
-  --icon-3-bg-color: #3a4f98;
+  --icon-3-bg-color: #1143f917;
   /* Verde pastel */
-  --icon-4-bg-color: #3a4f98;
+  --icon-4-bg-color: #1143f917;
 
 
 
---table-header-bg: #ffffff;
-    /* Fondo de encabezado */
-    --table-header-color: #f7fafc;
-    /* Color de texto del encabezado */
-    --table-row-bg: #000000;
-    /* Fondo de las filas */
-    --table-row-color: #e2e8f0;
-    /* Color de texto de las filas */
-    --table-border: rgb(255, 255, 255);
-    /* Borde de las celdas */
-    --table-hover-bg: rgba(255, 255, 255, 0.1);
-    /* Fondo al pasar el ratón sobre una fila */
-    --status-active-bg: #38a169;
-    /* Fondo estado activo */
-    --status-inactive-bg: #e53e3e;
-    /* Fondo estado inactivo */
-    --text-color-td:#b7b7b7;
-        --text-color-th: #ffffff;
-    --status-text: #fff;
+  --table-header-bg: #ffffff;
+  /* Fondo de encabezado */
+  --table-header-color: #f7fafc;
+  /* Color de texto del encabezado */
+  --table-row-bg: #000000;
+  /* Fondo de las filas */
+  --table-row-color: #e2e8f0;
+  /* Color de texto de las filas */
+  --table-border: rgb(255, 255, 255);
+  /* Borde de las celdas */
+  --table-hover-bg: rgba(255, 255, 255, 0.1);
+  /* Fondo al pasar el ratón sobre una fila */
+  --status-active-bg: #38a169;
+  /* Fondo estado activo */
+  --status-inactive-bg: #e53e3e;
+  /* Fondo estado inactivo */
+  --text-color-td: #b7b7b7;
+  --text-color-th: #ffffff;
+  --status-text: #fff;
 
-    --font-text: "Onest Variable";
-    /* Color de texto de los estados */
-
-
+  --font-text: "Onest Variable";
+  /* Color de texto de los estados */
 
 
-    /*modal*/
-    --modal-bg: var(--popup-bg);
-        /* Fondo del modal */
-        --modal-text: var(--theme-color);
-        /* Color de texto */
-        --modal-border: var(--border-color);
-        /* Borde del modal */
-        --modal-shadow: var(--overlay-bg);
-        /* Sombra */
-        --modal-input-bg: var(--content-bg);
-        /* Fondo de los inputs */
-        --modal-input-text: var(--theme-color);
-        /* Texto de los inputs */
-        --modal-input-border: var(--border-color);
-        /* Borde de los inputs */
-        --modal-btn-cancel: var(--button-inactive);
-        /* Color botón cancelar */
-        --modal-btn-save: var(--name-color);
-        /* Color botón guardar */
-        --modal-btn-text: var(--content-title-color);
-        /* Texto de botones */
+  /* Fondo del modal */
+  --modal-bg-color: rgba(255, 255, 255, 0.01);
+  /* Fondo oscuro del modal */
 
+
+  /* Color de texto del modal */
+  --modal-text-color: #f7fafc;
+  /* Texto claro en el modal */
+
+  /* Borde del modal */
+  --modal-border-color: rgba(0, 0, 0, 0.1);
+  /* Borde sutil en el modal */
+
+  /* Fondo de botones dentro del modal */
+  --modal-button-bg: #007bff;
+  /* Fondo del botón "Guardar" */
+  --modal-button-hover-bg: #0056b3;
+  /* Fondo del botón "Guardar" al hacer hover */
+
+  /* Fondo de la zona de entrada del modal */
+  --input-bg: #000000;
+  /* Fondo de los inputs en el modal */
+  --input-border-color: #4a5568;
+  /* Borde de los inputs */
+
+  /* Color de texto de los inputs */
+  --input-text-color: #f7fafc;
+  /* Texto claro dentro de los inputs */
+
+  /* Fondo de la zona de "Drop Zone" */
+  --drop-zone-bg: #000000;
+  /* Fondo oscuro en la zona de "Drop Zone" */
+  --drop-zone-border-color: #f7fafc;
+  /* Borde blanco en la zona de Drop Zone */
+
+
+  /* Tema Oscuro */
+  --drop-zone-bg-color: rgba(255, 255, 255, 0.03);
+  /* Fondo oscuro para la Drop Zone */
+  --drop-zone-border-color: #f7fafc;
+  /* Borde blanco */
+  --drop-zone-text-color: #f7fafc;
+  /* Color del texto en la Drop Zone */
+  --browse-btn-bg: #6caef36e;
+  /* Fondo del botón "Seleccionar archivo" */
+  --browse-btn-hover-bg: #0056b3;
+  /* Fondo del botón al hacer hover */
+  --browse-btn-text-color: #ffffff;
+  /* Texto blanco en el botón */
+
+  /* Borde del botón */
+  --svg-fill-color: #f7fafc;
+  --save-btn-bg: #5da35c;
+  --button-inactive: rgba(39, 66, 94, 0.208);
+  /* Color del icono SVG */
+  --content-title-color: #ffffff;
+
+  --select-option-hover-bg: rgba(255, 255, 255, 0.1);
+  /* Fondo al hacer hover */
+  --select-option-hover-color: #ffffff;
+  /* Color del texto al hacer hover */
+
+--alert-bg-color: rgba(0, 0, 0, 0.7);
+  /* Fondo semitransparente */
+--alert-text-color: #f7fafc;
+  --alert-border-color: rgba(0, 0, 0, 0.589);
+  --alert-button-bg: #dc2626;
+  --alert-button-text: #ffffff;
+  --alert-button-hover-bg: #b91c1c;
+  --alert-cancel-bg: #030202;
+  --alert-cancel-text: #f7fafc;
+  --alert-cancel-border: #4b5563;
+
+  --alert-success-bg: rgb(0, 0, 0);
+    /* Color verde */
+    --alert-success-text: #ffffff;
+    /* Color del texto */
 }
+
+
+
+
 
 .light-mode {
   --theme-bg-color: rgba(255, 255, 255, 0.31);
@@ -139,12 +202,71 @@
   /* Amarillo pastel */
 
 
---table-row-bg: #ffffff;
---text-color-td: #0b0025;
---text-color-th: #000000;
+  --table-row-bg: #ffffff;
+  --text-color-td: #0b0025;
+  --text-color-th: #000000;
 
---font-text: "Onest Variable";
+  --font-text: "Onest Variable";
+
+  --drop-zone-bg-color: #ffffff25;
+  /* Fondo blanco para la Drop Zone */
+  --drop-zone-border-color: #595959;
+  /* Borde negro */
+  --drop-zone-text-color: #333333;
+  /* Texto oscuro en la Drop Zone */
+  --browse-btn-bg: #007bff76;
+  /* Fondo del botón "Seleccionar archivo" */
+  --browse-btn-hover-bg: #0056b3;
+  /* Fondo del botón al hacer hover */
+  --browse-btn-text-color: #ffffff;
+  /* Texto blanco en el botón */
+  --browse-btn-border-color: #007bff;
+  /* Borde del botón */
+  --svg-fill-color: #494747;
+  /* Color del icono SVG */
+  --card-bg-color: #ffffff;
+  /* Fondo del modal */
+  --card-text-color: #000000;
+  /* Texto oscuro */
+  --input-bg: #ffffff;
+  /* Fondo de los inputs */
+  --input-border-color: #767676;
+  /* Borde de los inputs */
+  --input-text-color: #000000;
+  /* Texto en los inputs */
+  --input-placeholder-color: #5c5c5c;
+  /* Color del placeholder */
+  --button-inactive: rgba(227, 227, 227, 0.55);
+  /* Fondo de botón inactivo */
+  --button-hover: rgba(4, 15, 51, 0.1);
+  /* Fondo al hacer hover en botones */
+  --save-btn-bg: #000000;
+  /* Fondo del botón "Guardar" */
+  --save-btn-text-color: white;
+  /* Texto en el botón "Guardar" */
+  --save-btn-hover-bg: #0056b3;
+  /* Fondo al hacer hover en el botón "Guardar" */
+  --content-title-color: #000000;
+  /* Color del título */
+  --modal-bg-color: rgb(255, 255, 255);
+
+--alert-bg-color: #ffffff;
+
+--alert-text-color: #333333;
+  --alert-border-color: rgba(0, 0, 0, 0.1);
+  --alert-button-bg: #dc2626;
+  --alert-button-text: #ffffff;
+  --alert-button-hover-bg: #b91c1c;
+  --alert-cancel-bg: #ffffff;
+  --alert-cancel-text: #374151;
+  --alert-cancel-border: #d1d5db;
+
+
+    --alert-success-bg: rgb(255, 255, 255);
+      --alert-success-text: #393939;
 }
+
+
 
 body {
   font-family: var(--body-font);
@@ -156,11 +278,32 @@ body.light-mode {
   background-color: var(--theme-bg-color);
   color: var(--theme-color);
 }
+
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+/* En styles.css */
+.success-snackbar {
+  max-width: 400px !important;
+  margin-top: 20px !important;
+  margin-right: 20px !important;
+}
+
+.success-snackbar .mat-mdc-snack-bar-container {
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.success-snackbar .mdc-snackbar__surface {
+  background-color: transparent !important;
+  box-shadow: none !important;
 }

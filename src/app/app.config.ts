@@ -1,17 +1,18 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
-
 import { provideHttpClient } from '@angular/common/http';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { provideAnimations } from '@angular/platform-browser/animations'; // <- Esta es la importación correcta
+import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-       provideHttpClient(),
+    provideHttpClient(),
     provideRouter(routes),
+    provideAnimations(), // <- Añade este provider
     provideFirebaseApp(() =>
       initializeApp({
         projectId: 'dashboard-a096b',

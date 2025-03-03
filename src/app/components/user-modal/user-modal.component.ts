@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -15,6 +15,10 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AlertCreateComponent } from '@components/alert-create/alert-create.component';
+import { UserService } from '../../auth/data-access/user.service';
+import { DropZoneImageComponent } from '../../components/drop-zone-image/drop-zone-image.component';
 
 @Component({
   selector: 'app-user-modal',
@@ -29,21 +33,69 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     MatButtonModule,
     ReactiveFormsModule,
+    DropZoneImageComponent,
   ],
 })
 export class UserModalComponent {
+  @ViewChild(DropZoneImageComponent) dropZone!: DropZoneImageComponent;
   userForm: FormGroup;
+  isLoading = false;
+  selectedFile: File | null = null;
+
+  // Cambia la definición de roles para incluir el _id correcto
+  roles: { _id: string; nombre: string; descripcion: string }[] = [];
 
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<UserModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private userService: UserService,
+    private snackBar: MatSnackBar,
   ) {
-    this.userForm = this.fb.group({
-      nombre: ['', Validators.required],
-      correo: ['', [Validators.required, Validators.email]],
-      rol: ['', Validators.required],
-      estado: ['Activo', Validators.required],
+    this.userForm = this.fb.group(
+      {
+        nombre: ['', [Validators.required]],
+        correo: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', [Validators.required]],
+        telefono: ['', [Validators.required]],
+        fechaNacimiento: ['', [Validators.required]],
+        idRol: ['', [Validators.required]],
+        imageUrl: [''],
+      },
+      {
+        validators: this.passwordMatchValidator,
+      },
+    );
+  }
+
+  private passwordMatchValidator(form: FormGroup) {
+    const password = form.get('password');
+    const confirmPassword = form.get('confirmPassword');
+
+    if (password?.value !== confirmPassword?.value) {
+      confirmPassword?.setErrors({ passwordMismatch: true });
+    } else {
+      confirmPassword?.setErrors(null);
+    }
+    return null;
+  }
+
+  ngOnInit() {
+    // Cargar los roles desde la base de datos
+    this.userService.getRoles().subscribe({
+      next: (roles) => {
+        this.roles = roles;
+        console.log('Roles cargados:', this.roles);
+      },
+      error: (error) => {
+        console.error('Error al cargar roles:', error);
+        this.snackBar.open('Error al cargar roles', 'Cerrar', {
+          duration: 3000,
+          horizontalPosition: 'end',
+          verticalPosition: 'bottom',
+        });
+      },
     });
   }
 
@@ -53,7 +105,96 @@ export class UserModalComponent {
 
   guardarUsuario(): void {
     if (this.userForm.valid) {
-      this.dialogRef.close(this.userForm.value);
+      this.isLoading = true;
+      const formData = new FormData();
+
+      // Obtener los valores del formulario
+      const formValues = this.userForm.value;
+
+      Object.keys(formValues).forEach((key) => {
+        if (key !== 'confirmPassword' && key !== 'imageUrl') {
+          formData.append(key, formValues[key]);
+        }
+      });
+
+      if (this.selectedFile) {
+        formData.append('image', this.selectedFile, this.selectedFile.name);
+      }
+
+      this.userService.createUser(formData).subscribe({
+        next: (response) => {
+          console.log('Respuesta del servidor:', response);
+          this.snackBar.openFromComponent(AlertCreateComponent, {
+            duration: 3000,
+            horizontalPosition: 'end',
+            verticalPosition: 'bottom',
+            panelClass: ['success-snackbar'],
+            data: { message: 'El usuario ha sido creado con éxito!' }, // Mensaje personalizado
+          });
+          this.dialogRef.close(response.usuario);
+        },
+        error: (error) => {
+          console.error('Error al crear usuario:', error);
+          this.snackBar.open(
+            error.error?.message || 'Error al crear usuario',
+            'Cerrar',
+            {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'bottom',
+              panelClass: ['error-snackbar'],
+            },
+          );
+        },
+        complete: () => {
+          this.isLoading = false;
+        },
+      });
+    } else {
+      this.markFormGroupTouched(this.userForm);
     }
+  }
+
+  
+  onFileSelected(file: File) {
+    console.log('Archivo seleccionado:', file);
+    this.selectedFile = file;
+  }
+
+  private markFormGroupTouched(formGroup: FormGroup) {
+    Object.values(formGroup.controls).forEach((control) => {
+      control.markAsTouched();
+      if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control);
+      }
+    });
+  }
+
+  // Método para manejar la imagen desde el DropZone
+  handleImageSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+      this.userForm.patchValue({
+        imageUrl: file,
+      });
+    }
+  }
+
+  getErrorMessage(controlName: string): string {
+    const control = this.userForm.get(controlName);
+    if (control?.hasError('required')) {
+      return 'Este campo es requerido';
+    }
+    if (control?.hasError('email')) {
+      return 'Correo electrónico inválido';
+    }
+    if (control?.hasError('minlength')) {
+      return 'La contraseña debe tener al menos 6 caracteres';
+    }
+    if (control?.hasError('passwordMismatch')) {
+      return 'Las contraseñas no coinciden';
+    }
+    return '';
   }
 }

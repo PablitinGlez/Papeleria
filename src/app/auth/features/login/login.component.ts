@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { BtnGoogleComponent } from '@components/btn-google/btn-google.component';
 
 import { ButtonBlueComponent } from '../../../components/button-blue/button-blue.component';
@@ -17,6 +17,7 @@ import { ThemeService } from '../../theme.service';
     BtnGoogleComponent,
     ButtonBlueComponent,
     ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
@@ -40,18 +41,20 @@ export class LoginComponent {
   constructor(private themeService: ThemeService) {}
 
   // Método para manejar el login
+
   login() {
     if (this.form.invalid) {
       this.errorMessage = 'Por favor complete todos los campos correctamente';
       return;
     }
 
-    const { email, password } = this.form.value; // Cambiamos correo por email
+    const { email, password } = this.form.value;
 
     this._authService.login(email, password).subscribe({
       next: (response) => {
         console.log('Login exitoso', response);
-        this._router.navigate(['/dashboard']);
+        // Quita la navegación aquí, deja que el servicio se encargue
+        // this._router.navigate(['/dashboard']);
       },
       error: (error) => {
         console.error('Error en el login:', error);
@@ -64,7 +67,6 @@ export class LoginComponent {
       },
     });
   }
-
   // Método para alternar entre temas (modo oscuro)
   toggleTheme() {
     this.isDarkTheme = !this.isDarkTheme;

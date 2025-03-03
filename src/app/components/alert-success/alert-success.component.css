@@ -1,0 +1,12 @@
+.success {
+    background-color: var(--alert-success-bg) !important;
+    color: var(--alert-success-text);
+}
+
+:host {
+    display: block;
+}
+
+.txt{
+    color: var(--alert-success-text);
+    }

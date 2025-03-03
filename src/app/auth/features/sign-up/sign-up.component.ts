@@ -15,7 +15,6 @@ import { AuthService } from '../../data-access/auth.service';
     ButtonBlueComponent,
     FormsModule,
     RouterLink,
-
     ReactiveFormsModule,
   ],
   templateUrl: './sign-up.component.html',
@@ -53,12 +52,37 @@ export class SignUpComponent {
       return;
     }
 
+    // Validar que la fecha no esté vacía
+    if (!this.birthdate) {
+      this.errorMessage = 'La fecha de nacimiento es obligatoria';
+      return;
+    }
+
+    // Formatear la fecha correctamente (opcional, pero recomendado)
+    const formattedDate = new Date(this.birthdate).toISOString().split('T')[0];
+    console.log('Fecha formateada:', formattedDate);
+
+    // Mapeo de campos frontend -> backend
+    const signupData = {
+      nombre: this.name,
+      correo: this.email,
+      telefono: this.phone,
+      fechaNacimiento: formattedDate, // Usa la fecha formateada
+      password: this.password,
+    };
+
     this.authService
-      .signup(this.name, this.email, this.phone, this.birthdate, this.password)
+      .signup(
+        signupData.nombre,
+        signupData.correo,
+        signupData.telefono,
+        signupData.fechaNacimiento,
+        signupData.password,
+      )
       .subscribe({
         next: (response) => {
           console.log('Registro exitoso:', response);
-          this.router.navigate(['/dashboard']); // Redirigir al dashboard después del registro
+          this.router.navigate(['/dashboard']);
         },
         error: (error) => {
           console.error('Error al registrar:', error);

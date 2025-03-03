@@ -88,7 +88,7 @@ body.light-mode .video-bg:before {
     left: 0;
     top: 0;
     width: 100%;
-    overflow: hidden;
+  
     height: 100vh;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgb(255 255 255 / 45%) 100%);
     backdrop-filter: saturate(3);
@@ -102,7 +102,7 @@ body.light-mode .video-bg:before {
     /* Ocupa todo el ancho de la ventana */
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    
     position: relative;
 
 
@@ -294,7 +294,9 @@ body.light-mode .video-bg:before {
 .wrapper {
     display: flex;
     flex-grow: 1;
-    overflow: hidden;
+    overflow-y: auto;
+    /* Permite el desplazamiento vertical */
+    height: 100%;
 }
 
 .left-side {
@@ -448,7 +450,7 @@ body.light-mode .video-bg:before {
 }
 
 
-
+.main-container
 .card-container {
     display: flex;
     gap: 20px;
@@ -521,6 +523,7 @@ body.light-mode .video-bg:before {
     font-size: 0.9rem;
     color: var(--card-text-color);
     opacity: 0.8;
+    
 }
 
 .header {
@@ -548,14 +551,16 @@ body.light-mode .video-bg:before {
 
 .main-container {
     width: 100%;
-    /* Usa todo el ancho disponible */
-    max-width: 100%;
-    /* Ajusta según tu necesidad */
-    min-width: 800px;
-    /* Evita que se haga demasiado pequeña */
-margin: 0 10px;
-    /* Centra el contenedor */
-   
-    overflow: hidden;
-    /* Evita scroll no deseado */
+    height: calc(100vh - 58px);
+    /* Ajusta el alto restando la altura del header */
+    overflow-y: auto;
+    /* Permite el desplazamiento vertical */
+    padding: 20px;
+    /* Espaciado interno */
+    background-color: var(--theme-bg-color);
+    /* Fondo del contenedor */
+}
+
+.icon{
+
 }
