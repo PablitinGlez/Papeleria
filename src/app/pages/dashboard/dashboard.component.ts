@@ -36,8 +36,4 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggleTheme() {
-    this.isLightMode = !this.isLightMode;
-    document.body.classList.toggle('light-mode', this.isLightMode);
-  }
 }

@@ -21,6 +21,18 @@ import { LogoutButtonComponent } from "../../components/logout/logout.component"
     <div class="app">
       <!-- Header fijo -->
       <div class="header">
+        <div class="dark-light" (click)="toggleTheme()">
+          <svg
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="1.5"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+          </svg>
+        </div>
         <div class="menu-circle"></div>
 
         <div class="search-bar">
@@ -256,12 +268,17 @@ import { LogoutButtonComponent } from "../../components/logout/logout.component"
   `,
 })
 export class DashboardLayoutComponent {
+  isLightMode: boolean = false;
   currentUser: any = null;
   private userSubscription: Subscription | undefined;
   defaultProfileImage =
     'https://res.cloudinary.com/dxgriy1hu/image/upload/v1739936608/ICONOS-27_mtjxlg.png';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+    // Establecer el tema claro como predeterminado
+    this.isLightMode = true;
+    document.body.classList.add('light-mode');
+  }
 
   ngOnInit() {
     // Subscribe to the current user observable
@@ -286,5 +303,10 @@ export class DashboardLayoutComponent {
   handleImageError(event: any) {
     // If the image fails to load, fallback to default image
     event.target.src = this.defaultProfileImage;
+  }
+
+  toggleTheme() {
+    this.isLightMode = !this.isLightMode;
+    document.body.classList.toggle('light-mode', this.isLightMode);
   }
 }

@@ -45,6 +45,7 @@
     font-size: 14px;
     padding: 16px !important;
     border-bottom: none;
+   
 }
 
 .mat-header-cell,
@@ -528,3 +529,352 @@ td{
 
 /* ... resto de tus estilos existentes ... */
 
+
+mat-paginator  {
+    background-color:var(--card-bg-color);
+    color: var(--text-color-td);
+    
+    
+    font-family: var(--font-text);
+}
+
+
+span{
+    color: var(--text-color-td);
+}
+
+
+
+
+.search-container {
+    padding: 16px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.search-field {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Opcional: posicionar la barra de búsqueda a la izquierda */
+.search-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.search-paginator-container {
+    display: flex;
+    justify-content: space-between;
+    /* Separa los elementos a los extremos */
+    align-items: center;
+    /* Alinea verticalmente los elementos */
+    max-width: 1600px !important;
+        min-width: 600px;
+
+    padding: 16px 0;
+    /* Espaciado vertical */
+}
+
+.search-container {
+    flex: 1;
+    /* Ocupa el espacio disponible */
+    margin-right: 16px;
+    /* Espacio entre la barra de búsqueda y el paginador */
+    max-width: 400px;
+    /* Ancho máximo de la barra de búsqueda */
+}
+
+.search-field {
+    width: 100%;
+}
+
+mat-paginator {
+    background-color: var(--card-bg-color);
+    color: var(--text-color-td);
+    border-radius: 4px;
+    /* Bordes redondeados */
+    padding: 8px;
+    /* Espaciado interno */
+}
+
+/* From Uiverse.io by Shaidend */
+.InputContainer {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--card-bg-color);
+    border-radius: 10px;
+    overflow: hidden;
+    color: var(--card-text-color);
+    cursor: pointer;
+    border: 1px solid #004727;
+    padding-left: 15px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.075);
+}
+
+.input {
+    width: 220px;
+    height: 100%;
+    background-color: var(--card-bg-color);
+    border: none;
+    outline: none;
+    font-size: 0.9em;
+    caret-color: rgb(255, 255, 255);
+}
+
+.labelforsearch {
+    cursor: text;
+    padding: 0px 12px;
+}
+
+.searchIcon {
+    width: 13px;
+}
+
+.border {
+    height: 40%;
+    width: 1.3px;
+    background-color: rgb(223, 223, 223);
+}
+
+.micIcon {
+    width: 12px;
+}
+
+.micButton {
+    padding: 0px 15px 0px 12px;
+    border: none;
+    background-color: transparent;
+    height: 40px;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.searchIcon path {
+    fill: rgb(114, 114, 114);
+}
+
+.micIcon path {
+    fill: rgb(255, 81, 0);
+}
+
+.micButton:hover {
+    background-color: rgb(255, 230, 230);
+    transition-duration: 0.3s;
+}
+
+
+
+
+
+
+
+
+
+.filter-dropdown {
+    position: relative;
+    border-top: 1px solid #004727;
+    border-bottom: 1px solid #004727;
+    border-left: none;
+    border-radius: 90%;
+    border-right: none;
+    display: inline-block;
+}
+.sec-center {
+    position: relative;
+    max-width: 100%;
+    text-align: center;
+    z-index: 200;
+}
+
+[type="checkbox"]:checked,
+[type="checkbox"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.dropdown:checked+label,
+.dropdown:not(:checked)+label {
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    
+    line-height: 2;
+    height: 40px;
+    transition: all 200ms linear;
+    border-radius: 4px;
+    width: 190px;
+    letter-spacing: 1px;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+    -ms-flex-pack: center;
+    text-align: center;
+    border: none;
+    background-color:var(--card-bg-color);
+    cursor: pointer;
+color: var(--card-text-color);
+   
+}
+
+.dropdown:checked+label:before,
+.dropdown:not(:checked)+label:before {
+    position: fixed;
+    top: 0;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    cursor: auto;
+    pointer-events: none;
+}
+
+.dropdown:checked+label:before {
+    pointer-events: auto;
+}
+
+.dropdown:not(:checked)+label .uil {
+    font-size: 24px;
+    margin-left: 10px;
+    transition: transform 200ms linear;
+}
+
+.dropdown:checked+label .uil {
+    transform: rotate(180deg);
+    font-size: 24px;
+    
+    margin-left: 10px;
+    transition: transform 200ms linear;
+}
+
+.section-dropdown {
+    position: absolute;
+    padding: 5px;
+    background-color: var(--card-bg-color);
+    top: 70px;
+    left: 0;
+    color: var(--card-text-color);
+    width: 100%;
+    
+    border-radius: 4px;
+    display: block;
+    box-shadow: 0 14px 35px 0 rgba(9, 9, 12, 0.4);
+    z-index: 2;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: all 200ms linear;
+}
+
+.dropdown:checked~.section-dropdown {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.section-dropdown:before {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    content: '';
+    display: block;
+    z-index: 1;
+}
+
+.section-dropdown:after {
+    position: absolute;
+    top: -7px;
+    left: 50px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #111;
+    content: '';
+    display: block;
+    z-index: 2;
+    transition: all 200ms linear;
+}
+
+a {
+    position: relative;
+    color: #fff;
+    transition: all 200ms linear;
+    font-family: var(--font-text);
+    font-weight: 400;
+    font-size: 15px;
+    border-radius: 2px;
+    padding: 5px 3px;
+    padding-left: 20px;
+    cursor: pointer;
+    padding-right: 15px;
+    margin: 5px 0;
+    text-align: left;
+    text-decoration: none;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    justify-content: space-between;
+    -ms-flex-pack: distribute;
+}
+
+a:hover {
+    color: #102770;
+    background-color: #0e0514;
+}
+
+a .uil {
+    font-size: 22px;
+}
+
+.filter-search-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    /* Espacio entre la barra de búsqueda y el filtro */
+    width: 55%;
+    max-width: 1100px;
+  
+    padding: 16px 0;
+}
+
+
+
+
+.no-results-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.no-results-text {
+    font-size: 24px;
+    font-family: var(--font-text);
+    font-weight: 500;
+    color: #040d15;
+    margin-bottom: 20px;
+}

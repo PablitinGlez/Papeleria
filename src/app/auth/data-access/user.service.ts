@@ -158,5 +158,17 @@ export class UserService {
         }),
       );
   }
+
+  // En user.service.ts
+  getDashboardStats(): Observable<any> {
+    return this.http
+      .get<any>(`${environment.api.authApis}/usuarios/dashboard/stats`)
+      .pipe(
+        catchError((error) => {
+          console.error('Error al obtener estadísticas del dashboard:', error);
+          return throwError(() => error);
+        }),
+      );
+  }
 }
  
