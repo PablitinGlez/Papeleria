@@ -1,0 +1,462 @@
+/* Clases base */
+.group {
+    display: flex;
+    line-height: 30px;
+    align-items: center;
+    padding: 90px;
+    position: relative;
+
+    max-width: 290px;
+    gap: 10px;
+}
+
+.input {
+    width: 30px;
+    height: 45px;
+    line-height: 30px;
+    padding-left: 3rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    transition: 0.5s ease;
+}
+
+.icon {
+    position: absolute;
+    left: 1rem;
+    fill: none;
+    width: 1rem;
+    height: 1rem;
+}
+
+/* Estilos para el modal */
+.modal {
+    position: fixed;
+    top: 0;
+
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: var(--modal-bg-color);
+    /* Fondo semi-transparente */
+    padding: 30px;
+    border-radius: 12px;
+    padding: 20px 50px;
+    width: 800px;
+    max-width: 90%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    color: var(--card-text-color);
+    backdrop-filter: blur(10px);
+    /* Aplicar el efecto de desenfoque */
+    -webkit-backdrop-filter: blur(10px);
+    /* Soporte para navegadores basados en WebKit */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Borde sutil para mejorar el efecto */
+}
+
+/* Estilos para el formulario dentro del modal */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Fila de inputs */
+.input-row {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 10px;
+    /* Permite que los inputs se ajusten en pantallas pequeñas */
+}
+
+.input-wrapper {
+    display:flow-root;
+
+    width: 40%;
+    align-items: center;
+    justify-content: center;
+    /* Establece el ancho de cada input a casi la mitad */
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 12px;
+
+    width: 22px;
+    height: 16px;
+    color: var(--text-color);
+    /* Color de los iconos usando variable */
+}
+
+.form-input {
+    width: 100%;
+    height: 40px;
+    padding: 10px 36px;
+    font-size: 14px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 10px;
+    background: var(--input-bg);
+    /* Fondo del input usando variable */
+    color: var(--input-text-color);
+    /* Color de texto en los inputs usando variable */
+    transition: all 0.2s ease;
+}
+
+.form-input::placeholder {
+    color: var(--input-placeholder-color);
+    /* Color del placeholder */
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #007bff;
+
+}
+
+/* Estilos para los botones del modal */
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-left: 13px;
+
+}
+
+.cancel-btn,
+.save-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.cancel-btn {
+    background-color: var(--button-inactive);
+    /* Fondo del botón inactivo */
+    color: var(--text-color);
+    /* Color del texto en el botón */
+}
+
+.cancel-btn:hover {
+    background-color: var(--button-hover);
+    /* Fondo al hacer hover */
+}
+
+.save-btn {
+    background-color: var(--save-btn-bg);
+    /* Fondo del botón "Guardar" */
+    color: var(--save-btn-text-color);
+    /* Color del texto en "Guardar" */
+}
+
+.save-btn:hover {
+    background-color: var(--save-btn-hover-bg);
+    /* Fondo al hacer hover en "Guardar" */
+}
+
+
+h2 {
+    margin-left: 10px;
+    margin: 10px;
+    color: var(--content-title-color);
+    /* Color del título */
+}
+
+
+
+.title-modal {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+/* Fila de inputs */
+.input-rows {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 10px;
+    /* Permite que los inputs se ajusten en pantallas pequeñas */
+}
+
+
+.buttons button {
+    margin: 5px;
+}
+
+.input-rows {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Asegura que los hijos ocupen todo el alto */
+    gap: 20px;
+    padding: 10px;
+
+}
+
+/* Contenedor de fecha y botones */
+.date-and-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 40%;
+
+}
+
+/* Contenedor del input de fecha */
+.date-and-buttons .input-wrapper {
+    width: 100%;
+}
+
+/* Contenedor de botones */
+.date-and-buttons .buttons {
+    display: flex;
+
+    gap: 10px;
+    margin-top: auto;
+    /* Empuja los botones hacia abajo */
+}
+
+/* Botones individuales */
+.buttons button {
+    width: 100%;
+    padding: 10px 20px;
+
+}
+
+/* Drop zone */
+.drop-zone {
+    width: 40%;
+    /* Mismo ancho que los otros input-wrapper */
+    height: 100%;
+    /* Ocupa todo el alto disponible */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons {
+    display: flex;
+
+}
+
+/* Ajustes específicos para el input de fecha en Angular */
+input[type="date"].form-input {
+    position: relative;
+    background-color: var(--input-bg);
+}
+
+input[type="date"].form-input::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.input-wrapper {
+    position: relative;
+    z-index: 2;
+}
+
+/* Asegúrate que el modal no interfiera con el calendario */
+.modal-content {
+    position: relative;
+    z-index: 1;
+}
+
+.drop-zone-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.drop-zone-label {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+/* Modificar el contenedor de input para permitir espacio para mensajes de error */
+.input-wrapper {
+    position: relative;
+    width: 40%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    /* Agregar espacio para el mensaje de error */
+}
+
+/* Posicionar el mensaje de error absolutamente debajo del input */
+.error-message {
+    position: absolute;
+    bottom: -20px;
+    /* Colocar debajo del input */
+    left: 0;
+    color: #e53e3e;
+    font-size: 0.75rem;
+    width: 100%;
+    text-align: left;
+    padding-left: 12px;
+}
+
+/* Igual para los criterios de contraseña */
+.password-criteria {
+    position: absolute;
+    bottom: -60px;
+    /* Más espacio para múltiples líneas */
+    left: 0;
+    font-size: 0.75rem;
+    width: 100%;
+    text-align: left;
+    padding-left: 12px;
+}
+
+
+
+
+
+/* Ajustar el contenedor de drop zone */
+.drop-zone-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+}
+
+/* Posicionar el mensaje de error del drop zone */
+.drop-zone-container .error-message {
+    position: absolute;
+    bottom: -20px;
+    text-align: center;
+}
+
+#pepe {
+    margin-top: 15px;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.drop-buttons-row {
+    display: flex;
+}
+
+.cancel-btn,
+.save-btn {
+    width: 100%;
+    /* Asegura que los botones tengan el mismo ancho */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    background-color: #f44336;
+    /* Rojo para Cancelar */
+    color: white;
+}
+
+.save-btn {
+    background-color: #4CAF50;
+    /* Verde para Guardar */
+    color: white;
+}
+
+.save-btn:disabled {
+    background-color: #ccc;
+    /* Gris cuando está deshabilitado */
+    cursor: not-allowed;
+}
+
+/* Ajusta la fila que contiene los botones y drop zone */
+.drop-buttons-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    min-height: 180px;
+    /* Limita la altura mínima */
+    padding: 5px;
+    /* Reduce el padding */
+}
+
+/* Ajusta el contenedor de botones */
+.buttons-container {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    /* Reduce el gap entre botones */
+    align-self: flex-start;
+    margin-top: 100px;
+    /* Alinea con la drop zone */
+}
+
+/* Ajusta el tamaño de los botones */
+.cancel-btn,
+.save-btn {
+    padding: 8px 15px;
+    /* Reduce el padding de los botones */
+    font-size: 13px;
+    /* Reduce el tamaño de la fuente */
+}
+
+/* Ajusta el contenedor de la drop zone */
+.drop-zone-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+    margin-top: 0;
+    /* Elimina el margen superior */
+}
+
+/* Ajusta la etiqueta de la drop zone */
+.drop-zone-label {
+    margin-bottom: 5px;
+    /* Reduce el espacio bajo la etiqueta */
+    font-size: 13px;
+    /* Reduce el tamaño de la fuente */
+}
+
+/* Ajusta el alto de la drop zone */
+.drop-zone {
+    height: 80px;
+    /* Reduce la altura de la zona */
+    min-height: 80px;
+    /* Asegura que no crezca demasiado */
+}
+
+/* Ajusta la posición del mensaje de error */
+.drop-zone-container .error-message {
+    bottom: -15px;
+    /* Acerca el mensaje de error */
+}

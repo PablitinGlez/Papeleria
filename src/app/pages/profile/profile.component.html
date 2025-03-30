@@ -1,0 +1,202 @@
+<div class="profile-container">
+  <!-- Sección de carga -->
+  <div *ngIf="isLoading" class="loader-container">
+    <div class="loader-spinner"></div>
+  </div>
+  
+  <!-- Perfil del usuario -->
+  <div *ngIf="!isLoading && user" class="user-profile">
+    <!-- Imagen de perfil -->
+    <div class="profile-image-container">
+      <img
+        [src]="getProfileImage()"
+        alt="Foto de perfil"
+        class="profile-image"
+        onerror="this.src='assets/images/default-avatar.png'">
+    </div>
+    
+    <!-- Información del usuario -->
+    <div class="user-info">
+      <h1 class="user-name">{{ getUserName() }}</h1>
+      <p class="user-email">{{ getUserEmail() }}</p>
+      
+      <div class="user-badges">
+        <!-- Badge para el rol -->
+        <span class="badge badge-role">
+          {{ getUserRole() }}
+        </span>
+        
+        <!-- Badge para el estado -->
+        <span class="badge badge-status">
+          {{ getUserStatus() }}
+        </span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Mensaje si no hay usuario -->
+  <div *ngIf="!isLoading && !user" class="no-user-message">
+    <div class="error-text">No se ha encontrado información del usuario</div>
+    <p class="error-subtext">Por favor, inicia sesión para ver tu perfil</p>
+  </div>
+  
+  <!-- Sección detallada de información personal -->
+  <div *ngIf="!isLoading && user" class="user-details">
+    <h2 class="section-title">Información Personal</h2>
+    
+    <div class="details-grid">
+      <!-- Nombre -->
+      <div class="detail-item">
+        <span class="detail-label">Nombre</span>
+        <span class="detail-value">{{ getUserName() }}</span>
+      </div>
+      
+      <!-- Correo -->
+      <div class="detail-item">
+        <span class="detail-label">Correo Electrónico</span>
+        <span class="detail-value">{{ getUserEmail() }}</span>
+      </div>
+      
+      <!-- Teléfono (si está disponible) -->
+      <div class="detail-item" *ngIf="user?.telefono">
+        <span class="detail-label">Teléfono</span>
+        <span class="detail-value">{{ user.telefono }}</span>
+      </div>
+      
+      <!-- Fecha de nacimiento (si está disponible) -->
+      <div class="detail-item" *ngIf="user?.fechaNacimiento">
+        <span class="detail-label">Fecha de Nacimiento</span>
+        <span class="detail-value">{{ user.fechaNacimiento }}</span>
+      </div>
+      
+      <!-- Rol -->
+      <div class="detail-item">
+        <span class="detail-label">Rol</span>
+        <span class="detail-value">{{ getUserRole() }}</span>
+      </div>
+      
+      <!-- Estado -->
+      <div class="detail-item">
+        <span class="detail-label">Estado</span>
+        <span class="detail-value">{{ getUserStatus() }}</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Sección de configuración de controles -->
+<div *ngIf="!isLoading && user" class="user-config-section">
+  <h2 class="section-title">Configuración</h2>
+  
+  <!-- Notificaciones -->
+  <div class="config-category">
+    <h3 class="category-title">Notificaciones</h3>
+    <div class="config-controls">
+      <div class="config-control">
+        <div class="control-info">
+          <span class="control-label">Notificaciones por correo</span>
+          <span class="control-description">Recibe actualizaciones importantes en tu correo</span>
+        </div>
+        <div class="toggle-switch">
+          <input type="checkbox" id="emailNotif" class="toggle-input" checked>
+          <label for="emailNotif" class="toggle-label" title="Activar/Desactivar notificaciones por correo"></label>
+        </div>
+      </div>
+      
+      <div class="config-control">
+        <div class="control-info">
+          <span class="control-label">Notificaciones push</span>
+          <span class="control-description">Recibe alertas en tiempo real</span>
+        </div>
+        <div class="toggle-switch">
+          <input type="checkbox" id="pushNotif" class="toggle-input">
+          <label for="pushNotif" class="toggle-label" title="Activar/Desactivar notificaciones push"></label>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Recordatorios -->
+  <div class="config-category">
+    <h3 class="category-title">Recordatorios</h3>
+    <div class="config-controls">
+      <div class="config-control">
+        <div class="control-info">
+          <span class="control-label">Recordatorios de tareas</span>
+          <span class="control-description">Recibe alertas sobre tareas pendientes</span>
+        </div>
+        <div class="toggle-switch">
+          <input type="checkbox" id="taskReminder" class="toggle-input" checked>
+          <label for="taskReminder" class="toggle-label" title="Activar/Desactivar recordatorios de tareas"></label>
+        </div>
+      </div>
+      
+    
+  </div>
+  
+  <!-- Privacidad -->
+  <div class="config-category">
+    <h3 class="category-title">Privacidad</h3>
+    <div class="config-controls">
+      <div class="config-control">
+        <div class="control-info">
+          <span class="control-label">Mostrar estado en línea</span>
+          <span class="control-description">Permite que otros usuarios vean cuando estás conectado</span>
+        </div>
+        <div class="toggle-switch">
+          <input type="checkbox" id="onlineStatus" class="toggle-input" checked>
+          <label for="onlineStatus" class="toggle-label" title="Mostrar/Ocultar estado en línea"></label>
+        </div>
+      </div>
+      
+      <div class="config-control">
+        <div class="control-info">
+          <span class="control-label">Compartir actividad</span>
+          <span class="control-description">Permite compartir tu actividad reciente con otros usuarios</span>
+        </div>
+        <div class="toggle-switch">
+          <input type="checkbox" id="shareActivity" class="toggle-input">
+          <label for="shareActivity" class="toggle-label" title="Activar/Desactivar compartir actividad"></label>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Tema -->
+  <div class="config-category">
+    <h3 class="category-title">Apariencia</h3>
+    <div class="config-controls">
+      <div class="config-control">
+        <div class="control-info">
+          <span class="control-label">Modo oscuro</span>
+          <span class="control-description">Cambia la apariencia del dashboard</span>
+        </div>
+        <div class="toggle-switch">
+          <input type="checkbox" id="darkMode" class="toggle-input">
+          <label for="darkMode" class="toggle-label" title="Activar/Desactivar modo oscuro"></label>
+        </div>
+      </div>
+      
+      <div class="config-control">
+        <div class="control-info">
+          <span class="control-label">Tamaño de fuente</span>
+          <span class="control-description">Ajusta el tamaño del texto en tu dashboard</span>
+        </div>
+        <div class="radio-group">
+          <div class="radio-option">
+            <input type="radio" id="fontSmall" name="fontSize" class="radio-input">
+            <label for="fontSmall" class="radio-label">Pequeño</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="fontMedium" name="fontSize" class="radio-input" checked>
+            <label for="fontMedium" class="radio-label">Medio</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="fontLarge" name="fontSize" class="radio-input">
+            <label for="fontLarge" class="radio-label">Grande</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

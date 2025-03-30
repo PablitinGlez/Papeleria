@@ -24,7 +24,9 @@ export class AuthService {
   currentUser$ = this._currentUser.asObservable();
   isAuthenticating$ = this._isAuthenticating.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.initAuthState();
+  }
 
   // Añadimos el método signup
   signup(
@@ -35,7 +37,6 @@ export class AuthService {
     password: string,
     profileImage?: File, // Add optional profile image parameter
   ): Observable<any> {
-
     const formData = new FormData();
     formData.append('nombre', nombre);
     formData.append('correo', correo);
@@ -43,10 +44,9 @@ export class AuthService {
     formData.append('fechaNacimiento', fechaNacimiento);
     formData.append('password', password);
 
-   
-     if (profileImage) {
-       formData.append('image', profileImage);
-     }
+    if (profileImage) {
+      formData.append('image', profileImage);
+    }
 
     console.log('Enviando fecha al backend:', fechaNacimiento); // Log para verificación
 
@@ -93,6 +93,7 @@ export class AuthService {
             this.saveToken({
               token: response.token,
               user: response.usuario,
+              loginType: response.usuario.loginType, // Add this line
             });
             this._currentUser.next(response.usuario);
             this.router.navigate(['/dashboard']);
@@ -104,6 +105,9 @@ export class AuthService {
         }),
       );
   }
+
+
+  
   signInWithGoogle(): Observable<UserCredential> {
     if (this._isAuthenticating.value) {
       console.log('Ya hay un proceso de autenticación en curso');
@@ -184,12 +188,44 @@ export class AuthService {
     return userData?.token || null;
   }
 
-  private saveToken(user: any) {
-    localStorage.setItem('userData', JSON.stringify(user));
+  private saveToken(data: any) {
+    // Asegúrate de guardar una estructura consistente
+    const userData = data.user || data;
+    localStorage.setItem(
+      'userData',
+      JSON.stringify({
+        token: data.token,
+        user: userData,
+      }),
+    );
+
+    // Actualiza el BehaviorSubject con el usuario, no con todo el objeto
+    this._currentUser.next(userData);
   }
 
   private decodeToken() {
-    const userData = localStorage.getItem('userData');
-    return userData ? JSON.parse(userData) : null;
+    try {
+      const userData = localStorage.getItem('userData');
+      if (!userData) return null;
+
+      const parsedData = JSON.parse(userData);
+      console.log('Datos del usuario recuperados:', parsedData);
+      return parsedData?.user || parsedData; // Modificar según la estructura exacta que guardas
+    } catch (error) {
+      console.error('Error decodificando datos del usuario:', error);
+      return null;
+    }
+  }
+
+  private initAuthState() {
+    const userData = this.decodeToken();
+    console.log('Estado inicial de autenticación:', userData);
+    if (userData) {
+      this._currentUser.next(userData);
+    }
+  }
+  // Añadir este método en auth.service.ts
+  getCurrentUser(): any {
+    return this._currentUser.getValue();
   }
 }

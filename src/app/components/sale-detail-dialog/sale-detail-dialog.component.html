@@ -1,0 +1,97 @@
+<h2 mat-dialog-title class="flex items-center gap-2 text-2xl font-bold text-[var(--text-color-th)]">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-receipt">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+    <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2" />
+    <path d="M14 8h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5m2 0v1.5m0 -9v1.5" />
+  </svg>
+  Detalle de Venta #{{ data.venta._id | slice:0:8 }}
+</h2>
+
+<mat-dialog-content class="bg-[var(--modal-bg-color)] text-[var(--modal-text-color)]">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+    <div class="detail-section p-4 rounded-lg border border-[var(--card-border-color)] bg-[var(--card-bg-color)]">
+      <h3 class="detail-title text-lg font-semibold mb-3 text-[var(--text-color-th)]">Información General</h3>
+      <div class="detail-item flex justify-between py-2 border-b border-[var(--border-color)]">
+        <span class="detail-label font-medium text-[var(--text-color-td)]">Fecha:</span>
+        <span class="detail-value text-[var(--text-color-tp)]">{{ formatDate(data.venta.fechaVenta || data.venta.createdAt) }}</span>
+      </div>
+      <div class="detail-item flex justify-between py-2 border-b border-[var(--border-color)]">
+        <span class="detail-label font-medium text-[var(--text-color-td)]">Estado:</span>
+        <span class="detail-value px-2 py-1 rounded text-sm font-medium" 
+              [ngClass]="{
+                'bg-green-100 text-green-800': data.venta.estado.toLowerCase() === 'completado',
+                'bg-yellow-100 text-yellow-800': data.venta.estado.toLowerCase() === 'pendiente',
+                'bg-red-100 text-red-800': data.venta.estado.toLowerCase() === 'cancelado',
+                'bg-blue-100 text-blue-800': data.venta.estado.toLowerCase() === 'procesando'
+              }">
+          {{ data.venta.estado }}
+        </span>
+      </div>
+      <div class="detail-item flex justify-between py-2" *ngIf="data.venta.metodoPago">
+        <span class="detail-label font-medium text-[var(--text-color-td)]">Método de Pago:</span>
+        <span class="detail-value px-2 py-1 rounded text-sm font-medium"
+              [ngClass]="{
+                'bg-purple-100 text-purple-800': data.venta.metodoPago.toLowerCase() === 'tarjeta',
+                'bg-green-100 text-green-800': data.venta.metodoPago.toLowerCase() === 'transferencia',
+                'bg-blue-100 text-blue-800': data.venta.metodoPago.toLowerCase() === 'efectivo'
+              }">
+          {{ data.venta.metodoPago }}
+        </span>
+      </div>
+    </div>
+
+    <div class="detail-section p-4 rounded-lg border border-[var(--card-border-color)] bg-[var(--card-bg-color)]" *ngIf="data.venta.usuario">
+      <h3 class="detail-title text-lg font-semibold mb-3 text-[var(--text-color-th)]">Cliente</h3>
+      <div class="detail-item flex justify-between py-2 border-b border-[var(--border-color)]">
+        <span class="detail-label font-medium text-[var(--text-color-td)]">Nombre:</span>
+        <span class="detail-value text-[var(--text-color-tp)]">{{ data.venta.usuario.nombre }}</span>
+      </div>
+      <div class="detail-item flex justify-between py-2">
+        <span class="detail-label font-medium text-[var(--text-color-td)]">Email:</span>
+        <span class="detail-value text-[var(--text-color-tp)]">{{ data.venta.usuario.correo }}</span>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="detail-title text-lg font-semibold mb-3 text-[var(--text-color-th)]">Productos</h3>
+  <div class="overflow-x-auto rounded-lg border border-[var(--card-border-color)]">
+    <table class="w-full product-table">
+      <thead class="bg-[var(--table-header-bg)]">
+        <tr>
+          <th class="px-4 py-3 text-left text-sm font-medium text-[var(--text-color-th)]">Producto</th>
+          <th class="px-4 py-3 text-right text-sm font-medium text-[var(--text-color-th)]">Precio Unitario</th>
+          <th class="px-4 py-3 text-right text-sm font-medium text-[var(--text-color-th)]">Cantidad</th>
+          <th class="px-4 py-3 text-right text-sm font-medium text-[var(--text-color-th)]">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data.venta.productos" class="border-t border-[var(--border-color)] hover:bg-[var(--hover-bg)]">
+          <td class="px-4 py-3 text-sm text-[var(--text-color-td)]">{{ item.producto?.nombre || 'Producto no disponible' }}</td>
+          <td class="px-4 py-3 text-sm text-right text-[var(--text-color-tp)]">{{ item.precioUnitario | currency }}</td>
+          <td class="px-4 py-3 text-sm text-right text-[var(--text-color-td)]">{{ item.cantidad }}</td>
+          <td class="px-4 py-3 text-sm text-right font-medium text-[var(--text-color-s)]">
+            {{ item.subtotal || (item.precioUnitario * item.cantidad) | currency }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="total-section mt-6 p-4 rounded-lg border border-[var(--card-border-color)] bg-[var(--card-bg-color)]">
+    <div class="total-item flex justify-between py-2 border-b border-[var(--border-color)]">
+      <span class="total-label font-medium text-[var(--text-color-td)]">Total Items:</span>
+      <span class="total-value font-medium text-[var(--text-color-tp)]">{{ getTotalItems() }}</span>
+    </div>
+    <div class="total-item flex justify-between py-2">
+      <span class="total-label font-bold text-lg text-[var(--text-color-th)]">Total Venta:</span>
+      <span class="total-value font-bold text-lg text-[var(--text-color-s)]">{{ data.venta.total | currency }}</span>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="mt-4">
+  <button mat-button mat-dialog-close 
+          class="close-button px-4 py-2 rounded-lg border border-[var(--border-color)] bg-[var(--button-inactive)] text-[var(--text-color-td)] hover:bg-[var(--hover-bg)] transition-colors">
+    Cerrar
+  </button>
+</mat-dialog-actions>

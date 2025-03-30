@@ -10,7 +10,7 @@ import {
   where
 } from '@angular/fire/firestore';
 import { from, Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../../enviroments/environment'; // Ajusta esta ruta si es necesario
 
 interface Usuario {
@@ -166,6 +166,79 @@ export class UserService {
       .pipe(
         catchError((error) => {
           console.error('Error al obtener estadísticas del dashboard:', error);
+          return throwError(() => error);
+        }),
+      );
+  }
+
+  updateUserData(
+    userId: string,
+    userData: any,
+    file?: File | null,
+    deleteImage: boolean = false,
+  ): Observable<any> {
+    // Create FormData object for multipart/form-data
+    const formData = new FormData();
+
+    // Add all userData fields to the FormData
+    Object.keys(userData).forEach((key) => {
+      formData.append(key, userData[key]);
+    });
+
+    // If we want to delete the image, add the flag
+    // This must be set BEFORE adding a new file
+    if (deleteImage) {
+      formData.append('deleteImage', 'true');
+      console.log('Delete image flag set to true');
+    } else {
+      formData.append('deleteImage', 'false');
+    }
+
+    // If we have a file, add it
+    if (file) {
+      formData.append('image', file);
+      console.log('Image file added to form data');
+    }
+
+    // Log the form data keys for debugging
+    console.log('Form data keys:', Array.from(formData.keys()));
+
+    return this.http
+      .put(`${environment.api.authApis}/usuarios/${userId}`, formData)
+      .pipe(
+        tap((response) => console.log('Update response:', response)),
+        catchError((error) => {
+          console.error('Error al actualizar usuario:', error);
+          return throwError(() => error);
+        }),
+      );
+  }
+
+  // En user.service.ts
+  getUsersCreatedByDayOfWeek(): Observable<any[]> {
+    return this.http
+      .get<any[]>(`${environment.api.authApis}/usuarios/stats/by-day`)
+      .pipe(
+        catchError((error) => {
+          console.error(
+            'Error al obtener usuarios por día de la semana:',
+            error,
+          );
+          return throwError(() => error);
+        }),
+      );
+  }
+
+  // Añadir este método al UserService
+  getAdministradores(): Observable<Usuario[]> {
+    return this.http
+      .get<Usuario[]>(`${environment.api.authApis}/usuarios`)
+      .pipe(
+        map((users) =>
+          users.filter((user) => user.idRol?.nombre === 'Administrador'),
+        ),
+        catchError((error) => {
+          console.error('Error al obtener administradores:', error);
           return throwError(() => error);
         }),
       );

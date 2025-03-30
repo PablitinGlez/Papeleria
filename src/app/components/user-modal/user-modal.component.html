@@ -15,7 +15,7 @@
       <div class="input-row">
         <!-- Campo de nombre -->
         <div class="input-wrapper">
-            <svg  class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1.25">
+            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1.25">
   <path d="M3 17c3.333 -3.333 5 -6 5 -8c0 -3 -1 -3 -2 -3s-2.032 1.085 -2 3c.034 2.048 1.658 4.877 2.5 6c1.5 2 2.5 2.5 3.5 1l2 -3c.333 2.667 1.333 4 3 4c.53 0 2.639 -2 3 -2c.517 0 1.517 .667 3 2"></path>
 </svg>
          
@@ -23,10 +23,16 @@
             placeholder="Nombre" 
             class="form-input" 
             type="text" 
+            maxlength="15"
             formControlName="nombre"
-            [class.invalid]="userForm.get('nombre')?.invalid && userForm.get('nombre')?.touched"
+            [class.invalid]="nombreInvalid"
+            id="nombre"
           />
-         
+          
+          <div class="error-message" *ngIf="nombreInvalid">
+            <span *ngIf="userForm.get('nombre')?.errors?.['required']">El nombre es obligatorio</span>
+            <span *ngIf="userForm.get('nombre')?.errors?.['pattern']">Solo se permiten letras</span>
+          </div>
         </div>
 
         <!-- Campo de correo electrónico -->
@@ -34,16 +40,18 @@
           <svg fill="none" viewBox="0 0 24 24" class="input-icon">
             <path stroke-width="1.5" stroke="currentColor" d="M3 8L10.8906 13.2604C11.5624 13.7083 12.4376 13.7083 13.1094 13.2604L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z"></path>
           </svg>
-             <input 
+          <input 
             placeholder="Correo Electrónico" 
             class="form-input" 
             type="email" 
+            maxlength="30"
             formControlName="correo"
-            [class.invalid]="userForm.get('correo')?.invalid && userForm.get('correo')?.touched"
+            [class.invalid]="correoInvalid"
           />
 
-            <div class="error-message" *ngIf="userForm.get('correo')?.invalid && userForm.get('correo')?.touched">
-            {{ getErrorMessage('correo') }}
+          <div class="error-message" *ngIf="correoInvalid">
+            <span *ngIf="userForm.get('correo')?.errors?.['required']">El correo es obligatorio</span>
+            <span *ngIf="userForm.get('correo')?.errors?.['email'] || userForm.get('correo')?.errors?.['pattern']">Formato de correo inválido</span>
           </div>
         </div>
       </div>
@@ -60,7 +68,44 @@
   <path d="M12 3v9"></path>
   <path d="M12 12l-8 4.5"></path>
 </svg>
-        <input placeholder="Contraseña" class="form-input" type="password" formControlName="password" required />
+        <input placeholder="Contraseña" class="form-input" type="password" formControlName="password" required maxlength="16"/>
+        
+        <!-- Criterios de contraseña -->
+        <div class="password-criteria mt-2 ml-2">
+          <div class="flex items-center">
+            <span class="text-xs" [ngClass]="passwordLengthValid ? 'text-green-500' : 'text-red-500'">
+              <svg *ngIf="passwordLengthValid" class="inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <svg *ngIf="!passwordLengthValid" class="inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+              Entre 6 y 15 caracteres
+            </span>
+          </div>
+          <div class="flex items-center">
+            <span class="text-xs" [ngClass]="passwordNumberValid ? 'text-green-500' : 'text-red-500'">
+              <svg *ngIf="passwordNumberValid" class="inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <svg *ngIf="!passwordNumberValid" class="inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+              Al menos un número
+            </span>
+          </div>
+          <div class="flex items-center">
+            <span class="text-xs" [ngClass]="passwordSpecialCharValid ? 'text-green-500' : 'text-red-500'">
+              <svg *ngIf="passwordSpecialCharValid" class="inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <svg *ngIf="!passwordSpecialCharValid" class="inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+              Al menos un carácter especial ($!%*?&)
+            </span>
+          </div>
+        </div>
         </div>
 
         <!-- Campo de confirmar contraseña -->
@@ -73,12 +118,16 @@
   <path d="M12 3v9"></path>
   <path d="M12 12l-8 4.5"></path>
 </svg>
-         <input placeholder="Confirmar Contraseña" class="form-input" type="password" formControlName="confirmPassword" required />
+         <input placeholder="Confirmar Contraseña" class="form-input" type="password" formControlName="confirmPassword" required maxlength="16" />
+         
+         <div class="error-message" *ngIf="userForm.get('confirmPassword')?.touched && userForm.get('confirmPassword')?.errors?.['passwordMismatch']">
+            Las contraseñas no coinciden
+         </div>
         </div>
       </div>
 
       <!-- Fila de Rol -->
-      <div class="input-row">
+      <div class="input-row" id="pepe">
         <!-- Campo de rol (desplegable) -->
         <div class="input-wrapper">
          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1.25">
@@ -86,49 +135,64 @@
   <path d="M12 3v18"></path>
 </svg>
         <select 
-  class="form-input" 
-  formControlName="idRol"
-  [class.invalid]="userForm.get('idRol')?.invalid && userForm.get('idRol')?.touched"
->
-  <option value="" disabled>Selecciona el Rol</option>
-  <option *ngFor="let rol of roles" [value]="rol._id">{{ rol.nombre }}</option>
-</select>
+          class="form-input" 
+          formControlName="idRol"
+          [class.invalid]="rolInvalid"
+        >
+          <option value="" disabled>Selecciona el Rol</option>
+          <option *ngFor="let rol of roles" [value]="rol._id">{{ rol.nombre }}</option>
+        </select>
+        
+        <div class="error-message" *ngIf="rolInvalid">
+          Debe seleccionar un rol
         </div>
-          <!-- Campo de nombre -->
+        </div>
+         
         <div class="input-wrapper">
            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1.25"> <path d="M6 5a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-14z"></path> <path d="M11 4h2"></path> <path d="M12 17v.01"></path> </svg> 
          
-        <input placeholder="Telefono" class="form-input" type="text" formControlName="telefono" required />
-
+        <input placeholder="Telefono" class="form-input" type="text" formControlName="telefono" id="telefono" required maxlength="10"/>
+        
+        <div class="error-message" *ngIf="telefonoInvalid">
+          <span *ngIf="userForm.get('telefono')?.errors?.['required']">El teléfono es obligatorio</span>
+          <span *ngIf="userForm.get('telefono')?.errors?.['pattern']">Debe tener 10 dígitos numéricos</span>
         </div>
-           <!-- Drop zone -->
-     
+        </div>
       </div>
      
-   
-
-
 <div class="input-rows">
     <!-- Contenedor de fecha y botones -->
     <div class="date-and-buttons">
         <!-- Input de fecha -->
-<div class="input-wrapper">
-    <svg fill="none" viewBox="0 0 24 24" class="input-icon">
-      <path
-        stroke-width="1.5"
-        stroke="currentColor"
-        d="M8 6H16C17.1046 6 18 6.89543 18 8V16C18 17.1046 17.1046 18 16 18H8C6.89543 18 6 17.1046 6 16V8C6 6.89543 6.89543 6 8 6Z"
-      ></path>
-    </svg>
-    <input 
-        type="date" 
-        class="form-input" 
-        formControlName="fechaNacimiento"
-        required
-        min="1900-01-01"
-        max="2025-12-31"
-    />
-</div>
+        <div class="input-wrapper">
+            <svg fill="none" viewBox="0 0 24 24" class="input-icon">
+              <path
+                stroke-width="1.5"
+                stroke="currentColor"
+                d="M8 6H16C17.1046 6 18 6.89543 18 8V16C18 17.1046 17.1046 18 16 18H8C6.89543 18 6 17.1046 6 16V8C6 6.89543 6.89543 6 8 6Z"
+              ></path>
+            </svg>
+               <input 
+                type="text" 
+    id="fechaNacimiento" 
+    formControlName="fechaNacimiento" 
+                class="form-input" 
+                formControlName="fechaNacimiento"
+                required
+                min="1900-01-01"
+                max="2025-12-31"
+              
+                 placeholder="Fecha de Nacimiento" 
+    (focus)="changeInputType('date')" 
+    (blur)="!userForm.get('fechaNacimiento')?.value && changeInputType('text')" 
+                
+            />
+            
+            <div class="error-message" *ngIf="fechaNacimientoInvalid">
+              La fecha de nacimiento es obligatoria
+            </div>
+        </div>
+        
 
         <!-- Botones -->
         <div class="buttons">
@@ -136,8 +200,8 @@
 
              <button 
           type="submit" 
-          class="save-btn"
-          [disabled]="userForm.invalid || isLoading"
+          class="button-primary" 
+          [disabled]="userForm.invalid || isLoading || !selectedFile"
         >
           {{ isLoading ? 'Guardando...' : 'Guardar' }}
         </button>
@@ -145,13 +209,15 @@
     </div>
 
     <!-- Drop zone -->
-   
- <!-- Zona de carga con texto indicativo -->
-  <div class="drop-zone-container">
-    <p class="drop-zone-label">Imagen de perfil</p>
-    <app-drop-zone-image  class="drop-zone" 
-    (fileSelected)="onFileSelected($event)"></app-drop-zone-image>
-  </div>
+    <div class="drop-zone-container">
+      <p class="drop-zone-label">Imagen de perfil</p>
+      <app-drop-zone-image class="drop-zone" 
+      (fileSelected)="onFileSelected($event)"></app-drop-zone-image>
+      
+      <div class="error-message" *ngIf="imagenInvalid">
+        Debe seleccionar una imagen de perfil
+      </div>
+    </div>
 </div>
 
     </form>

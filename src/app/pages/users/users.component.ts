@@ -13,11 +13,15 @@ import { MatTableModule } from '@angular/material/table';
 import { AlertSuccessComponent } from '@components/alert-success/alert-success.component';
 import { RoleFilterDialogComponent } from '@components/role-filter-dialog/role-filter-dialog.component';
 import { StatusFilterDialogComponent } from '@components/status-filter-dialog/status-filter-dialog.component';
+import { UpdateModalComponent } from '@components/update-modal/update-modal.component';
 import { UserModalComponent } from '@components/user-modal/user-modal.component';
 import { Chart, registerables } from 'chart.js';
+import { AuthService } from 'src/app/auth/data-access/auth.service';
 import { UserService } from 'src/app/auth/data-access/user.service';
+import { HasPermissionDirective } from 'src/app/core/directives/has-permission.directive';
+import { RoleButtonDirective } from 'src/app/core/directives/rolebutton.directive';
 import { AlertDeleteComponent } from '../../components/alert-delete/alert-delete.component';
-
+import { Permission } from '../../core/services/role.service';
 // Registrar componentes de Chart.js
 Chart.register(...registerables);
 
@@ -61,6 +65,8 @@ class MatPaginatorIntlEs extends MatPaginatorIntl {
     ReactiveFormsModule,
     MatSelectModule,
     MatMenuModule,
+    HasPermissionDirective,
+    RoleButtonDirective,
   ],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css'],
@@ -74,12 +80,20 @@ export class UsersComponent implements OnInit, AfterViewInit {
   // Datos para el dashboard
   dashboardStats: {
     totalUsuarios: number;
+    totalUsuariosActivos: number; // Añadir esta línea
     ultimosUsuarios: any[];
     usuariosPorRol: any[];
   } = {
     totalUsuarios: 0,
+    totalUsuariosActivos: 0, // Inicializar en 0
     ultimosUsuarios: [],
-    usuariosPorRol: []
+    usuariosPorRol: [],
+  };
+  Permission = {
+    READ: 'read' as keyof Permission,
+    CREATE: 'create' as keyof Permission,
+    UPDATE: 'update' as keyof Permission,
+    DELETE: 'delete' as keyof Permission,
   };
 
   displayedColumns: string[] = [
@@ -91,8 +105,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
     'estado',
     'fechaCreacion',
     'fechaActualizacion',
-    'actualizar',
-    'eliminar',
+    'acciones'
   ];
   dataSource: any[] = [];
 
@@ -114,19 +127,24 @@ export class UsersComponent implements OnInit, AfterViewInit {
   roles: any[] = [];
   activeFilters: string[] = [];
   isFiltering: boolean = false;
-
+  private currentUser: any;
   constructor(
     private userService: UserService,
     public dialog: MatDialog,
+    private authService: AuthService,
     private snackBar: MatSnackBar,
     @Inject(DOCUMENT) private document: Document,
   ) {}
 
   ngOnInit(): void {
-    this.loadPaginatedUsers();
-    this.loadRoles();
-    this.loadDashboardStats();
-    this.loadLottiePlayerScript();
+    // Obtener el usuario actual primero
+    this.authService.currentUser$.subscribe((user) => {
+      this.currentUser = user;
+      this.loadPaginatedUsers();
+      this.loadRoles();
+      this.loadDashboardStats();
+      this.loadLottiePlayerScript();
+    });
   }
 
   ngAfterViewInit(): void {
@@ -172,28 +190,36 @@ export class UsersComponent implements OnInit, AfterViewInit {
     if (!ctx) return;
 
     // Datos para la gráfica
-    const roleNames = this.dashboardStats.usuariosPorRol.map(item => item.nombre);
-    const roleCounts = this.dashboardStats.usuariosPorRol.map(item => item.cantidad);
-    
+    const roleNames = this.dashboardStats.usuariosPorRol.map(
+      (item) => item.nombre,
+    );
+    const roleCounts = this.dashboardStats.usuariosPorRol.map(
+      (item) => item.cantidad,
+    );
+
     // Colores para cada rol (puedes personalizarlos)
     const backgroundColors = [
-      'rgba(54, 162, 235, 0.7)',
-      'rgba(255, 99, 132, 0.7)',
-      'rgba(255, 206, 86, 0.7)',
-      'rgba(75, 192, 192, 0.7)',
-      'rgba(153, 102, 255, 0.7)',
-      'rgba(255, 159, 64, 0.7)',
+      'rgba(33, 150, 243, 0.7)', // Azul brillante
+      'rgba(1, 100, 244, 0.7)', // Celeste vibrante
+      'rgba(0, 200, 83, 0.7)', // Verde intenso
+      'rgba(255, 167, 38, 0.7)', // Naranja vibrante
+      'rgba(255, 61, 61, 0.7)', // Rojo brillante
+      'rgba(233, 30, 99, 0.7)', // Rosa intenso
+      'rgba(156, 39, 176, 0.7)', // Morado eléctrico
+      'rgba(255, 214, 0, 0.7)', // Amarillo neón
     ];
 
     this.pieChartInstance = new Chart(ctx, {
       type: 'pie',
       data: {
         labels: roleNames,
-        datasets: [{
-          data: roleCounts,
-          backgroundColor: backgroundColors.slice(0, roleNames.length),
-          borderWidth: 1
-        }]
+        datasets: [
+          {
+            data: roleCounts,
+            backgroundColor: backgroundColors.slice(0, roleNames.length),
+            borderWidth: 0.5,
+          },
+        ],
       },
       options: {
         responsive: true,
@@ -203,10 +229,9 @@ export class UsersComponent implements OnInit, AfterViewInit {
           },
           title: {
             display: true,
-            text: 'Distribución de usuarios por rol'
-          }
-        }
-      }
+          },
+        },
+      },
     });
   }
 
@@ -232,6 +257,8 @@ export class UsersComponent implements OnInit, AfterViewInit {
     });
   }
 
+  // En el componente users.component.ts
+  // Modificar el método que procesa los datos recibidos
   loadPaginatedUsers(): void {
     this.loading = true;
     this.isFiltering = Object.keys(this.filters).length > 0;
@@ -246,18 +273,26 @@ export class UsersComponent implements OnInit, AfterViewInit {
       )
       .subscribe({
         next: (response) => {
-          this.dataSource = response.items.map((user: any) => ({
-            ...user,
-            imageUrl: user.imageUrl || 'ruta/a/imagen/por/defecto.png',
-            fechaNacimiento: new Date(user.fechaNacimiento),
-            fechaCreacion: new Date(user.createdAt),
-            fechaActualizacion: new Date(user.updatedAt),
-            rol: user.idRol?.nombre || 'No asignado',
-          }));
+          // Filtrar el usuario autenticado de la lista recibida
+          this.dataSource = response.items
+            .filter((user: any) => {
+              // No mostrar el usuario si coincide con el correo del usuario actual
+              return user.correo !== this.currentUser?.correo;
+            })
+            .map((user: any) => ({
+              ...user,
+              imageUrl: user.imageUrl || 'ruta/a/imagen/por/defecto.png',
+              fechaNacimiento: new Date(user.fechaNacimiento),
+              fechaCreacion: new Date(user.createdAt),
+              fechaActualizacion: new Date(user.updatedAt),
+              rol: user.idRol?.nombre || 'No asignado',
+            }));
 
-          // Actualizar datos de paginación
-          this.totalItems = response.meta.total;
-          this.totalPages = response.meta.totalPages;
+          // Actualizar datos de paginación (ajustar total si fue filtrado)
+          this.totalItems = this.currentUser
+            ? response.meta.total - 1
+            : response.meta.total;
+          this.totalPages = Math.ceil(this.totalItems / this.pageSize);
           this.loading = false;
         },
         error: (error) => {
@@ -437,7 +472,10 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
     const dialogRef = this.dialog.open(AlertDeleteComponent, {
       width: '400px',
-      data: element,
+      data: {
+        item: element,
+        itemType: 'usuario',
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -465,13 +503,13 @@ export class UsersComponent implements OnInit, AfterViewInit {
       }
     });
   }
-
   private mostrarAlertaExito() {
     this.snackBar.openFromComponent(AlertSuccessComponent, {
       duration: 3000,
       horizontalPosition: 'end',
       verticalPosition: 'bottom',
       panelClass: ['success-snackbar'],
+      data: { message: 'El usuario ha sido eliminado' }, // Mensaje personalizado
     });
   }
 
@@ -494,7 +532,20 @@ export class UsersComponent implements OnInit, AfterViewInit {
     return date.toLocaleDateString('es-ES', {
       day: '2-digit',
       month: 'short',
-      year: 'numeric'
+      year: 'numeric',
+    });
+  } // In users.component.ts
+  abrirModalActualizar(usuario: any): void {
+    const dialogRef = this.dialog.open(UpdateModalComponent, {
+      width: '500px',
+      data: { usuario: usuario },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.loadPaginatedUsers(); // Recargar usuarios después de actualizar
+        this.loadDashboardStats(); // Recargar estadísticas también
+      }
     });
   }
 }

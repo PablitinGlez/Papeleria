@@ -1,0 +1,21 @@
+.hola{
+    color: var(--text-color-th);
+    font-weight: 400;
+    font-family: var(--font-heading);
+
+}
+
+
+.pop{
+    background-color: transparent;
+}
+
+
+p{
+color: var(--text-color-th);
+}
+
+
+.nombre{
+color: var(--text-color-th);
+}

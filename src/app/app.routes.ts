@@ -3,6 +3,7 @@ import { authGuard } from './core/guards/auth.guard';
 import { LandingComponent } from './landing/landing/landing.component';
 
 export const routes: Routes = [
+  { path: '', component: LandingComponent },
   {
     path: 'landing',
     component: LandingComponent,
@@ -26,4 +27,5 @@ export const routes: Routes = [
     path: '**',
     redirectTo: 'dashboard',
   },
+  
 ];

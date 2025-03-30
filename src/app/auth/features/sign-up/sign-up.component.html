@@ -42,7 +42,7 @@
   <!-- Fila 1: Nombre y Email -->
   <div class="flex space-x-4">
     <!-- Nombre -->
-    <div class="input-group flex-1">
+    <div class="input-group flex-1 relative">
       <div class="input-wrapper">
         <svg fill="none" viewBox="0 0 24 24" class="input-icon">
           <path
@@ -51,8 +51,11 @@
             d="M12 10V14M8 6H16C17.1046 6 18 6.89543 18 8V16C18 17.1046 17.1046 18 16 18H8C6.89543 18 6 17.1046 6 16V8C6 6.89543 6.89543 6 8 6Z"
           ></path>
         </svg>
-         <input [(ngModel)]="name" name="name" required placeholder="Nombre Completo" class="form-input" type="text">
+        <input [(ngModel)]="name" name="name" required placeholder="Nombre Completo" 
+       class="form-input" type="text" maxlength="15"
+       (keydown)="onNameKeyDown($event)">
       </div>
+       <span class="error-message" *ngIf="nameError">{{ nameError }}</span>
     </div>
 
     <!-- Email -->
@@ -65,9 +68,11 @@
             d="M3 8L10.8906 13.2604C11.5624 13.7083 12.4376 13.7083 13.1094 13.2604L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z"
           ></path>
         </svg>
-        <input [(ngModel)]="email" name="email" required placeholder="Email" class="form-input" type="email">
+        <input [(ngModel)]="email" name="email" required placeholder="Email" class="form-input" type="email" maxlength="25s">
       </div>
+      <span class="error-message" *ngIf="emailError">{{ emailError }}</span>
     </div>
+     
   </div>
 
   <!-- Fila 2: Número de Teléfono y Fecha de Nacimiento -->
@@ -82,12 +87,16 @@
             d="M12 3V8.5L16.5 6.25L12 4V3ZM12 15V9.5L7.5 11.75L12 14V15Z"
           ></path>
         </svg>
-        <input [(ngModel)]="phone" name="phone" required placeholder="Número de Teléfono" class="form-input" type="tel">
+      <input [(ngModel)]="phone" name="phone" required placeholder="Número de Teléfono" 
+       class="form-input" type="tel" maxlength="10"
+       (keydown)="onPhoneKeyDown($event)">
       </div>
-    </div>
+  <span class="error-message" *ngIf="phoneError">{{ phoneError }}</span>
+</div>
 
     <!-- Fecha de Nacimiento -->
-   <div class="input-group flex-1">
+  <!-- Fecha de Nacimiento -->
+<div class="input-group flex-1">
   <div class="input-wrapper">
     <svg fill="none" viewBox="0 0 24 24" class="input-icon">
       <path
@@ -96,63 +105,108 @@
         d="M8 6H16C17.1046 6 18 6.89543 18 8V16C18 17.1046 17.1046 18 16 18H8C6.89543 18 6 17.1046 6 16V8C6 6.89543 6.89543 6 8 6Z"
       ></path>
     </svg>
-    <input [(ngModel)]="birthdate" name="birthdate" id="fechaNacimiento" class="form-input" required type="date" placeholder="Fecha de Nacimiento">
+    <input [(ngModel)]="birthdate" name="birthdate" id="fechaNacimiento" class="form-input" required type="text" placeholder="Fecha de Nacimiento" (focus)="changeInputType('date')" (blur)="changeInputType('text')">
+  </div>
+    <span class="error-message" *ngIf="birthdateError">{{ birthdateError }}</span>
+</div>
+
+  </div>
+
+ <div class="flex space-x-4 mt-4">
+  <!-- Contraseña -->
+  <div class="input-group flex-1">
+    <div class="input-wrapper">
+      <svg fill="none" viewBox="0 0 24 24" class="input-icon">
+        <path
+          stroke-width="1.5"
+          stroke="currentColor"
+          d="M12 10V14M8 6H16C17.1046 6 18 6.89543 18 8V16C18 17.1046 17.1046 18 16 18H8C6.89543 18 6 17.1046 6 16V8C6 6.89543 6.89543 6 8 6Z"
+        ></path>
+      </svg>
+      <input [(ngModel)]="password" name="password" required placeholder="Contraseña" 
+        class="form-input" type="password" maxlength="16" (input)="checkPasswordCriteria()">
+      <button class="password-toggle" type="button">
+        <svg fill="none" viewBox="0 0 24 24" class="eye-icon">
+          <path
+            stroke-width="1.5"
+            stroke="currentColor"
+            d="M2 12C2 12 5 5 12 5C19 5 22 12 22 12C22 12 19 19 12 19C5 19 2 12 2 12Z"
+          ></path>
+          <circle
+            stroke-width="1.5"
+            stroke="currentColor"
+            r="3"
+            cy="12"
+            cx="12"
+          ></circle>
+        </svg>
+      </button>
+    </div>
+   
+    <!-- Criterios de contraseña -->
+    <div class="password-criteria mt-2 ml-2">
+      <div class="flex items-center">
+        <span class="text-xs" [ngClass]="passwordLengthValid ? 'text-green-500' : 'text-red-500'">
+          <svg *ngIf="passwordLengthValid" class="inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <svg *ngIf="!passwordLengthValid" class="inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+          Entre 6 y 15 caracteres
+        </span>
+      </div>
+      <div class="flex items-center">
+        <span class="text-xs" [ngClass]="passwordNumberValid ? 'text-green-500' : 'text-red-500'">
+          <svg *ngIf="passwordNumberValid" class="inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <svg *ngIf="!passwordNumberValid" class="inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+          Al menos un número
+        </span>
+      </div>
+      <div class="flex items-center">
+        <span class="text-xs" [ngClass]="passwordSpecialCharValid ? 'text-green-500' : 'text-red-500'">
+          <svg *ngIf="passwordSpecialCharValid" class="inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <svg *ngIf="!passwordSpecialCharValid" class="inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+          Al menos un carácter especial ($!%*?&)
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirmar Contraseña -->
+  <div class="input-group flex-1">
+    <div class="input-wrapper">
+      <svg fill="none" viewBox="0 0 24 24" class="input-icon">
+        <path
+          stroke-width="1.5"
+          stroke="currentColor"
+          d="M12 10V14M8 6H16C17.1046 6 18 6.89543 18 8V16C18 17.1046 17.1046 18 16 18H8C6.89543 18 6 17.1046 6 16V8C6 6.89543 6.89543 6 8 6Z"
+        ></path>
+      </svg>
+      <input [(ngModel)]="confirmPassword" name="confirmPassword" required placeholder="Confirmar Contraseña" class="form-input" type="password" maxlength="16">
+    </div>
+    <span class="error-message" *ngIf="confirmPasswordError">{{ confirmPasswordError }}</span>
   </div>
 </div>
-  </div>
+  <!-- Mensaje de error general -->
+<div class="mt-4" *ngIf="generalError">
+  <span class="general-error-message">{{ generalError }}</span>
+</div>
 
-  <!-- Fila 3: Contraseña y Confirmar Contraseña -->
-  <div class="flex space-x-4 mt-4">
-    <!-- Contraseña -->
-    <div class="input-group flex-1">
-      <div class="input-wrapper">
-        <svg fill="none" viewBox="0 0 24 24" class="input-icon">
-          <path
-            stroke-width="1.5"
-            stroke="currentColor"
-            d="M12 10V14M8 6H16C17.1046 6 18 6.89543 18 8V16C18 17.1046 17.1046 18 16 18H8C6.89543 18 6 17.1046 6 16V8C6 6.89543 6.89543 6 8 6Z"
-          ></path>
-        </svg>
-       <input [(ngModel)]="password" name="password" required placeholder="Contraseña" class="form-input" type="password">
-        <button class="password-toggle" type="button">
-          <svg fill="none" viewBox="0 0 24 24" class="eye-icon">
-            <path
-              stroke-width="1.5"
-              stroke="currentColor"
-              d="M2 12C2 12 5 5 12 5C19 5 22 12 22 12C22 12 19 19 12 19C5 19 2 12 2 12Z"
-            ></path>
-            <circle
-              stroke-width="1.5"
-              stroke="currentColor"
-              r="3"
-              cy="12"
-              cx="12"
-            ></circle>
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- Confirmar Contraseña -->
-    <div class="input-group flex-1">
-      <div class="input-wrapper">
-        <svg fill="none" viewBox="0 0 24 24" class="input-icon">
-          <path
-            stroke-width="1.5"
-            stroke="currentColor"
-            d="M12 10V14M8 6H16C17.1046 6 18 6.89543 18 8V16C18 17.1046 17.1046 18 16 18H8C6.89543 18 6 17.1046 6 16V8C6 6.89543 6.89543 6 8 6Z"
-          ></path>
-        </svg>
-       <input [(ngModel)]="confirmPassword" name="confirmPassword" required placeholder="Confirmar Contraseña" class="form-input" type="password">
-      </div>
-    </div>
-  </div>
 
   <!-- Términos y Condiciones -->
 
 
-  <div class="form-footer mt-4">
-    <p class="login-link text-gray-600 hover:text-gray-800">
+  <div class="form-footer">
+    <p class="login-link text-gray-600 hover:text-gray-800 mt-12">
       ¿Ya tienes una cuenta?
       <a class="text-blue-500 hover:text-blue-700" routerLink="/auth/login">
         Iniciar Sesión
@@ -165,12 +219,15 @@
 
     <app-button-blue text="Registrar Cuenta"></app-button-blue>
   </div>
+
+   
+
 </form>
 
 <div class="flex items-center mb-4 mt-4">
  
 <div class="flex items-center space-x-">
-  <label class="group flex items-center cursor-pointer">
+  <label class="group flex items-center  cursor-pointer">
     <input class="hidden peer" type="checkbox" />
 
     <span
@@ -195,7 +252,7 @@
     </span>
 
     <p
-      class="ml-2 text-gray-700 group-hover:text-blue-500 font-normal transition-colors duration-300"
+      class="ml-2 text-gray-700 group-hover:text-blue-500 font-normal transition-colors duration-300 mt-3"
     >
       Acepto los Términos y Condiciones
     
@@ -210,7 +267,7 @@
       </div>
 
       <div
-        class="relative w-[300px] h-[420px] rounded-lg p-4 flex justify-center items-center overflow-visible"
+        class="relative w-[300px] h-[515px] rounded-lg p-4 flex justify-center items-center overflow-visible"
         style="
           border-radius: 16px;
           box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);

@@ -1,0 +1,196 @@
+<div class="modal">
+  <div class="modal-content">
+    <div class="title-modal">
+      <h2>Actualizar Empleado</h2>
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+        <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+      </svg>
+    </div>
+    
+    <form [formGroup]="empleadoForm" (ngSubmit)="guardarEmpleado()">
+      <!-- Fila de Nombre y Apellidos -->
+      <div class="input-row">
+        <div class="input-wrapper">
+          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1.25">
+            <path d="M3 17c3.333 -3.333 5 -6 5 -8c0 -3 -1 -3 -2 -3s-2.032 1.085 -2 3c.034 2.048 1.658 4.877 2.5 6c1.5 2 2.5 2.5 3.5 1l2 -3c.333 2.667 1.333 4 3 4c.53 0 2.639 -2 3 -2c.517 0 1.517 .667 3 2"></path>
+          </svg>
+          <input 
+            placeholder="Nombre" 
+            class="form-input" 
+            type="text" 
+            formControlName="nombre"
+            [class.invalid]="empleadoForm.get('nombre')?.invalid && empleadoForm.get('nombre')?.touched"
+          />
+          <div *ngIf="empleadoForm.get('nombre')?.invalid && empleadoForm.get('nombre')?.touched" class="error-message">
+            {{ getErrorMessage('nombre') }}
+          </div>
+        </div>
+
+        <div class="input-wrapper">
+            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1.25">
+            <path d="M3 17c3.333 -3.333 5 -6 5 -8c0 -3 -1 -3 -2 -3s-2.032 1.085 -2 3c.034 2.048 1.658 4.877 2.5 6c1.5 2 2.5 2.5 3.5 1l2 -3c.333 2.667 1.333 4 3 4c.53 0 2.639 -2 3 -2c.517 0 1.517 .667 3 2"></path>
+          </svg>
+          <input 
+            placeholder="Apellidos" 
+            class="form-input" 
+            type="text" 
+            formControlName="apellidos"
+            [class.invalid]="empleadoForm.get('apellidos')?.invalid && empleadoForm.get('apellidos')?.touched"
+          />
+          <div *ngIf="empleadoForm.get('apellidos')?.invalid && empleadoForm.get('apellidos')?.touched" class="error-message">
+            {{ getErrorMessage('apellidos') }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila de Correo y Teléfono -->
+      <div class="input-row">
+        <div class="input-wrapper">
+          <svg fill="none" viewBox="0 0 24 24" class="input-icon">
+            <path stroke-width="1.5" stroke="currentColor" d="M3 8L10.8906 13.2604C11.5624 13.7083 12.4376 13.7083 13.1094 13.2604L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z"></path>
+          </svg>
+          <input 
+            placeholder="Correo Electrónico" 
+            class="form-input" 
+            type="email" 
+            formControlName="correo"
+          
+          />
+        </div>
+
+        <div class="input-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1.25" class="input-icon">
+            <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path>
+          </svg>
+          <input 
+            placeholder="Teléfono" 
+            class="form-input" 
+            type="text" 
+            formControlName="telefono"
+            [class.invalid]="empleadoForm.get('telefono')?.invalid && empleadoForm.get('telefono')?.touched"
+          />
+          <div *ngIf="empleadoForm.get('telefono')?.invalid && empleadoForm.get('telefono')?.touched" class="error-message">
+            {{ getErrorMessage('telefono') }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila de Documentos -->
+      <div class="input-row">
+        <div class="input-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1.25" class="input-icon">
+            <path d="M4 6v-1a1 1 0 0 1 1 -1h1m5 0h2m5 0h1a1 1 0 0 1 1 1v1m0 5v2m0 5v1a1 1 0 0 1 -1 1h-1m-5 0h-2m-5 0h-1a1 1 0 0 1 -1 -1v-1m0 -5v-2m0 -5v-1"></path>
+          </svg>
+          <input 
+            placeholder="CURP" 
+            class="form-input" 
+            type="text" 
+            formControlName="curp"
+            [class.invalid]="empleadoForm.get('curp')?.invalid && empleadoForm.get('curp')?.touched"
+          />
+          <div *ngIf="empleadoForm.get('curp')?.invalid && empleadoForm.get('curp')?.touched" class="error-message">
+            {{ getErrorMessage('curp') }}
+          </div>
+        </div>
+
+        <div class="input-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1.25" class="input-icon">
+            <path d="M4 6v-1a1 1 0 0 1 1 -1h1m5 0h2m5 0h1a1 1 0 0 1 1 1v1m0 5v2m0 5v1a1 1 0 0 1 -1 1h-1m-5 0h-2m-5 0h-1a1 1 0 0 1 -1 -1v-1m0 -5v-2m0 -5v-1"></path>
+          </svg>
+          <input 
+            placeholder="NSS" 
+            class="form-input" 
+            type="text" 
+            formControlName="nss"
+            [class.invalid]="empleadoForm.get('nss')?.invalid && empleadoForm.get('nss')?.touched"
+          />
+          <div *ngIf="empleadoForm.get('nss')?.invalid && empleadoForm.get('nss')?.touched" class="error-message">
+            {{ getErrorMessage('nss') }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila de RFC y Puesto -->
+      <div class="input-row">
+        <div class="input-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1.25" class="input-icon">
+            <path d="M4 6v-1a1 1 0 0 1 1 -1h1m5 0h2m5 0h1a1 1 0 0 1 1 1v1m0 5v2m0 5v1a1 1 0 0 1 -1 1h-1m-5 0h-2m-5 0h-1a1 1 0 0 1 -1 -1v-1m0 -5v-2m0 -5v-1"></path>
+          </svg>
+          <input 
+            placeholder="RFC" 
+            class="form-input" 
+            type="text" 
+            formControlName="rfc"
+            [class.invalid]="empleadoForm.get('rfc')?.invalid && empleadoForm.get('rfc')?.touched"
+          />
+          <div *ngIf="empleadoForm.get('rfc')?.invalid && empleadoForm.get('rfc')?.touched" class="error-message">
+            {{ getErrorMessage('rfc') }}
+          </div>
+        </div>
+
+        <div class="input-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1.25" class="input-icon">
+            <path d="M3 21l18 0"></path>
+            <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16"></path>
+            <path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4"></path>
+            <path d="M10 9l4 0"></path>
+            <path d="M12 7l0 4"></path>
+          </svg>
+          <select 
+            class="form-input" 
+            formControlName="puesto"
+            [class.invalid]="empleadoForm.get('puesto')?.invalid && empleadoForm.get('puesto')?.touched"
+          >
+            <option value="" disabled>Selecciona un puesto</option>
+            <option value="Cajero">Cajero</option>
+            <option value="Almacenista">Almacenista</option>
+            <option value="Vendedor">Vendedor</option>
+            <option value="Gerente">Gerente</option>
+            <option value="Administrativo">Administrativo</option>
+          </select>
+          <div *ngIf="empleadoForm.get('puesto')?.invalid && empleadoForm.get('puesto')?.touched" class="error-message">
+            {{ getErrorMessage('puesto') }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Drop Zone para imagen -->
+      <div class="drop-zone-container">
+        <p class="drop-zone-label">Foto del empleado</p>
+        <div class="drop-zone" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+          <input type="file" id="fileInput" #fileInput accept="image/*" (change)="onFileSelected($event)" style="display: none;" />
+          <div *ngIf="!previewImageUrl; else previewTemplate" class="upload-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="40" height="40" stroke-width="1.25">
+              <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"></path>
+              <path d="M8.5 10a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
+              <path d="m21 15-5-5L5 21"></path>
+            </svg>
+            <p>Arrastra y suelta una imagen aquí o</p>
+            <label for="fileInput" class="upload-label">Selecciona una imagen</label>
+          </div>
+          <ng-template #previewTemplate>
+            <div class="image-preview-container">
+              <img [src]="previewImageUrl" alt="Vista previa" class="image-preview" />
+              <button type="button" class="delete-image-button" (click)="deleteImage()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="1.5">
+                  <path d="M18 6L6 18M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+
+      <!-- Botones de acción -->
+      <div class="button-row">
+        <button type="button" class="button-secondary" (click)="onNoClick()">Cancelar</button>
+        <button type="submit" class="button-primary" [disabled]="empleadoForm.invalid || isLoading">
+          <span *ngIf="!isLoading">Actualizar</span>
+          <span *ngIf="isLoading" class="spinner"></span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

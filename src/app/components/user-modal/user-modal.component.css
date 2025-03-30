@@ -69,7 +69,7 @@
 form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 5px;
 }
 
 /* Fila de inputs */
@@ -298,4 +298,63 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator {
     font-weight: 400;
     margin-bottom: 10px;
     color: #ffffff;
+}
+
+/* Modificar el contenedor de input para permitir espacio para mensajes de error */
+.input-wrapper {
+    position: relative;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    /* Agregar espacio para el mensaje de error */
+}
+
+/* Posicionar el mensaje de error absolutamente debajo del input */
+.error-message {
+    position: absolute;
+    bottom: -20px;
+    /* Colocar debajo del input */
+    left: 0;
+    color: #e53e3e;
+    font-size: 0.75rem;
+    width: 100%;
+    text-align: left;
+    padding-left: 12px;
+}
+
+/* Igual para los criterios de contraseña */
+.password-criteria {
+    position: absolute;
+    bottom: -60px;
+    /* Más espacio para múltiples líneas */
+    left: 0;
+    font-size: 0.75rem;
+    width: 100%;
+    text-align: left;
+    padding-left: 12px;
+}
+
+
+
+
+
+/* Ajustar el contenedor de drop zone */
+.drop-zone-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+}
+
+/* Posicionar el mensaje de error del drop zone */
+.drop-zone-container .error-message {
+    position: absolute;
+    bottom: -20px;
+    text-align: center;
+}
+#pepe{
+    margin-top: 15px;
 }

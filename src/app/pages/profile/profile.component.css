@@ -1,0 +1,366 @@
+/* Estilos para el componente de perfil usando las variables globales */
+
+.profile-container {
+    width: 100%;
+    padding: 1.5rem;
+    background-color: var(--card-bg-color);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: var(--card-text-color);
+    border: 1px solid var(--card-border-color);
+}
+
+/* Estilos para el loader */
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 16rem;
+}
+
+.loader-spinner {
+    animation: spin 1s linear infinite;
+    border-radius: 50%;
+    height: 3rem;
+    width: 3rem;
+    border-top: 2px solid var(--name-color1);
+    border-bottom: 2px solid var(--name-color1);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Estilos para el perfil del usuario */
+.user-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .user-profile {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+/* Estilos para la imagen de perfil */
+.profile-image-container {
+    flex-shrink: 0;
+}
+
+.profile-image {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--card-border-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para la información del usuario */
+.user-info {
+    flex-grow: 1;
+}
+
+.user-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--content-title-color);
+}
+
+.user-email {
+    color: var(--text-color-td);
+    margin-bottom: 0.75rem;
+}
+
+.user-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.badge {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    border-radius: 9999px;
+    font-weight: 500;
+}
+
+.badge-role {
+    background-color: var(--name-color1);
+    color: var(--browse-btn-text-color);
+}
+
+.badge-status {
+    background-color: var(--status-active-bg);
+    color: var(--status-text);
+}
+
+/* Mensaje cuando no hay usuario */
+.no-user-message {
+    text-align: center;
+    padding: 2rem;
+}
+
+.error-text {
+    color: var(--status-inactive-bg);
+    font-size: 1.25rem;
+}
+
+.error-subtext {
+    color: var(--text-color-td);
+    margin-top: 0.5rem;
+}
+
+/* Sección de detalles del usuario */
+.user-details {
+    margin-top: 2.5rem;
+    border-top: 1px solid var(--card-border-color);
+    padding-top: 1.5rem;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--content-title-color);
+    margin-bottom: 1rem;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .details-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-label {
+    font-size: 0.875rem;
+    color: var(--text-color-td);
+}
+
+.detail-value {
+    font-weight: 500;
+    color: var(--card-text-color);
+}
+
+/* Efecto hover para la tarjeta */
+.profile-container:hover {
+    border-color: var(--card-hover-bg-color);
+    transition: all 0.3s ease;
+}/* Estilos para la sección de configuración */
+.user-config-section {
+    margin-top: 2.5rem;
+    border-top: 1px solid var(--card-border-color);
+    padding-top: 1.5rem;
+}
+
+/* Estilos para categorías */
+.config-category {
+    margin-bottom: 2rem;
+}
+
+.category-title {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--content-title-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--card-border-color);
+}
+
+/* Estilos para los controles */
+.config-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.config-control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+}
+
+.control-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.control-label {
+    font-weight: 500;
+    color: var(--card-text-color);
+}
+
+.control-description {
+    font-size: 0.875rem;
+    color: var(--text-color-td);
+}
+
+/* Estilos para switch toggle */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 3.5rem;
+    height: 1.75rem;
+}
+
+.toggle-input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-label {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.toggle-label:before {
+    position: absolute;
+    content: "";
+    height: 1.25rem;
+    width: 1.25rem;
+    left: 0.25rem;
+    bottom: 0.25rem;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.toggle-input:checked+.toggle-label {
+    background-color: var(--name-color1);
+}
+
+.toggle-input:checked+.toggle-label:before {
+    transform: translateX(1.75rem);
+}
+
+.toggle-input:focus+.toggle-label {
+    box-shadow: 0 0 1px var(--name-color1);
+}
+
+/* Estilos para slider */
+.slider-control {
+    width: 10rem;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 0.5rem;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: var(--name-color1);
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: var(--name-color1);
+    cursor: pointer;
+}
+
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--text-color-td);
+    margin-top: 0.5rem;
+}
+
+/* Estilos para radio buttons */
+.radio-group {
+    display: flex;
+    gap: 1rem;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.radio-input {
+    accent-color: var(--name-color1);
+}
+
+.radio-label {
+    font-size: 0.875rem;
+    color: var(--card-text-color);
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    .config-controls {
+        gap: 1rem;
+    }
+
+    .slider-control {
+        width: 12rem;
+    }
+}
+
+/* Tooltips */
+.toggle-label[title]:hover:after {
+    content: attr(title);
+    position: absolute;
+    bottom: -2.5rem;
+    right: 0;
+    background: var(--card-bg-color);
+    color: var(--card-text-color);
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    border: 1px solid var(--card-border-color);
+}
+
+
+.category-title{
+
+}

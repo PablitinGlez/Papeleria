@@ -1,0 +1,1126 @@
+/* Estilo base de la tabla */
+.custom-table {
+    width: 100% !important;
+    max-width: 1600px !important;
+    min-width: 600px;
+    margin: 0 auto;
+    padding: 20px 0;
+    display: block !important;
+
+    /* Habilita el desplazamiento vertical */
+}
+
+.custom-table {
+    width: 100%;
+    min-width: 600px;
+    /* Ancho mínimo para evitar que se comprima demasiado */
+    border-collapse: collapse;
+    background-color: var(--table-row-bg);
+    color: var(--text-color);
+}
+
+.mat-cell,
+.mat-header-cell {
+    padding: 12px 16px;
+    text-align: center;
+    white-space: nowrap;
+    /* Evita que el texto se divida en varias líneas */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Muestra puntos suspensivos si el texto es demasiado largo */
+}
+
+.mat-mdc-table {
+    width: 95% !important;
+    table-layout: fixed !important;
+}
+
+.mat-header-cell {
+    background-color: var(--table-header-bg);
+    color: var(--text-color);
+    /* Aplicamos la variable al texto */
+    font-weight: 600;
+    font-size: 14px;
+    padding: 16px !important;
+    border-bottom: none;
+
+}
+
+.mat-header-cell,
+.mat-cell {
+    width: auto;
+    min-width: 120px;
+    max-width: 250px;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.mat-cell {
+    color: var(--table-row-color);
+    font-size: 14px;
+    padding: 12px 16px !important;
+    border-bottom: 1px solid var(--table-border);
+}
+
+.mat-row {
+    transition: background-color 0.2s ease;
+    background-color: var(--table-row-bg);
+    margin-bottom: 10px;
+}
+
+.mat-row:hover {
+    background-color: var(--table-hover-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.estado-activo,
+.estado-inactivo {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.estado-activo {
+    background-color: var(--status-active-bg);
+    color: var(--status-text);
+}
+
+.estado-inactivo {
+    background-color: var(--status-inactive-bg);
+    color: var(--status-text);
+}
+
+/* Estilos para el modo claro */
+.light-mode .mat-header-cell {
+    background-color: var(--light-table-header-bg);
+    color: var(--light-table-header-color);
+}
+
+.light-mode .mat-cell {
+    color: var(--light-table-row-color);
+}
+
+.light-mode .mat-row {
+    background-color: var(--light-table-row-bg);
+}
+
+.light-mode .mat-row:hover {
+    background-color: var(--light-table-hover-bg);
+}
+
+/* Estilos responsivos */
+@media screen and (max-width: 768px) {
+    .custom-table {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .mat-header-cell,
+    .mat-cell {
+        padding: 10px !important;
+        font-size: 13px;
+    }
+}
+
+/* Estilos para la paginación */
+.mat-paginator {
+    background-color: transparent;
+    border-top: 1px solid var(--table-border);
+}
+
+/* Estilos para el ordenamiento */
+.mat-sort-header-container {
+    justify-content: flex-start;
+}
+
+/* Estilos para las fechas */
+td.mat-cell.fecha {
+    color: #ffffff;
+    font-size: 13px;
+}
+
+/* Estilos para el correo */
+td.mat-cell.correo {
+    color: #3498db;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Animación al cargar la tabla */
+.mat-table {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+/* Estilo con mayor especificidad */
+app-users .mat-mdc-table .mat-mdc-header-cell {
+    background-color: #2c3e50 !important;
+    color: #ecf0f1 !important;
+}
+
+app-users .mat-mdc-table .mat-mdc-cell {
+    background-color: #ffffff !important;
+    color: #2c3e50 !important;
+}
+
+
+/* From Uiverse.io by vinodjangid07 */
+.Btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100px;
+    height: 40px;
+    border: none;
+    padding: 0px 20px;
+    background-color: #62abff;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 10px;
+
+    transition-duration: .3s;
+}
+
+.svg {
+    width: 13px;
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+    fill: white;
+    transition-duration: .3s;
+}
+
+.Btn:hover {
+    color: transparent;
+}
+
+.Btn:hover svg {
+    right: 43%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    transition-duration: .3s;
+}
+
+.Btn:active {
+    transform: translate(3px, 3px);
+    transition-duration: .3s;
+    box-shadow: 2px 2px 0px rgb(140, 32, 212);
+}
+
+
+/* From Uiverse.io by vinodjangid07 */
+.button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgb(20, 20, 20);
+    border: none;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    position: relative;
+    gap: 2px;
+}
+
+.svgIcon {
+    width: 12px;
+    transition-duration: 0.3s;
+}
+
+.svgIcon path {
+    fill: white;
+}
+
+.button:hover {
+    transition-duration: 0.3s;
+    background-color: rgb(255, 69, 69);
+    align-items: center;
+    gap: 0;
+}
+
+.bin-top {
+    transform-origin: bottom right;
+}
+
+.button:hover .bin-top {
+    transition-duration: 0.5s;
+    transform: rotate(160deg);
+}
+
+/* Contenedor de la tabla */
+.table-container {
+    width: 10%;
+    padding: 30px;
+    overflow-x: auto;
+    /* Permite el desplazamiento horizontal en pantallas pequeñas */
+}
+
+/* Estilos base de la tabla */
+.custom-table {
+    width: 10%;
+    min-width: 100px;
+    /* Ajusta este valor según el contenido de tu tabla */
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: var(--table-row-bg);
+}
+
+/* Estilos para las celdas */
+.mat-cell {
+    white-space: nowrap;
+
+    /* Evita que el texto se divida en varias líneas */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Muestra puntos suspensivos si el texto es demasiado largo */
+    max-width: 80px;
+    /* Ajusta este valor según el contenido de tus columnas */
+}
+
+td {
+    padding: 14px;
+}
+
+.adds {
+    width: 100% !important;
+    max-width: 1100px !important;
+    min-width: 600px;
+    margin: 0 auto;
+    padding: 15px 0;
+    display: block !important;
+}
+
+
+/* Estilos del botón Añadir */
+.btn-add {
+
+    display: block;
+    width: 10%;
+    margin-top: 0 auto;
+    padding: 10px 20px;
+
+    text-align: center;
+    background-color: #07a66c;
+    /* Verde pastel */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.btn-add svg {
+    margin-left: 10px;
+
+    width: 16px;
+    height: 16px;
+}
+
+/* Hover */
+.btn-add:hover {
+    background-color: #004727;
+    /* Cambio de color al hacer hover */
+}
+
+.btn-add:focus {
+    outline: none;
+}
+
+
+
+/* Contenedor de las cards */
+.gradient-cards {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 25px 0;
+    margin: 0 auto;
+
+    justify-content: start;
+    gap: 20px;
+    width: 100% !important;
+    max-width: 1100px !important;
+    min-width: 600px;
+    margin: 0 auto;
+
+
+}
+
+/* Estilos base de la card */
+.card {
+    width: 300px;
+
+    border: none;
+    background: none;
+    /* Espacio para que el borde no se sobreponga */
+    background-clip: padding-box;
+    height: 250px;
+}
+
+/* Contenedor interno de la card */
+.container-card {
+    background: var(--card-bg-color);
+    color: var(--card-text-color);
+
+    padding: 20px;
+    text-align: center;
+}
+
+/* 🌑 Borde gradiente para tema oscuro */
+.bg-green-box {
+    border: 0.3px solid;
+
+    border-image-source: var(--card-border-gradient-1);
+    border-image-slice: 1;
+}
+
+.bg-white-box {
+    border: 0.3px solid;
+    border-radius: 1%;
+    border-image-source: var(--card-border-gradient-2);
+    border-image-slice: 1;
+}
+
+.bg-blue-box {
+    border: 0.3px solid;
+    border-radius: 1%;
+    border-image-source: var(--card-border-gradient-3);
+    border-image-slice: 1;
+}
+
+/* ☀️ Borde gradiente para tema claro */
+.light-mode .bg-green-box {
+    border-image-source: var(--light-card-border-gradient-1);
+}
+
+.light-mode .bg-white-box {
+    border-image-source: var(--light-card-border-gradient-2);
+}
+
+.light-mode .bg-blue-box {
+    border-image-source: var(--light-card-border-gradient-3);
+}
+
+/* Estilos para el título de la card */
+.card-title {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/* Estilos para la descripción de la card */
+.card-description {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Modo claro - ajustar fondo y texto */
+.light-mode .container-card {
+    background: #ffffff;
+    color: #333333;
+}
+
+.bg-green-box::after,
+.bg-white-box::after,
+.bg-yellow-box::after,
+.bg-blue-box::after {
+    position: absolute;
+    top: -2px;
+    /* Ajuste para que el borde gradiente sobresalga un poco */
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    content: "";
+    z-index: -1;
+    border-radius: 45px;
+    /* Aplica el border-radius al borde gradiente */
+
+    /* Gradiente para el borde */
+    background-size: 100% 100%;
+}
+
+th {
+    color: var(--text-color-td);
+    font-family: var(--font-text);
+}
+
+td {
+    color: var(--text-color-th);
+    font-family: var(--font-text);
+
+}
+
+
+
+.bg-green-box {
+    position: relative;
+    border-radius: 30px;
+    margin: 3px;
+    /* Bordes redondeados */
+    overflow: hidden;
+    /* Evita que el contenido sobresalga */
+}
+
+/* Pseudo-elemento para el borde con gradiente */
+.bg-green-box::before {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: 33px;
+    /* Mismo radio + ajuste para que el borde no se recorte */
+    padding: 3px;
+    /* Grosor del borde */
+    background: var(--card-border-gradient-1);
+    /* Aplica el degradado */
+    -webkit-mask: linear-gradient(white 0 0) content-box, linear-gradient(white 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    z-index: -1;
+    /* Envía el borde detrás del contenido */
+}
+
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.imagen-cell {
+    width: 60px;
+    padding: 8px !important;
+}
+
+/* ... resto de tus estilos existentes ... */
+
+
+mat-paginator {
+    background-color: var(--card-bg-color);
+    color: var(--text-color-td);
+
+
+    font-family: var(--font-text);
+}
+
+
+span {
+    color: var(--text-color-td);
+}
+
+
+
+
+.search-container {
+    padding: 16px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.search-field {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Opcional: posicionar la barra de búsqueda a la izquierda */
+.search-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.search-paginator-container {
+    display: flex;
+    justify-content: space-between;
+    /* Separa los elementos a los extremos */
+    align-items: center;
+    /* Alinea verticalmente los elementos */
+    max-width: 1600px !important;
+    min-width: 600px;
+
+    padding: 16px 0;
+    /* Espaciado vertical */
+}
+
+.search-container {
+    flex: 1;
+    /* Ocupa el espacio disponible */
+    margin-right: 16px;
+    /* Espacio entre la barra de búsqueda y el paginador */
+    max-width: 400px;
+    /* Ancho máximo de la barra de búsqueda */
+}
+
+.search-field {
+    width: 100%;
+}
+
+mat-paginator {
+    background-color: var(--card-bg-color);
+    color: var(--text-color-td);
+    border-radius: 4px;
+    /* Bordes redondeados */
+    padding: 8px;
+    /* Espaciado interno */
+}
+
+/* From Uiverse.io by Shaidend */
+.InputContainer {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--card-bg-color);
+    border-radius: 10px;
+    overflow: hidden;
+    color: var(--card-text-color);
+    cursor: pointer;
+    border: 1px solid #004727;
+    padding-left: 15px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.075);
+}
+
+.input {
+    width: 220px;
+    height: 100%;
+    background-color: var(--card-bg-color);
+    border: none;
+    outline: none;
+    font-size: 0.9em;
+    caret-color: rgb(255, 255, 255);
+}
+
+.labelforsearch {
+    cursor: text;
+    padding: 0px 12px;
+}
+
+.searchIcon {
+    width: 13px;
+}
+
+.border {
+    height: 40%;
+    width: 1.3px;
+    background-color: rgb(223, 223, 223);
+}
+
+.micIcon {
+    width: 12px;
+}
+
+.micButton {
+    padding: 0px 15px 0px 12px;
+    border: none;
+    background-color: transparent;
+    height: 40px;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.searchIcon path {
+    fill: rgb(114, 114, 114);
+}
+
+.micIcon path {
+    fill: rgb(255, 81, 0);
+}
+
+.micButton:hover {
+    background-color: rgb(255, 230, 230);
+    transition-duration: 0.3s;
+}
+
+
+
+
+
+
+
+
+
+.filter-dropdown {
+    position: relative;
+    border-top: 1px solid #004727;
+    border-bottom: 1px solid #004727;
+    border-left: none;
+    border-radius: 90%;
+    border-right: none;
+    display: inline-block;
+}
+
+.sec-center {
+    position: relative;
+    max-width: 100%;
+    text-align: center;
+    z-index: 200;
+}
+
+[type="checkbox"]:checked,
+[type="checkbox"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.dropdown:checked+label,
+.dropdown:not(:checked)+label {
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+
+    line-height: 2;
+    height: 40px;
+    transition: all 200ms linear;
+    border-radius: 4px;
+    width: 190px;
+    letter-spacing: 1px;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+    -ms-flex-pack: center;
+    text-align: center;
+    border: none;
+    background-color: var(--card-bg-color);
+    cursor: pointer;
+    color: var(--card-text-color);
+
+}
+
+.dropdown:checked+label:before,
+.dropdown:not(:checked)+label:before {
+    position: fixed;
+    top: 0;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    cursor: auto;
+    pointer-events: none;
+}
+
+.dropdown:checked+label:before {
+    pointer-events: auto;
+}
+
+.dropdown:not(:checked)+label .uil {
+    font-size: 24px;
+    margin-left: 10px;
+    transition: transform 200ms linear;
+}
+
+.dropdown:checked+label .uil {
+    transform: rotate(180deg);
+    font-size: 24px;
+
+    margin-left: 10px;
+    transition: transform 200ms linear;
+}
+
+.section-dropdown {
+    position: absolute;
+    padding: 5px;
+    background-color: var(--card-bg-color);
+    top: 70px;
+    left: 0;
+    color: var(--card-text-color);
+    width: 100%;
+
+    border-radius: 4px;
+    display: block;
+    box-shadow: 0 14px 35px 0 rgba(9, 9, 12, 0.4);
+    z-index: 2;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: all 200ms linear;
+}
+
+.dropdown:checked~.section-dropdown {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.section-dropdown:before {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    content: '';
+    display: block;
+    z-index: 1;
+}
+
+.section-dropdown:after {
+    position: absolute;
+    top: -7px;
+    left: 50px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #111;
+    content: '';
+    display: block;
+    z-index: 2;
+    transition: all 200ms linear;
+}
+
+a {
+    position: relative;
+    color: #fff;
+    transition: all 200ms linear;
+    font-family: var(--font-text);
+    font-weight: 400;
+    font-size: 15px;
+    border-radius: 2px;
+    padding: 5px 3px;
+    padding-left: 20px;
+    cursor: pointer;
+    padding-right: 15px;
+    margin: 5px 0;
+    text-align: left;
+    text-decoration: none;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    justify-content: space-between;
+    -ms-flex-pack: distribute;
+}
+
+a:hover {
+    color: #102770;
+    background-color: var(--hover-bg);
+}
+
+a .uil {
+    font-size: 22px;
+}
+
+.filter-search-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    /* Espacio entre la barra de búsqueda y el filtro */
+    width: 55%;
+    max-width: 1100px;
+
+    padding: 16px 0;
+}
+
+
+
+
+.no-results-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.no-results-text {
+    font-size: 24px;
+    font-family: var(--font-text);
+    font-weight: 500;
+
+    margin-bottom: 20px;
+}
+
+
+
+.gradient-cards {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.card {
+    flex: 1;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.container-card {
+    padding: 20px;
+    position: relative;
+
+    align-items: center;
+    flex-direction: column;
+    height: 250px;
+}
+
+.bg-green-box {
+
+    color: white;
+}
+
+.bg-white-box {
+
+    color: #1F2937;
+}
+
+.bg-blue-box {
+
+    color: white;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 3px;
+    color: var(--text-color-th);
+}
+
+.card-number {
+    font-weight: 300;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-align: end;
+    background: linear-gradient(90deg, #259128, #00ffb7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 6px rgba(0, 170, 255, 0.5);
+}
+
+.card-icon {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    opacity: 0.7;
+}
+
+.latest-users-list {
+    list-style: none;
+    padding: 0;
+
+}
+
+.user-item {
+    display: flex;
+    margin-right: 30px;
+    text-align: start;
+    align-items: start;
+    margin: 10px;
+    gap: 10px;
+}
+
+.user-avatar {
+    width: 80px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: contain;
+    /* La imagen se adapta sin recortarse */
+    background-color: #fff;
+    /* Opcional: fondo para imágenes con transparencia */
+}
+
+.user-details {
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+.user-name {
+    font-weight: 400;
+    color: var(--text-color-th);
+    margin: 0;
+    font-size: 12px;
+}
+
+.user.brand {
+    font-size: 12px;
+}
+
+.user-role {
+    font-size: 0.8rem;
+    color: var(--text-color-td);
+    font-weight: 400;
+    font-size: 12px;
+
+}
+
+.chart-container {
+    width: 100%;
+    height: 200px;
+    /* Adjust this value to make chart smaller */
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.card.roles-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.card.roles-card .card-content {}
+
+
+
+#titulo {
+    text-align: start
+}
+
+
+.card-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.neon-icon {
+    filter: drop-shadow(0 0 5px #00ff88) drop-shadow(0 0 10px #00aaff)
+}
+
+.icon {
+    transition: transform 0.3s ease;
+}
+
+.icon:hover {
+    transform: scale(1.1);
+}
+
+.neon-icon {
+    filter: drop-shadow(0 0 5px #00ff88) drop-shadow(1 0 20px #00aaff);
+}
+
+.active-icon {
+    filter: drop-shadow(0 0 8px #00aaff);
+}
+
+.neon-icon {
+    filter: drop-shadow(0 0 8px #00ff88) drop-shadow(0 0 15px #00aaff);
+}
+
+.active-icon {
+    filter: drop-shadow(0 0 15px #00aaff);
+}
+
+no-results-text {
+    color: var(--text-color-th);
+}
+
+/* Estilo específico para la columna de descripción */
+.mat-column-descripcion {
+    width: 200px;
+    /* Ancho fijo - ajusta según necesites */
+    max-width: 200px;
+    white-space: normal;
+    /* Permite que el texto salte de línea */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    /* Permite que las palabras largas se corten */
+}
+
+/* Modificar el estilo general de las celdas para la descripción */
+.mat-cell.mat-column-descripcion {
+    white-space: normal;
+    /* Sobreescribe el nowrap que está en tu CSS general */
+    text-align: left;
+    /* Alineación a la izquierda para mejor lectura */
+    padding: 12px 16px;
+    height: auto;
+    /* Permite que la altura se ajuste al contenido */
+}
+
+.user-brand {
+    color: var(--text-color-s);
+}
+
+
+product-details {}
+
+.mat-column-descripcion {
+    width: 400px;
+    /* Ajusta este valor según el ancho que desees */
+    min-width: 400px;
+    text-justify: auto;
+    /* Asegura que el ancho mínimo sea el mismo */
+    max-width: 300px;
+    /* Asegura que el ancho máximo sea el mismo */
+}
+
+.user-brand p {
+    padding-bottom: 20px;
+}
+
+.mat-column-imageUrl{
+    width: 80px;
+        /* Ajusta este valor según el ancho que desees */
+        min-width: 10px;
+        text-justify: auto;
+        /* Asegura que el ancho mínimo sea el mismo */
+        max-width: 300px;
+        /* Asegura que el ancho máximo sea el mismo */
+}
+
+.user-item{
+
+}
+
+.user-avatar img{
+
+}

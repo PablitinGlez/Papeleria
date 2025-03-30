@@ -6,108 +6,210 @@ Your browser does not support the video tag.
 </video>
 </div>-->
 
-
 <div class="app">
-
-
-
   <!--seccion de header-->
-
-  <div class="wrapper">
-    <!--Menu Lateral-->
-
   
+    <!--Menu Lateral-->
     <!--fin del menu lateral-->
-
-
 
     <!--contendio-->
     <div class="main-container">
       <div class="main-header">
-        <a class="menu-link-main" href="#">All Apps</a>
+        <a class="menu-link-main" href="#">Maria's Store</a>
         <div class="header-menu">
-          <a class="main-header-link is-active" href="#">Desktop</a>
-          <a class="main-header-link" href="#">Mobile</a>
-          <a class="main-header-link" href="#">Web</a>
+          <a class="main-header-link" routerLink="/administradores">Administradores</a>
+            <a class="main-header-link" routerLink="/categories">Categorias</a>
+            <a class="main-header-link " (click)="toggleWeatherCard()">
+      <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.5"  stroke-linecap="round"  stroke-linejoin="round"  ><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6.657 18c-2.572 0 -4.657 -2.007 -4.657 -4.483c0 -2.475 2.085 -4.482 4.657 -4.482c.393 -1.762 1.794 -3.2 3.675 -3.773c1.88 -.572 3.956 -.193 5.444 1c1.488 1.19 2.162 3.007 1.77 4.769h.99c1.913 0 3.464 1.56 3.464 3.486c0 1.927 -1.551 3.487 -3.465 3.487h-11.878" /></svg>
+      </a>
+        </div>
+        <!-- Tarjeta del clima que se muestra/oculta con el botón -->
+<div class="weather-popup" *ngIf="showWeatherCard">
+  <div class="weather-card-container">
+    <!-- Cabecera de la tarjeta -->
+    <div class="weather-card-header">
+      <h3 class="weather-card-title">Clima en {{weatherData?.city}}, {{weatherData?.country}}</h3>
+      <button class="weather-card-close" (click)="closeWeatherCard()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Contenido principal - Clima actual -->
+    <div class="weather-card-content">
+      <div class="weather-card-current" *ngIf="weatherData; else loadingWeather">
+        <div class="weather-card-info">
+          <img [src]="weatherData.icon" alt="Clima actual" class="weather-card-icon">
+          <div class="weather-card-temp">{{weatherData.temperature}}°C</div>
+        </div>
+        <div class="weather-card-details">
+          <div class="weather-card-date">{{weatherData.date}}</div>
+          <div class="weather-card-description">{{weatherData.description}}</div>
         </div>
       </div>
-
-         <div class="welcome-message">
-        <h1>Bienvenido, <span>{{ userName }}</span> 👋</h1>
-        <p>Esperamos que tengas un gran día.</p>
+      
+      <!-- Pronóstico para los próximos días -->
+      <div class="weather-card-forecast" *ngIf="weatherForecast.length > 0">
+        <h4 class="weather-card-forecast-title">Pronóstico</h4>
+        <div class="weather-card-forecast-items">
+          <div class="weather-card-forecast-item" *ngFor="let day of weatherForecast">
+            <div class="weather-card-forecast-day">{{day.date.split(',')[0]}}</div>
+            <div class="weather-card-forecast-temp">{{day.temperature}}°C</div>
+          </div>
+        </div>
       </div>
-<div class="card-container">
-  <!-- Tarjeta 1: Total User -->
-  <div class="card card-1">
-    <h3>
-      Total User
-      <span class="icon">
-
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="1.5">
-  <path d="M5 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-  <path d="M3 21v-2a4 4 0 0 1 4 -4h4c.948 0 1.818 .33 2.504 .88"></path>
-  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-  <path d="M16 19h6"></path>
-</svg>
-      </span>
-    </h3>
-    <p>
-      <span class="icon"><i class="fas fa-arrow-up"></i></span>
-      40,689
-    </p>
-  
-  </div>
-
-  <!-- Tarjeta 2: Total Order -->
-  <div class="card card-2">
-    <h3>
-      Total Order
-      <span class="icon"><i class="fas fa-shopping-cart"></i></span>
-    </h3>
-    <p>
-      <span class="icon"><i class="fas fa-arrow-up"></i></span>
-      10,293
-    </p>
-    
-  </div>
-
-  <!-- Tarjeta 3: Total Sales -->
-  <div class="card card-3">
-    <h3>
-      Total Sales
-      <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1.25">
-  <path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5"></path>
-  <path d="M12 12l8 -4.5"></path>
-  <path d="M12 12l0 9"></path>
-  <path d="M12 12l-8 -4.5"></path>
-  <path d="M16 5.25l-8 4.5"></path>
-</svg></span>
-    </h3>
-    <p>
-      <span class="icon"><i class="fas fa-arrow-down"></i></span>
-      $89,000
-    </p>
-  
-  </div>
-
-  <!-- Tarjeta 4: Total Pending -->
-  <div class="card card-4">
-    <h3>
-      Total Pending
-      <span class="icon"><i class="fas fa-clock"></i></span>
-    </h3>
-    <p>
-      <span class="icon"><i class="fas fa-arrow-up"></i></span>
-      2,040
-    </p>
-   
+      
+      <!-- Estado de carga -->
+      <ng-template #loadingWeather>
+        <div class="weather-card-loading">
+          <div class="weather-card-spinner"></div>
+          <p>Cargando datos del clima...</p>
+        </div>
+      </ng-template>
+    </div>
   </div>
 </div>
-        
       </div>
 
       
+
+      <div class="welcome-message">
+        <h1>Bienvenido, <span>{{ userName }}</span> 👋</h1>
+        <p>Esperamos que tengas un gran día.</p>
+      </div>
+      
+      <div class="card-container">
+        <!-- Tarjeta 1: Total User -->
+        <div class="card card-1">
+          <h3>
+            Usuarios Totales
+            <span class="icon">
+          <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.5"  stroke-linecap="round"  stroke-linejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
+            </span>
+          </h3>
+          <p class="card-number">{{ dashboardStats.totalUsuarios || 0 }}</p>
+        </div>
+
+        <!-- Tarjeta 2: Total Order -->
+        <div class="card card-2">
+          <h3>
+            Productos
+            <span class="icon"><span class="icon">
+              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.5"  stroke-linecap="round"  stroke-linejoin="round"  ><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 7m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M6 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M8.6 8.6l10.4 10.4" /><path d="M8.6 15.4l10.4 -10.4" /></svg>
+            </span></span>
+          </h3>
+          <p class="card-number">{{ dashboardStats.totalProductos || 0 }}</p>
+        </div>
+
+        <!-- Tarjeta 3: Total Sales -->
+        <div class="card card-3">
+          <h3>
+            Proveedores
+            <span class="icon">
+             <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.5"  stroke-linecap="round"  stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 18a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M15 18a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M5 18h-1a1 1 0 0 1 -1 -1v-11a2 2 0 0 1 2 -2h12a4 4 0 0 1 4 4h-18" /><path d="M9 18h6" /><path d="M19 18h1a1 1 0 0 0 1 -1v-4l-3 -5" /><path d="M21 13h-7" /><path d="M14 8v10" /></svg>
+            </span>
+          </h3>
+          <p class="card-number">{{ dashboardStats.totalProveedores || 0 }}</p>
+        </div>
+
+        <!-- Tarjeta 4: Total Pending -->
+        <div class="card card-4">
+          <h3>
+            Categorias
+            <span class="icon"> <span class="icon"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.5"  stroke-linecap="round"  stroke-linejoin="round"  ><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 4h6v6h-6z" /><path d="M4 14h6v6h-6z" /><path d="M17 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M7 7m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /></svg></span>
+          </span>
+          </h3>
+         <p class="card-number">{{ dashboardStats.totalCategorias || 0 }}</p>
+        </div>
+      </div>
+      
+      <!-- Sección de Productos Destacados -->
+      <div class="section-title">
+        <h2 class="title-p">Productos Destacados</h2>
+      </div>
+      
+ <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+  <!-- Productos cargados desde la API -->
+  <div class="product-card rounded-lg shadow-md flex flex-col h-full" 
+       style="background-color: var(--card-bg-color); border: 1px solid var(--card-border-color);"
+       *ngFor="let producto of featuredProducts">
+    <div class="product-image h-48">
+      <img [src]="producto.imageUrl" [alt]="producto.nombre" class="w-full object-cover object-center h-48">
     </div>
-   
+    
+    <div class="p-4 flex flex-col flex-grow">
+      <h3 class="text-sm font-medium mb-2" style="color: var(--card-text-color);">{{ producto.nombre }}</h3>
+      <div class="flex items-center mb-3 gap-2">
+        <span class="text-xs px-2 py-1 rounded-full font-medium"
+              style="background-color: var(--status-active-bg); color: var(--status-text);">
+          {{ producto.precio | currency }}
+        </span>
+       
+      </div>
+      <p class="text-xs mb-3 flex-grow" style="color: var(--text-color-td);">
+        {{ producto.descripcion | slice:0:100 }}{{ producto.descripcion.length > 100 ? '...' : '' }}
+      </p>
+      <div class="mt-auto">
+        <span class="text-xs px-2 py-1 rounded-full"
+              style="background-color: var(--icon-2-bg-color); color: var(--card-text-color);">
+          {{ producto.idMarca?.nombre || 'Sin marca' }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+      
+<p></p>
+
+
+
+<!-- Componente de carrusel para mostrar 4 imágenes a la vez -->
+<!-- Carrusel simple con 5 imágenes -->
+<div class="carousel-multiitem">
+  <carousel [interval]="5000" [noPause]="true" [showIndicators]="true">
+    <slide>
+      <div class="carousel-row">
+        <div class="carousel-column" *ngFor="let item of carouselImages | slice:0:5">
+          <img [src]="item.url" [alt]="item.alt" class="carousel-item-image">
+        </div>
+      </div>
+    </slide>
+  </carousel>
+</div>
+
+
+
+<!-- En dashboard.component.html -->
+<!-- Añade esto justo después del carrusel -->
+<!-- En dashboard.component.html -->
+<div class="charts-row">
+  <div class="chart-container">
+    <div class="card1">
+      <div class="card1-header">
+        <h2>Usuarios creados por día de la semana</h2>
+      </div>
+      <div class="card1-body">
+        <canvas id="usersByDayChart"></canvas>
+      </div>
+    </div>
+  </div>
+  
+  <div class="chart-container">
+    <div class="card1">
+      <div class="card1-header">
+        <h2>Productos creados por día de la semana</h2>
+      </div>
+      <div class="card1-body">
+        <canvas id="productsByDayChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    </div>
+  
   <div class="overlay-app"></div>
 </div>

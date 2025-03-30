@@ -1,8 +1,11 @@
-// En alert-success.component.ts
+// alert-success.component.ts
 import { animate, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { MatSnackBarRef } from '@angular/material/snack-bar';
+import { Component, Inject } from '@angular/core';
+import {
+  MAT_SNACK_BAR_DATA,
+  MatSnackBarRef,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-alert-success',
@@ -29,5 +32,8 @@ import { MatSnackBarRef } from '@angular/material/snack-bar';
   ],
 })
 export class AlertSuccessComponent {
-  constructor(public snackBarRef: MatSnackBarRef<AlertSuccessComponent>) {}
+  constructor(
+    public snackBarRef: MatSnackBarRef<AlertSuccessComponent>,
+    @Inject(MAT_SNACK_BAR_DATA) public data: any, // Inyectar los datos
+  ) {}
 }

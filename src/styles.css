@@ -13,10 +13,12 @@
 
 :root {
   --font-heading: "Onest Variable";
-
+ --hola:#00000000;
   --theme-bg-color: #000000;
+  --theme-bp-color: #000000;
   --theme-color: #f9fafb;
-  --name-color: #ffcc00;
+  --name-color: #ffcc00; 
+  --name-color1: #0d83fd;
   --inactive-color: rgba(255, 255, 255, 0.78);
   --border-color: rgba(113, 119, 144, 0.25);
   --hover-menu-bg: rgba(4, 15, 51, 0.3);
@@ -25,7 +27,7 @@
   --button-inactive: rgba(249, 250, 251, 0.55);
   --dropdown-bg: #21242d;
   --dropdown-hover: rgb(42, 46, 60);
-
+  
 
   --card-text-color: #f7fafc;
 
@@ -75,12 +77,15 @@
   /* Fondo al pasar el ratón sobre una fila */
   --status-active-bg: #38a169;
   /* Fondo estado activo */
-  --status-inactive-bg: #e53e3e;
+  --status-inactive-bg: #f50000;
   /* Fondo estado inactivo */
   --text-color-td: #b7b7b7;
   --text-color-th: #ffffff;
+  --text-color-tp: #99b6f5;
   --status-text: #fff;
 
+
+    --text-color-s: #00bc84;
   --font-text: "Onest Variable";
   /* Color de texto de los estados */
 
@@ -162,6 +167,8 @@
     /* Color verde */
     --alert-success-text: #ffffff;
     /* Color del texto */
+
+      --hover-bg: #130712;
 }
 
 
@@ -172,6 +179,7 @@
   --theme-bg-color: rgba(255, 255, 255, 0.31);
   --theme-color: #3c3a3a;
   --name-color: #000340;
+  --theme-bp-color: #ffffff;
   --inactive-color: #333333;
   --button-inactive: #3c3a3a;
   --search-bg: rgba(255, 255, 255, 0.31);
@@ -205,7 +213,10 @@
   --table-row-bg: #ffffff;
   --text-color-td: #0b0025;
   --text-color-th: #000000;
-
+  --status-active-bg: #38a169;
+    /* Fondo estado activo */
+    --status-inactive-bg: #e53e3e;
+  --text-color-tp: #3460be;
   --font-text: "Onest Variable";
 
   --drop-zone-bg-color: #ffffff25;
@@ -261,7 +272,7 @@
   --alert-cancel-text: #374151;
   --alert-cancel-border: #d1d5db;
 
-
+--hover-bg: #aba9ab;
     --alert-success-bg: rgb(255, 255, 255);
       --alert-success-text: #393939;
 }
@@ -272,6 +283,7 @@ body {
   font-family: var(--body-font);
   background-color: var(--theme-bg-color);
   color: var(--theme-color);
+  
 }
 
 body.light-mode {
@@ -307,3 +319,5 @@ body {
   background-color: transparent !important;
   box-shadow: none !important;
 }
+
+

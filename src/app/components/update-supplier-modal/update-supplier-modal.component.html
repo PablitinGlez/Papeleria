@@ -1,0 +1,224 @@
+<!-- Modal de Actualización de Proveedor -->
+<div class="modal">
+  <div class="modal-content">
+    <div class="title-modal">
+      <h2>Actualizar Proveedor</h2>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1.25">
+        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+      </svg>
+    </div>
+    
+    <form [formGroup]="supplierForm" (ngSubmit)="guardarProveedor()">
+      <!-- Fila de Nombre y Correo -->
+      <div class="input-row">
+        <!-- Campo de nombre -->
+        <div class="input-wrapper">
+          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1.25">
+            <path d="M3 17c3.333 -3.333 5 -6 5 -8c0 -3 -1 -3 -2 -3s-2.032 1.085 -2 3c.034 2.048 1.658 4.877 2.5 6c1.5 2 2.5 2.5 3.5 1l2 -3c.333 2.667 1.333 4 3 4c.53 0 2.639 -2 3 -2c.517 0 1.517 .667 3 2"></path>
+          </svg>
+          <input 
+            placeholder="Nombre" 
+            class="form-input" 
+            type="text" 
+            formControlName="nombre"
+            [class.invalid]="nombreInvalid"
+            (keydown)="validarInputNombre($event)"
+          />
+          <div *ngIf="nombreInvalid" class="error-message">
+            Campo requerido, solo se permiten letras
+          </div>
+        </div>
+
+        <!-- Campo de correo electrónico -->
+        <div class="input-wrapper">
+          <svg fill="none" viewBox="0 0 24 24" class="input-icon">
+            <path stroke-width="1.5" stroke="currentColor" d="M3 8L10.8906 13.2604C11.5624 13.7083 12.4376 13.7083 13.1094 13.2604L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z"></path>
+          </svg>
+          <input 
+            placeholder="Correo Electrónico" 
+            class="form-input" 
+            type="email" 
+            formControlName="correo"
+            [class.invalid]="correoInvalid"
+          />
+          <div *ngIf="correoInvalid" class="error-message">
+            Correo electrónico inválido
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila de Teléfono y RFC -->
+      <div class="input-row">
+        <!-- Campo de teléfono -->
+        <div class="input-wrapper">
+          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1.25"> 
+            <path d="M6 5a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-14z"></path> 
+            <path d="M11 4h2"></path> 
+            <path d="M12 17v.01"></path> 
+          </svg> 
+          <input 
+            placeholder="Teléfono" 
+            class="form-input" 
+            type="text" 
+            formControlName="telefono"
+            [class.invalid]="telefonoInvalid"
+            (keydown)="validarInputTelefono($event)"
+            maxlength="10"
+          />
+          <div *ngIf="telefonoInvalid" class="error-message">
+            Debe contener 10 dígitos numéricos
+          </div>
+        </div>
+
+        <!-- Campo de RFC -->
+        <div class="input-wrapper">
+          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1.25">
+            <path d="M4 7v-1a2 2 0 0 1 2 -2h2"></path>
+            <path d="M4 17v1a2 2 0 0 0 2 2h2"></path>
+            <path d="M16 4h2a2 2 0 0 1 2 2v1"></path>
+            <path d="M16 20h2a2 2 0 0 0 2 -2v-1"></path>
+            <path d="M5 12l14 0"></path>
+          </svg>
+          <input 
+            placeholder="RFC" 
+            class="form-input" 
+            type="text" 
+            formControlName="rfc"
+            [class.invalid]="rfcInvalid"
+            maxlength="13"
+          />
+          <div *ngIf="rfcInvalid" class="error-message">
+            RFC inválido (13 caracteres)
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila de Dirección y Contacto Principal -->
+      <div class="input-row">
+        <!-- Campo de dirección -->
+        <div class="input-wrapper">
+          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1.25">
+            <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
+            <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"></path>
+          </svg>
+          <input 
+            placeholder="Dirección" 
+            class="form-input" 
+            type="text" 
+            formControlName="direccion"
+            [class.invalid]="direccionInvalid"
+          />
+          <div *ngIf="direccionInvalid" class="error-message">
+            Campo requerido
+          </div>
+        </div>
+
+        <!-- Campo de contacto principal -->
+        <div class="input-wrapper">
+          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1.25">
+            <path d="M5 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+            <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+          </svg>
+          <input 
+            placeholder="Contacto Principal" 
+            class="form-input" 
+            type="text" 
+            formControlName="contactoPrincipal"
+            [class.invalid]="contactoPrincipalInvalid"
+          />
+          <div *ngIf="contactoPrincipalInvalid" class="error-message">
+            Campo requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila de Tipo de Proveedor y Estado -->
+      <div class="input-row">
+        <!-- Campo de tipo de proveedor -->
+        <!-- Campo de tipo de proveedor -->
+<div class="input-wrapper">
+  <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1.25">
+    <path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3"></path>
+    <path d="M12 3v18"></path>
+  </svg>
+  <select
+    class="form-input"
+    formControlName="tipoProveedor"
+    [class.invalid]="tipoProveedorInvalid"
+  >
+    <option value="" disabled>Selecciona el Tipo de Proveedor</option>
+    <option value="nacional">Nacional</option>
+    <option value="internacional">Internacional</option>
+  </select>
+  <div *ngIf="tipoProveedorInvalid" class="error-message">
+    El tipo de proveedor es obligatorio
+  </div>
+</div>
+
+        <!-- Campo de estado -->
+        <div class="input-wrapper">
+          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1.25">
+            <path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3"></path>
+            <path d="M12 3v18"></path>
+          </svg>
+          <select 
+            class="form-input" 
+            formControlName="estado"
+            [class.invalid]="estadoInvalid"
+          >
+            <option *ngFor="let estadoOption of estados" [value]="estadoOption.value">
+              {{ estadoOption.label }}
+            </option>
+          </select>
+          <div *ngIf="estadoInvalid" class="error-message">
+            Campo requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila de Categorías de Productos -->
+      <div class="input-row">
+        <!-- Campo de Categoría (Selección múltiple) -->
+        <div class="input-wrapper full-width">
+          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" stroke-width="1.25">
+            <path d="M12 12l8 -4.5"></path>
+            <path d="M12 12v9"></path>
+            <path d="M12 12l-8 -4.5"></path>
+            <path d="M12 12l8 4.5"></path>
+            <path d="M12 3v9"></path>
+            <path d="M12 12l-8 4.5"></path>
+          </svg>
+          
+          <div class="multiselect-container" [class.invalid]="categoriaProductosInvalid">
+            <div class="multiselect-header" (click)="toggleCategoriasDropdown()">
+              <div class="multiselect-placeholder">{{ getSelectedCategoriasText() }}</div>
+              <div class="multiselect-arrow">▼</div>
+            </div>
+            
+            <div class="multiselect-dropdown" *ngIf="showCategoriasDropdown">
+              <div class="multiselect-option" *ngFor="let categoria of categorias">
+                <mat-checkbox 
+                  [checked]="isCategoriaSelected(categoria._id)" 
+                  (change)="onCategoriaChange($event, categoria._id)">
+                  {{ categoria.nombre }}
+                </mat-checkbox>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="categoriaProductosInvalid" class="error-message">
+            Debe seleccionar al menos una categoría
+          </div>
+        </div>
+      </div>
+
+      <!-- Botones de Acción -->
+      <div class="button-row">
+        <button type="button" class="button-secondary" (click)="onNoClick()">Cancelar</button>
+        <button type="submit" class="button-primary" [disabled]="supplierForm.invalid || isLoading">
+          <span *ngIf="!isLoading">Actualizar</span>
+          <span *ngIf="isLoading" class="spinner"></span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -86,7 +86,7 @@ p{
 .form-input {
     width: 100%;
     height: 40px;
-    padding: 0 36px;
+    padding: 0 30px;
     font-size: 14px;
     border: 1px solid #e2e8f0;
     border-radius: 10px;
@@ -130,7 +130,7 @@ p{
 
 
 .form-footer {
-    margin-top: 16px;
+    margin-top: 29px;
     text-align: start;
     font-size: 13px;
 }
@@ -230,3 +230,117 @@ span {
 
 
 
+
+
+.error-message {
+    color: red;
+    font-size: 10px;
+   margin-left: 10px;
+   padding: 3px;
+    display: block;
+}
+
+.form-input:valid+.error-message {
+    color: green;
+}
+
+.input-group {
+    position: relative;
+    /* Asegura que los mensajes de error se posicionen relativamente a este contenedor */
+    margin-bottom: 24px;
+    /* Ajusta el margen inferior para dar espacio al mensaje de error */
+}
+/* Modificaciones para los inputs y grupos */
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+    /* Aumentar el margen inferior para dejar espacio a los mensajes */
+    z-index: 1;
+    /* Asegurar que el input se mantenga en la capa superior */
+}
+
+/* Asegurar que el wrapper del input se mantiene fijo */
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+    /* Mayor que otros elementos para mantenerlo sobre ellos */
+}
+
+/* Ajustar los mensajes de error para que no empujen otros elementos */
+.error-message {
+    position: absolute;
+    top: 100%;
+    /* Posicionar justo debajo del input */
+    left: 0;
+    font-size: 10px;
+    color: red;
+    margin-top: 5px;
+    /* Pequeño espacio entre el input y el mensaje */
+    z-index: 1;
+}
+
+/* Modificaciones para los criterios de contraseña */
+.password-criteria {
+    position: absolute;
+    top: 100%;
+    /* Posicionar debajo del input */
+    left: 0;
+    width: 100%;
+    /* Ancho completo */
+    margin-top: 5px;
+    /* Espacio entre input y criterios */
+    z-index: 1;
+    background-color: transparent;
+    /* Asegurar que no bloquee otros elementos */
+}
+
+/* Reducir el tamaño de los textos de criterios para que ocupen menos espacio */
+.password-criteria .text-xs {
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2px;
+    line-height: 1.2;
+}
+
+/* Reducir tamaño de iconos en los criterios */
+.password-criteria .inline-block {
+    width: 12px;
+    height: 12px;
+}
+
+/* Aumentar el espacio entre filas del formulario */
+.flex.space-x-4 {
+    margin-bottom: 10px;
+}
+
+/* Asegurar que los elementos flotantes permanezcan flotantes */
+.floating-icon {
+    z-index: 0;
+    /* Menor que los inputs */
+}
+
+/* Mejorar el contraste de los mensajes de error */
+.general-error-message {
+    position: static;
+    /* No debe afectar el posicionamiento de otros elementos */
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+
+.general-error-message {
+    display: block;
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 500;
+    padding: 8px;
+    margin:40px;
+    border-radius: 8px;
+    background-color: rgba(255, 0, 0, 0.1);
+    margin-bottom: 16px;
+    font-family: 'Onest';
+}

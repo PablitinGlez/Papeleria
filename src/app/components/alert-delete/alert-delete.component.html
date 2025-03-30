@@ -1,4 +1,3 @@
-<!-- alert-delete.component.html -->
 <div class="card">
   <div class="header">
     <div class="image">
@@ -17,13 +16,12 @@
       </svg>
     </div>
     <div class="content">
-      <span class="title">Eliminar usuario</span>
+      <span class="title">{{ title }}</span>
       <p class="message">
-        ¿Estás seguro de que deseas eliminar este usuario? Esta acción es permanente y no se puede deshacer. Todos los datos del usuario se perderán de manera irreversible.
+        {{ message }}
       </p>
     </div>
     <div class="actions">
-      <!-- Cambia estos botones para añadir (click) event bindings -->
       <button class="desactivate" type="button" (click)="confirmarEliminacion()">Eliminar</button>
       <button class="cancel" type="button" (click)="cancelarEliminacion()">Cancelar</button>
     </div>

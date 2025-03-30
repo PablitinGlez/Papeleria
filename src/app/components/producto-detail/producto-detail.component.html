@@ -1,0 +1,100 @@
+<div class="container mx-auto px-4 py-6">
+  <!-- Botón de regreso y título -->
+  <div class="mb-6 flex items-center justify-between">
+    <button 
+      (click)="volverProductos()" 
+      class="flex items-center text-blue-500 hover:text-blue-700 transition-colors"
+      style="color: var(--name-color1);"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      Volver a Productos
+    </button>
+    <h2 class="text-2xl font-bold" style="color: var(--content-title-color);">Detalle del Producto</h2>
+  </div>
+
+  <!-- Estado de carga -->
+  <div *ngIf="isLoading" class="flex justify-center py-8">
+    <div class="animate-spin rounded-full h-10 w-10 border-4" style="border-top-color: var(--name-color1); border-color: var(--button-inactive);"></div>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="error" class="border-l-4 p-4 mb-6 rounded" 
+       style="background-color: var(--alert-bg-color); border-color: var(--alert-border-color); color: var(--alert-text-color);">
+    {{ error }}
+  </div>
+
+  <!-- Detalle del producto -->
+  <div *ngIf="!isLoading && !error && producto" class="rounded-xl shadow-md overflow-hidden" 
+       style="background-color: var(--card-bg-color); border: 1px solid var(--card-border-color); color: var(--card-text-color);">
+    <div class="md:flex">
+      <!-- Imagen del producto -->
+      <div class="md:w-1/3 flex items-center justify-center p-6" style="background-color: var(--drop-zone-bg-color);">
+        <img [src]="producto.imageUrl" [alt]="producto.nombre" class="max-w-full max-h-64 object-contain">
+      </div>
+      
+      <!-- Información del producto -->
+      <div class="md:w-2/3 p-6">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h1 class="text-2xl font-bold mb-2" style="color: var(--content-title-color);">{{ producto.nombre }}</h1>
+            <p class="text-sm mb-4" style="color: var(--text-color-td);">
+              <span class="font-semibold">Categoría:</span> {{ producto.idCategoria?.nombre }}
+              <span class="mx-2">|</span>
+              <span class="font-semibold">Marca:</span> {{ producto.idMarca?.nombre }}
+            </p>
+          </div>
+          <div>
+            <span *ngIf="producto.estado === 'activo'" class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium" 
+                  style="background-color: var(--status-active-bg); color: var(--status-text);">
+              <span class="w-2 h-2 mr-1 rounded-full" style="background-color: var(--status-text);"></span>
+              Activo
+            </span>
+            <span *ngIf="producto.estado === 'inactivo'" class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium" 
+                  style="background-color: var(--status-inactive-bg); color: var(--status-text);">
+              <span class="w-2 h-2 mr-1 rounded-full" style="background-color: var(--status-text);"></span>
+              Inactivo
+            </span>
+          </div>
+        </div>
+        
+        <!-- Precios -->
+        <div class="mb-6">
+          <div class="flex items-end">
+            <span *ngIf="producto.precioDescuento > 0" class="line-through mr-2 text-lg" style="color: var(--text-color-td);">${{ producto.precio.toFixed(2) }}</span>
+            <span class="text-3xl font-bold" style="color: var(--text-color-s);">
+              ${{ (producto.precioDescuento > 0 ? producto.precioDescuento : producto.precio).toFixed(2) }}
+            </span>
+            <span *ngIf="producto.precioDescuento > 0" class="ml-3 px-2 py-1 rounded text-xs font-bold"
+                  style="background-color: var(--status-inactive-bg); color: var(--status-text);">
+              {{ (((producto.precio - producto.precioDescuento) / producto.precio) * 100).toFixed(0) }}% DESCUENTO
+            </span>
+          </div>
+        </div>
+        
+        <!-- Descripción -->
+        <div class="mb-6">
+          <h2 class="text-lg font-semibold mb-2" style="color: var(--content-title-color);">Descripción</h2>
+          <p class="text-sm whitespace-pre-line" style="color: var(--text-color-td);">{{ producto.descripcion }}</p>
+        </div>
+        
+        <!-- Stock -->
+        <div class="mb-6">
+          <div class="flex items-center">
+            <span class="font-semibold mr-2" style="color: var(--content-title-color);">Disponibilidad:</span>
+            <span *ngIf="producto.stock > 10" style="color: var(--text-color-s);">En stock ({{ producto.stock }} unidades)</span>
+            <span *ngIf="producto.stock > 0 && producto.stock <= 10" class="text-yellow-600 dark:text-yellow-400">Pocas unidades ({{ producto.stock }})</span>
+            <span *ngIf="producto.stock <= 0" style="color: var(--status-inactive-bg);">Agotado</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mensaje si no hay producto -->
+  <div *ngIf="!isLoading && !error && !producto" class="border-l-4 p-4 rounded"
+       style="background-color: var(--alert-bg-color); border-color: var(--name-color1); color: var(--alert-text-color);">
+    No se encontró el producto solicitado.
+  </div>
+</div>

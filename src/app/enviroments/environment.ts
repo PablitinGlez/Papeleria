@@ -1,6 +1,8 @@
 export const environment = {
   production: false,
   api: {
-    authApis: 'http://localhost:3000/api', // Aquí la URL de tu API backend
+    authApis: 'https://apirestful-0l0n.onrender.com/api',
+    productosApis: 'https://apirestful-0l0n.onrender.com/api',
+    ventasApis: 'https://apirestful-0l0n.onrender.com/api', // Nueva URL para ventas
   },
 };

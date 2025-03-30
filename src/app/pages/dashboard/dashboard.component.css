@@ -39,7 +39,7 @@ img {
 }
 
 .dark-light {
-    position: top;
+    position:absolute;
     bottom: 50px;
     right: 30px;
     background-color: var(--dropdown-bg);
@@ -235,6 +235,10 @@ body.light-mode .video-bg:before {
     }
 }
 
+.dark-light{
+
+}
+
 .notification {
     position: relative;
 
@@ -367,12 +371,14 @@ body.light-mode .video-bg:before {
 .main-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     border-bottom: 1px solid var(--border-color);
     height: 58px;
     flex-shrink: 0;
 
     .header-menu {
         margin-left: 150px;
+        display: flex;
 
         @media screen and (max-width: 1055px) {
             margin: auto;
@@ -456,6 +462,7 @@ body.light-mode .video-bg:before {
     gap: 20px;
     width: 90%;
     margin-top: px;
+justify-content: space-between;
     padding: 10px 40px;
 }
 
@@ -479,7 +486,7 @@ body.light-mode .video-bg:before {
 }
 
 .card p {
-    font-size: 1rem;
+    font-size: 3rem;
     margin: 5px 0;
 }
 
@@ -500,7 +507,7 @@ body.light-mode .video-bg:before {
     margin-bottom: 10px;
 }
 
-.card h3 .icon {
+.card  .icon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -515,7 +522,7 @@ body.light-mode .video-bg:before {
     display: flex;
     align-items: center;
 
-    font-size: 1rem;
+    font-size: 3rem;
     margin: 5px 0;
 }
 
@@ -549,18 +556,656 @@ body.light-mode .video-bg:before {
     background-color: var(--icon-4-bg-color);
 }
 
-.main-container {
-    width: 100%;
-    height: calc(100vh - 58px);
-    /* Ajusta el alto restando la altura del header */
-    overflow-y: auto;
-    /* Permite el desplazamiento vertical */
-    padding: 20px;
-    /* Espaciado interno */
-    background-color: var(--theme-bg-color);
-    /* Fondo del contenedor */
-}
+
 
 .icon{
 
+}
+
+span{
+
+}
+
+
+/* Importar tus estilos existentes si es necesario */
+
+/* Estilos para la sección de productos */
+.section-title {
+    margin: 30px 0 15px;
+    padding: 0 15px;
+}
+
+.section-title h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-family: var(--body-font);
+    color: var(--content-title-color);
+}
+
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 15px;
+}
+
+.product-card {
+    flex: 1 1 calc(25% - 20px);
+    min-width: 250px;
+    background-color: var(--card-bg-color);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--card-border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    background-color: var(--card-hover-bg-color);
+}
+
+
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.05);
+}
+
+.product-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-name {
+    margin: 0 0 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--card-text-color);
+}
+
+.product-price {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.current-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--card-text-color);
+}
+
+.discount-price {
+    margin-left: 10px;
+    font-size: 0.9rem;
+    color: #dc2626;
+    text-decoration: line-through;
+}
+
+.product-description {
+    margin: 0 0 15px;
+    font-size: 0.9rem;
+    color: var(--card-text-color);
+    opacity: 0.8;
+    flex-grow: 1;
+}
+
+.product-brand {
+    font-size: 0.85rem;
+    color: var(--card-text-color);
+    opacity: 0.7;
+    margin-bottom: 15px;
+}
+
+.product-actions {
+    display: flex;
+    justify-content: center;
+}
+
+.view-btn {
+    padding: 8px 15px;
+    background: var(--browse-btn-bg);
+    color: var(--browse-btn-text-color);
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.view-btn:hover {
+    background: var(--browse-btn-hover-bg);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .product-card {
+        flex: 1 1 calc(33.333% - 20px);
+    }
+}
+
+@media (max-width: 900px) {
+    .product-card {
+        flex: 1 1 calc(50% - 20px);
+    }
+}
+
+@media (max-width: 600px) {
+    .product-container {
+        flex-direction: column;
+    }
+
+    .product-card {
+        width: 100%;
+    }
+}
+
+
+/* Mensaje de bienvenida */
+.welcome-message {
+    padding: 20px 15px;
+}
+
+.welcome-message h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    color: var(--content-title-color);
+}
+
+.welcome-message span {
+    color: var(--name-color);
+    font-weight: 600;
+}
+
+.welcome-message p {
+    margin: 5px 0 0;
+    color: var(--content-title-color);
+    opacity: 0.8;
+}
+
+/* Estado de sin productos */
+.no-products {
+    text-align: center;
+    padding: 40px;
+    color: var(--card-text-color);
+    font-size: 1.1rem;
+    background-color: var(--card-bg-color);
+    border-radius: 12px;
+    margin: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+
+.app {
+    min-height: 100vh;
+    /* Ocupa al menos el 100% de la altura de la ventana */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    font-size: 15px;
+    font-weight: 500;
+    overflow: hidden;
+    /* Evita el desplazamiento en el contenedor principal */
+}
+
+.product-description {
+    width: 100%;
+    /* Asegura que ocupe todo el ancho disponible */
+    max-width: 250px;
+    /* Ajusta este valor según el ancho que desees */
+    white-space: normal;
+    /* Permite que el texto se divida en varias líneas */
+    word-wrap: break-word;
+    /* Asegura que las palabras largas se dividan correctamente */
+    overflow-wrap: break-word;
+    /* Similar a word-wrap, pero más moderno */
+    margin: 0 0 15px;
+    /* Ajusta el margen según sea necesario */
+    font-size: 0.9rem;
+    color: var(--card-text-color);
+    opacity: 0.8;
+}
+
+
+
+
+
+
+
+.main-container {
+    width: 100%;
+    flex-grow: 1;
+    overflow-y: scroll;
+    /* Mantiene la funcionalidad de desplazamiento */
+    overflow-x: hidden;
+    padding: 20px;
+    background-color: var(--theme-bg-color);
+
+    /* Oculta la barra de desplazamiento en navegadores modernos */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE y Edge */
+}
+
+/* Oculta la barra de desplazamiento en Chrome, Safari y Opera */
+.main-container::-webkit-scrollbar {
+    display: none;
+}
+
+.wrapper {
+    display: flex;
+    flex-grow: 1;
+    overflow-y: hidden;
+    /* Cambiado a hidden para evitar doble desplazamiento */
+    height: 100%;
+}
+
+
+
+.product-image {
+    height: 200px;
+    /* Altura fija para todas las tarjetas */
+    overflow: hidden;
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--card-bg-color);
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Cambiado de cover a contain para mostrar toda la imagen */
+    transition: transform 0.3s ease;
+}
+
+
+
+.title-p h2{
+    font-family: var(--body-font);
+    font-weight:900;
+}
+
+.icon{
+    
+}
+
+.card{
+
+}
+
+.card-number {
+    font-size: 4.5rem;
+    font-weight: 700;
+    margin: 10px 0;
+    background: linear-gradient(90deg, #070b5b, #00ffff, #ff00ff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient 3s ease infinite;
+    display: inline-block;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* For better appearance on hover */
+.card:hover .card-number {
+    animation: gradient 2s ease infinite;
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+h3{
+    color: var(--name-color1);
+}
+
+/* Estilos para el carrusel con múltiples imágenes */
+.carousel-multiitem {
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    margin-top: 50px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--card-bg-color, white);
+    border: 1px solid var(--card-border-color, #e0e0e0);
+    
+}
+
+/* Contenedor de la fila de imágenes */
+.carousel-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    height: 100px;
+}
+
+/* Contenedor de cada columna */
+.carousel-column {
+    flex: 0 0 19%;
+    max-width: 19%;
+    padding: 0 0.25rem;
+    height: 100%;
+}
+
+/* Imagen dentro del carrusel */
+.carousel-item-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.carousel-column:hover .carousel-item-image {
+    transform: scale(1.05);
+}
+
+/* Estilos para los controles del carrusel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 25px;
+    height: 25px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    background-size: 60% 60%;
+}
+
+/* Adaptación para pantallas pequeñas */
+@media (max-width: 992px) {
+    .carousel-column {
+        flex: 0 0 32%;
+        max-width: 32%;
+        margin-bottom: 0.5rem;
+    }
+
+    .carousel-row {
+        flex-wrap: wrap;
+        height: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .carousel-column {
+        flex: 0 0 48%;
+        max-width: 48%;
+    }
+}
+
+
+/* Estilos para la tarjeta del clima */
+.weather-popup {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.weather-card-container {
+    background: var(--theme-bp-color);
+    border-radius: 14px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    width: 320px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.weather-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.weather-card-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--theme-color);
+}
+
+.weather-card-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--theme-color);
+    padding: 4px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.weather-card-close:hover {
+    background: var(--hover-menu-bg);
+}
+
+.weather-card-content {
+    padding: 16px;
+}
+
+.weather-card-current {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.weather-card-info {
+    display: flex;
+    align-items: center;
+}
+
+.weather-card-icon {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+}
+
+.weather-card-temp {
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--theme-color);
+}
+
+.weather-card-details {
+    text-align: right;
+}
+
+.weather-card-date {
+    font-size: 14px;
+    color: var(--inactive-color);
+    margin-bottom: 4px;
+}
+
+.weather-card-description {
+    font-size: 14px;
+    color: var(--theme-color);
+    text-transform: capitalize;
+}
+
+.weather-card-forecast {
+    margin-top: 20px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 16px;
+}
+
+.weather-card-forecast-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 12px 0;
+    color: var(--theme-color);
+}
+
+.weather-card-forecast-items {
+    display: flex;
+    justify-content: space-between;
+}
+
+.weather-card-forecast-item {
+    text-align: center;
+    flex: 1;
+}
+
+.weather-card-forecast-day {
+    font-size: 12px;
+    color: var(--inactive-color);
+    margin-bottom: 4px;
+}
+
+.weather-card-forecast-temp {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--theme-color);
+}
+
+.weather-card-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.weather-card-spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--border-color);
+    border-top: 3px solid var(--content-title-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ajustes para el tema claro/oscuro */
+.light-mode .weather-card-container {
+    background: #f9fafb;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.light-mode .weather-card-spinner {
+    border-color: #e1e5eb;
+    border-top-color: #3a6df0;
+}
+
+
+
+/* En dashboard.component.css */
+.charts-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px -10px;
+}
+
+.chart-container {
+    flex: 0 0 50%;
+    padding: 0 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.chart-container .card1 {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--card-bg-color);
+    color: var(--card-text-color);
+    height: 100%;
+}
+
+.chart-container .card-header {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.chart-container .card-body {
+    padding: 15px;
+    height: 300px;
+}
+
+/* Responsive: en pantallas pequeñas, las gráficas van una debajo de otra */
+@media (max-width: 600px) {
+    .chart-container {
+        flex: 0 0 100%;
+    }
+}
+
+h2 {
+    font-size: 18px;
+    margin-left: 10px;
+    padding: 10px;
+    background: linear-gradient(90deg, #406cc0, #183362);
+    /* Degradado azul */
+    -webkit-background-clip: text;
+    /* Aplicar el degradado al texto */
+    -webkit-text-fill-color: transparent;
+    /* Hacer el texto transparente para que se vea el degradado */
+    color: transparent;
+    /* Para navegadores que no soportan -webkit- */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0);
+    /* Sombra para resaltar el texto */
+    font-weight: bold;
+    /* Texto en negrita */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    display: inline-block;
+    /* Para que el degradado se aplique correctamente */
 }
